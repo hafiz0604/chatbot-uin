@@ -2,7 +2,7 @@ const axios = require('axios');
 
 async function askBert(question, context) {
   try {
-    const res = await axios.post('http://127.0.0.1:8000/answer', {
+      const res = await fetch('https://backendmu-production.up.railway.app/answer', {...})
       question,
       context
     });
