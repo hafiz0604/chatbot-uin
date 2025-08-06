@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chatbot Akademik UIN Sunan Kalijaga</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      overflow: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    .page {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background-color: #004d40;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .chat-container {
+      flex: 1 1 auto;
+      display: flex;
+      background: white;
+      margin: 20px 30px 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      min-height: 0; /* important for flex children to scroll */
+    }
+    #newChatBtn, #deleteHistoryBtn {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.3s ease;
+    }
+
+    #newChatBtn:hover {
+      background-color: #28a745;
+      color: white;
+    }
+
+    #deleteHistoryBtn:hover {
+      background-color: #c9302c;
+    }
+
+    #chat-history {
+      width: 25%;
+      background-color: #f0f0f0;
+      padding: 20px;
+      overflow-y: auto;
+      border-right: 1px solid #ddd;
+      color: #004d40;
+      font-weight: 600;
+      min-height: 0;
+    }
+    #chat-history h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    #chat-history ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #chat-history li {
+      padding: 10px;
+      margin-bottom: 10px;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: background-color 0.2s ease;
+    }
+    #chat-history li:hover {
+      background-color: #d9f0e6;
+    }
+    #chat-history button {
+      margin-right: 5px;
+      padding: 6px 12px;
+      border: none;
+      background-color: #004d40;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    #chat-history button:hover {
+      background-color: #00695c;
+    }
+
+    .chat-main {
+      width: 75%;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .chat-box {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Message container to hold message and timestamp */
+    .message-container {
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 0.3s ease forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Message bubbles */
+    .message {
+      padding: 12px 18px;
+      border-radius: 20px;
+      font-size: 1rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: relative;
+      white-space: pre-wrap;
+    }
+    .message.user {
+      background-color: #28a745;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+      box-shadow: 0 2px 6px rgba(40,167,69,0.4);
+    }
+    .message.bot {
+      background-color: #e0e0e0;
+      color: #333;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Timestamp below message */
+    .timestamp {
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 4px;
+      align-self: flex-end;
+      user-select: none;
+      font-style: italic;
+    }
+    .message-container.user .timestamp {
+      align-self: flex-end;
+      color: #d4f8d4;
+    }
+    .message-container.bot .timestamp {
+      align-self: flex-start;
+      color: #999;
+    }
+    .chat-input {
+      flex-shrink: 0;
+      display: flex;
+      padding: 15px 20px;
+      background-color: #f1f1f1;
+      border-radius: 0 0 12px 12px;
+    }
+    .chat-input input[type="text"] {
+      flex-grow: 1;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .chat-input input[type="text"]:focus {
+      border-color: #28a745;
+    }
+    .chat-input button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      margin-left: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .chat-input button:hover {
+      background-color: #218838;
+    }
+    footer {
+      background-color: #004d40;
+      color: white;
+      text-align: center;
+      padding: 20px 30px;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    @media (max-width: 900px) {
+      .chat-container {
+        flex-direction: column;
+        margin: 10px 15px 10px 15px;
+      }
+      #chat-history, .chat-main {
+        width: 100%;
+        height: 300px;
+      }
+      #chat-history {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+      }
+      .chat-main {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="page-chat" class="page active" role="main" aria-label="Halaman percakapan chatbot akademik">
+    <header>
+      <div class="logo">UIN SuKa Chatbot</div>
+      <nav>
+        <a href="home.html">Beranda</a>
+      </nav>
+    </header>
+    <section class="chat-container" aria-label="Area percakapan chatbot">
+      <div id="chat-history" aria-label="Riwayat percakapan chatbot">
+        <div style="margin-top: 20px;">
+          <button id="newChatBtn" style="width: 100%; margin-bottom: 10px;">+ Chat Baru</button>
+        </div>
+        <h2>Riwayat Percakapan</h2>
+        <ul id="historyList">
+          <!-- Daftar riwayat percakapan akan muncul di sini -->
+        </ul>
+      </div>
+      <div class="chat-main">
+        <div class="chat-box" id="chatBox" aria-live="polite" aria-relevant="additions">
+          <!-- Riwayat percakapan aktif akan muncul di sini -->
+        </div>
+        <div class="chat-input" aria-label="Form input pengguna untuk chat">
+          <input type="text" id="userInput" placeholder="Ketik pertanyaan Anda..." aria-label="Input teks pengguna" />
+          <button id="sendBtn" aria-label="Kirim pertanyaan ke chatbot">Kirim</button>
+        </div>
+      </div>
+    </section>
+    <footer>
+      &copy; 2025 UIN Sunan Kalijaga - Chatbot Akademik. All rights reserved.
+    </footer>
+  </div>
+
+  <script src="chat.js"></script>
+</body>

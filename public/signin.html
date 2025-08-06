@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daftar - Chatbot Akademik UIN Sunan Kalijaga</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    a { text-decoration: none; color: #004d40; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+    .signin-container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    h1 {
+      color: #004d40;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #004d40;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #28a745;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .login-link {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="signin-container" role="main" aria-label="Halaman registrasi chatbot akademik">
+    <h1>Daftar</h1>
+    <form id="registerForm" action="#" method="post" aria-label="Form registrasi pengguna">
+      <label for="name">Nama</label>
+      <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required aria-required="true" />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required aria-required="true" />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Masukkan password Anda" required aria-required="true" />
+      <label for="confirmPassword">Konfirmasi Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Konfirmasi password Anda" required aria-required="true" />
+      <button type="submit" aria-label="Tombol daftar">Daftar</button>
+    </form>
+    <div class="login-link">
+      Sudah punya akun? <a href="login.html">Login di sini</a>
+    </div>
+  </main>
+  <script>
+    function validateEmail(email) {
+      const domain = '@student.uin-suka.ac.id';
+      if (!email.endsWith(domain)) {
+        alert('Harap gunakan email dengan domain ' + domain);
+        return false;
+      }
+      return true;
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (!validateEmail(email)) return;
+
+      if (password !== confirmPassword) {
+        alert('Konfirmasi password tidak cocok.');
+        return;
+      }
+
+      const username = email.split('@')[0];
+
+      try {
+        const res = await fetch('/api/users/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password, email, name })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.message) {
+          // Registrasi sukses, login otomatis
+          const loginRes = await fetch('/api/users/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+          });
+
+          const loginData = await loginRes.json();
+          if (loginRes.ok && loginData.token) {
+            localStorage.setItem('token', loginData.token);
+            localStorage.setItem('username', username);
+            window.location.href = 'chat.html';
+          } else {
+            alert(loginData.error || 'Gagal login setelah daftar');
+          }
+        } else {
+          alert(data.error || 'Gagal membuat akun');
+        }
+      } catch (err) {
+        console.error('❌ Signup error:', err);
+        alert('Terjadi kesalahan saat daftar');
+      }
+    });
+  </script>
+</body>
+</html>

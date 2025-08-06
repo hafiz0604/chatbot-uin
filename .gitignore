@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Logs
+logs/
+*.log
+logs/*.log
+
+# Build output
+dist/
+build/
+
+# MongoDB
+dump/
+*.mongodb
+
+# Coverage
+coverage/
+
+# Others
+*.swp
+*.swo
+
+# Static/Frontend build (if using React/Vue)
+public/build/

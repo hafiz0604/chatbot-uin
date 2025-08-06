@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chatbot Akademik UIN Sunan Kalijaga</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      height: 100vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    a { text-decoration: none; color: inherit; }
+    .page { height: 100%; }
+    header {
+      background-color: #004d40;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    nav a:hover, nav a:focus, #logoutBtn:hover, #logoutBtn:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+    #logoutBtn {
+      margin-left: 20px;
+      color: #ffdd00;
+      font-weight: 600;
+    }
+    /* Hero Section */
+    .hero {
+      background-color: #00796b;
+      color: white;
+      padding: 80px 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      min-height: calc(100vh - 80px);
+    }
+    .hero-text {
+      max-width: 600px;
+    }
+    .hero-text h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    .cta-button {
+      background-color: #28a745;
+      color: white;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      user-select: none;
+    }
+    .cta-button:hover, .cta-button:focus {
+      background-color: #218838;
+      outline: none;
+    }
+    .hero-image {
+      max-width: 400px;
+      width: 100%;
+    }
+    /* Section styles */
+    section {
+      padding: 60px 30px;
+      margin: 0 auto 0 auto;
+      text-align: center;
+      color: #004d40;
+    }
+    h2.section-title {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    /* Tentang Section */
+    #tentang p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    /* Features Section */
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+    .feature-card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .feature-card:hover, .feature-card:focus-within {
+      transform: translateY(-5px);
+      outline: none;
+    }
+    .feature-icon {
+      font-size: 3rem;
+      color: #00796b;
+      margin-bottom: 15px;
+    }
+    .feature-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .feature-desc {
+      font-size: 1rem;
+      color: #555;
+    }
+    /* FAQ Section */
+    #faq .faq-item {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+    #faq .faq-question {
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      position: relative;
+      padding-right: 25px;
+      user-select: none;
+    }
+    #faq .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: transform 0.3s ease;
+      user-select: none;
+    }
+    #faq .faq-item.open .faq-question::after {
+      content: '-';
+    }
+    #faq .faq-answer {
+      margin-top: 10px;
+      display: none;
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.5;
+    }
+    #faq .faq-item.open .faq-answer {
+      display: block;
+    }
+    /* Dokumentasi Section */
+    #dokumentasi ul {
+      list-style: disc inside;
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1rem;
+      color: #444;
+    }
+    #dokumentasi ul li {
+      margin-bottom: 10px;
+    }
+    #dokumentasi ul li a {
+      color: #00796b;
+      font-weight: 600;
+    }
+    #dokumentasi ul li a:hover, #dokumentasi ul li a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+    /* Kontak Section */
+    #kontak form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    #kontak label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #004d40;
+    }
+    #kontak input[type="text"],
+    #kontak input[type="email"],
+    #kontak textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    #kontak input[type="text"]:focus,
+    #kontak input[type="email"]:focus,
+    #kontak textarea:focus {
+      border-color: #28a745;
+    }
+    #kontak button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #kontak button:hover, #kontak button:focus {
+      background-color: #218838;
+      outline: none;
+    }
+    /* Footer */
+    footer {
+      background-color: #004d40;
+      color: white;
+      text-align: center;
+      padding: 20px 30px;
+      font-size: 0.9rem;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero {
+        flex-direction: column;
+        padding: 40px 20px;
+        min-height: auto;
+      }
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+      section {
+        padding: 40px 20px 60px 20px;
+      }
+      .feature-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="page-home" class="page active" role="main" aria-label="Halaman utama website chatbot akademik">
+    <header>
+      <div class="logo">UIN SuKa Chatbot</div>
+      <nav>
+        <a href="#page-home" onclick="scrollToSection(event, 'page-home')">Beranda</a>
+        <a href="#tentang" onclick="scrollToSection(event, 'tentang')">Tentang</a>
+        <a href="#fitur" onclick="scrollToSection(event, 'fitur')">Fitur</a>
+        <a href="#faq" onclick="scrollToSection(event, 'faq')">FAQ</a>
+        <a href="#dokumentasi" onclick="scrollToSection(event, 'dokumentasi')">Dokumentasi</a>
+        <a href="#kontak" onclick="scrollToSection(event, 'kontak')">Kontak</a>
+        <a href="login.html" id="logoutBtn" aria-label="Keluar dari akun">Logout</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Bagian pembuka halaman utama" id="page-home">
+      <div class="hero-text">
+        <h1>Chatbot Akademik UIN Sunan Kalijaga</h1>
+        <p>Membantu Mahasiswa Mendapatkan Informasi Akademik dengan Cepat dan Mudah</p>
+        <button class="cta-button" id="startChatBtn" aria-label="Mulai chat sekarang">Mulai Chat Sekarang</button>
+        <p id="welcomeMessage" style="font-weight: bold; margin: 20px 30px;"></p>
+      </div>
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Ilustrasi Chatbot" class="hero-image" />
+    </section>
+
+    <section id="tentang" aria-label="Tentang Chatbot Akademik">
+      <h2 class="section-title">Tentang</h2>
+      <p>
+        Chatbot Akademik UIN Sunan Kalijaga adalah asisten virtual yang dirancang untuk membantu mahasiswa mendapatkan informasi akademik secara cepat dan mudah. Dengan teknologi AI terbaru, chatbot ini siap menjawab berbagai pertanyaan seputar jadwal kuliah, beasiswa, prosedur administrasi, dan banyak lagi.
+      </p>
+    </section>
+
+    <section id="fitur" aria-label="Fitur Utama Chatbot">
+      <h2 class="section-title">Fitur</h2>
+      <div class="feature-cards">
+        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Jadwal Kuliah">
+          <div class="feature-icon" aria-hidden="true">📅</div>
+          <div class="feature-title">Jadwal Kuliah</div>
+          <div class="feature-desc">Informasi jadwal kuliah harian dan lokasi kelas secara real-time.</div>
+        </div>
+        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Informasi Beasiswa">
+          <div class="feature-icon" aria-hidden="true">🎓</div>
+          <div class="feature-title">Informasi Beasiswa</div>
+          <div class="feature-desc">Data beasiswa, persyaratan, dan periode pendaftaran.</div>
+        </div>
+        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Prosedur Administrasi">
+          <div class="feature-icon" aria-hidden="true">📝</div>
+          <div class="feature-title">Prosedur Administrasi</div>
+          <div class="feature-desc">Panduan pendaftaran ulang, cuti kuliah, dan pengajuan surat.</div>
+        </div>
+        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Nilai dan Transkrip">
+          <div class="feature-icon" aria-hidden="true">📚</div>
+          <div class="feature-title">Nilai dan Transkrip</div>
+          <div class="feature-desc">Informasi nilai semester dan status akademik mahasiswa.</div>
+        </div>
+        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Pengumuman Kampus">
+          <div class="feature-icon" aria-hidden="true">📢</div>
+          <div class="feature-title">Pengumuman Kampus</div>
+          <div class="feature-desc">Update pengumuman dan kegiatan kampus terkini.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" aria-label="Frequently Asked Questions">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq1" id="faq1-label">Bagaimana cara menggunakan chatbot ini?</div>
+        <div class="faq-answer" id="faq1" role="region" aria-labelledby="faq1-label">
+          Anda cukup mengetikkan pertanyaan seputar informasi akademik di kolom chat, lalu chatbot akan memberikan jawaban secara otomatis.
+        </div>
+      </div>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq2" id="faq2-label">Apakah chatbot ini bisa diakses kapan saja?</div>
+        <div class="faq-answer" id="faq2" role="region" aria-labelledby="faq2-label">
+          Ya, chatbot ini tersedia 24 jam sehari, 7 hari seminggu untuk membantu Anda kapan saja.
+        </div>
+      </div>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq3" id="faq3-label">Apakah data saya aman saat menggunakan chatbot?</div>
+        <div class="faq-answer" id="faq3" role="region" aria-labelledby="faq3-label">
+          Kami menjaga privasi dan keamanan data Anda sesuai dengan kebijakan kampus dan standar keamanan data.
+        </div>
+      </div>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq4" id="faq4-label">Bagaimana jika chatbot tidak bisa menjawab pertanyaan saya?</div>
+        <div class="faq-answer" id="faq4" role="region" aria-labelledby="faq4-label">
+          Anda dapat menghubungi bagian administrasi kampus melalui form kontak yang tersedia di halaman ini.
+        </div>
+      </div>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq5" id="faq5-label">Apakah chatbot ini gratis digunakan?</div>
+        <div class="faq-answer" id="faq5" role="region" aria-labelledby="faq5-label">
+          Ya, layanan chatbot ini disediakan gratis untuk seluruh mahasiswa UIN Sunan Kalijaga.
+        </div>
+      </div>
+    </section>
+
+    <section id="dokumentasi" aria-label="Dokumentasi Resmi">
+      <h2 class="section-title">Dokumentasi</h2>
+      <ul>
+        <li><a href="docs/panduan_penggunaan_chatbot.pdf" target="_blank" rel="noopener noreferrer">Panduan Penggunaan Chatbot (PDF)</a></li>
+        <li><a href="docs/kebijakan_privasi.pdf" target="_blank" rel="noopener noreferrer">Kebijakan Privasi (PDF)</a></li>
+        <li><a href="docs/prosedur_administrasi.docx" target="_blank" rel="noopener noreferrer">Prosedur Administrasi (DOCX)</a></li>
+        <li><a href="docs/jadwal_kuliah_2025.pdf" target="_blank" rel="noopener noreferrer">Jadwal Kuliah Semester 2025 (PDF)</a></li>
+        <li><a href="docs/panduan_beasiswa.pdf" target="_blank" rel="noopener noreferrer">Panduan Beasiswa (PDF)</a></li>
+      </ul>
+    </section>
+
+    <section id="kontak" aria-label="Form Kontak">
+      <h2 class="section-title">Kontak</h2>
+      <form id="contactForm" novalidate>
+        <label for="name">Nama</label>
+        <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required aria-required="true" />
+        <label for="emailContact">Email</label>
+        <input type="email" id="emailContact" name="emailContact" placeholder="Masukkan email Anda" required aria-required="true" />
+        <label for="message">Pesan</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tulis pesan Anda di sini" required aria-required="true"></textarea>
+        <button type="submit" aria-label="Kirim pesan">Kirim</button>
+      </form>
+    </section>
+
+    <footer>
+      &copy; 2025 UIN Sunan Kalijaga - Chatbot Akademik. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    // Cek login sebelum masuk home
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Silakan login terlebih dahulu.');
+      window.location.href = 'login.html';
+    }
+
+    // Scroll smooth ke section saat klik menu navigasi
+    function scrollToSection(event, sectionId) {
+      event.preventDefault();
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Toggle FAQ
+    document.querySelectorAll('#faq .faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const isOpen = item.classList.contains('open');
+        // Tutup semua FAQ
+        document.querySelectorAll('#faq .faq-item').forEach(i => i.classList.remove('open'));
+        // Jika sebelumnya tertutup, buka
+        if (!isOpen) {
+          item.classList.add('open');
+          question.setAttribute('aria-expanded', 'true');
+        } else {
+          question.setAttribute('aria-expanded', 'false');
+        }
+      });
+      question.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          question.click();
+        }
+      });
+    });
+
+    // Tombol Mulai Chat Sekarang arahkan ke halaman chat
+    document.getElementById('startChatBtn').addEventListener('click', () => {
+      window.location.href = 'chat.html';
+    });
+
+    // Validasi dan submit form kontak
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('emailContact').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name) {
+        alert('Nama harus diisi.');
+        document.getElementById('name').focus();
+        return;
+      }
+      if (!validateEmail(email)) {
+        alert('Harap masukkan email yang valid.');
+        document.getElementById('emailContact').focus();
+        return;
+      }
+      if (!message) {
+        alert('Pesan harus diisi.');
+        document.getElementById('message').focus();
+        return;
+      }
+
+      // Simulasi pengiriman data
+      alert('Terima kasih, pesan Anda telah terkirim.');
+      contactForm.reset();
+    });
+
+    // Fungsi validasi email sederhana
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    // Konfirmasi logout
+    document.getElementById('logoutBtn').addEventListener('click', function(e) {
+      if (!confirm('Apakah Anda yakin ingin logout?')) {
+        e.preventDefault();
+        return;
+      }
+
+      // 👉 Bersihkan token & redirect ke login
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      window.location.href = 'login.html';
+    });
+    // Tampilkan ucapan selamat datang
+    const username = localStorage.getItem('username');
+    const welcomeEl = document.getElementById('welcomeMessage');
+
+    if (username && welcomeEl) {
+      welcomeEl.textContent = `Halo, ${username}! Selamat datang di Chatbot Akademik.`;
+    }
+
+  </script>
+</body>
+</html>
