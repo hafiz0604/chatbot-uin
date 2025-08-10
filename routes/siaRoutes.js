@@ -1,11 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const { authenticateToken } = require('../middlewares/authMiddleware'); // Tambah middleware JWT
 
-// Konfigurasi user API Akademik
+// Konfigurasi user API Akademik dari env
 const API_URL = "http://api.uin-suka.ac.id/akademik/v2";
-const NIP = "ACC.API.CHAT";
-const PASSWORD = "0274512474";
+const NIP = process.env.SIA_NIP;
+const PASSWORD = process.env.SIA_PASSWORD;
 
 // Fungsi ambil token (cache di RAM selama aktif, per 1 jam misal)
 let cachedToken = null;

@@ -4,74 +4,147 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chatbot Akademik UIN Sunan Kalijaga</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * { box-sizing: border-box; }
-    body {
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0; padding: 0;
       background-color: #f9f9f9;
       color: #333;
-      height: 100vh;
-      overflow-y: auto;
-      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
-    a { text-decoration: none; color: inherit; }
-    .page { height: 100%; }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    a { 
+      text-decoration: none; 
+      color: inherit; 
+    }
+    
+    /* Header Styling */
     header {
       background-color: #004d40;
       color: white;
-      padding: 15px 30px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 100%;
     }
+    
     .logo {
       font-weight: bold;
       font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
     nav a {
       color: white;
       margin-left: 20px;
       font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    nav a:hover, nav a:focus, #logoutBtn:hover, #logoutBtn:focus {
-      text-decoration: underline;
-      outline: none;
+    
+    nav a:hover {
+      opacity: 0.9;
     }
+    
     #logoutBtn {
       margin-left: 20px;
       color: #ffdd00;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
+    
+    #logoutBtn:hover {
+      opacity: 0.9;
+    }
+    
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 10px;
+      margin-right: 5px;
+    }
+    
     /* Hero Section */
     .hero {
-      background-color: #00796b;
+      background-color: #004d40;
       color: white;
-      padding: 80px 30px;
+      padding: 80px 0;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
       gap: 40px;
       min-height: calc(100vh - 80px);
+      position: relative;
+      margin: 0;
+      width: 100%;
     }
+    
+    .hero-container {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 0 20px;
+    }
+    
     .hero-text {
       max-width: 600px;
+      text-align: center;
     }
+    
     .hero-text h1 {
       font-size: 2.8rem;
       margin-bottom: 20px;
+      line-height: 1.2;
     }
+    
     .hero-text p {
       font-size: 1.2rem;
       margin-bottom: 30px;
       line-height: 1.5;
+      opacity: 0.9;
     }
+    
     .cta-button {
       background-color: #28a745;
       color: white;
@@ -79,129 +152,239 @@
       font-size: 1.1rem;
       font-weight: bold;
       border: none;
-      border-radius: 8px;
+      border-radius: 24px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      display: inline-block;
-      user-select: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
     }
-    .cta-button:hover, .cta-button:focus {
+    
+    .cta-button:hover {
       background-color: #218838;
-      outline: none;
+      transform: translateY(-2px);
     }
+    
     .hero-image {
-      max-width: 400px;
+      max-width: 300px;
       width: 100%;
+      height: auto;
+      z-index: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+      animation: float 6s ease-in-out infinite;
     }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
     /* Section styles */
     section {
-      padding: 60px 30px;
-      margin: 0 auto 0 auto;
+      padding: 70px 30px;
+      margin: 0 auto;
       text-align: center;
-      color: #004d40;
+      max-width: 1200px;
     }
+    
     h2.section-title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 40px;
       text-align: center;
+      color: #004d40;
+      position: relative;
+      padding-bottom: 15px;
     }
+    
+    h2.section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: #28a745;
+      border-radius: 2px;
+    }
+    
     /* Tentang Section */
+    #tentang {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      margin: 20px auto;
+    }
+    
     #tentang p {
       font-size: 1.1rem;
-      line-height: 1.6;
+      line-height: 1.7;
       max-width: 800px;
       margin: 0 auto;
       text-align: center;
+      color: #444;
     }
+    
     /* Features Section */
     .feature-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 30px;
+      margin-top: 20px;
     }
+    
     .feature-card {
       background-color: white;
-      padding: 25px;
+      padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-    .feature-card:hover, .feature-card:focus-within {
-      transform: translateY(-5px);
-      outline: none;
+    
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     }
+    
     .feature-icon {
-      font-size: 3rem;
-      color: #00796b;
-      margin-bottom: 15px;
+      font-size: 2.5rem;
+      color: #28a745;
+      margin-bottom: 20px;
+      background-color: rgba(40, 167, 69, 0.1);
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
+    
     .feature-title {
       font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 10px;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #004d40;
     }
+    
     .feature-desc {
       font-size: 1rem;
       color: #555;
+      line-height: 1.6;
     }
-    /* FAQ Section */
-    #faq .faq-item {
-      background: white;
+    
+    /* FAQ Section - Updated based on the screenshot */
+    #faq {
+      background-color: #fff;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-      padding: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      margin: 20px auto;
+      max-width: 900px;
     }
+    
+    #faq .section-title {
+      color: #004d40;
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    #faq .faq-item {
+      background: #f8f8f8;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
     #faq .faq-question {
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1.1rem;
       cursor: pointer;
+      padding: 20px;
+      color: #004d40;
       position: relative;
-      padding-right: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       user-select: none;
     }
-    #faq .faq-question::after {
-      content: '+';
-      position: absolute;
-      right: 0;
-      top: 0;
-      font-size: 1.5rem;
-      line-height: 1;
+    
+    #faq .faq-question-icon {
       transition: transform 0.3s ease;
-      user-select: none;
-    }
-    #faq .faq-item.open .faq-question::after {
-      content: '-';
-    }
-    #faq .faq-answer {
-      margin-top: 10px;
-      display: none;
       font-size: 1rem;
+      color: #28a745;
+    }
+    
+    #faq .faq-item.open .faq-question-icon {
+      transform: rotate(180deg);
+    }
+    
+    #faq .faq-answer {
+      display: none;
+      padding: 0 20px 20px;
       color: #444;
-      line-height: 1.5;
+      line-height: 1.6;
+      border-top: 1px solid #eee;
+      text-align: left;
     }
-    #faq .faq-item.open .faq-answer {
-      display: block;
+    
+    #faq .faq-item.open {
+      background-color: #f0f8f5;
     }
+    
     /* Dokumentasi Section */
     #dokumentasi ul {
-      list-style: disc inside;
+      list-style: none;
       max-width: 700px;
       margin: 0 auto;
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: #444;
+      padding: 0;
     }
+    
     #dokumentasi ul li {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+    
+    #dokumentasi ul li:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
     #dokumentasi ul li a {
-      color: #00796b;
+      color: #004d40;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    #dokumentasi ul li a:hover, #dokumentasi ul li a:focus {
-      text-decoration: underline;
-      outline: none;
+    
+    #dokumentasi ul li a::after {
+      content: '\f019';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #28a745;
     }
+    
+    #dokumentasi ul li a:hover {
+      color: #28a745;
+    }
+    
     /* Kontak Section */
     #kontak form {
       max-width: 600px;
@@ -209,32 +392,38 @@
       background: white;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
+    
     #kontak label {
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
       color: #004d40;
+      text-align: left;
     }
+    
     #kontak input[type="text"],
     #kontak input[type="email"],
     #kontak textarea {
       width: 100%;
-      padding: 12px 15px;
+      padding: 12px 18px;
       margin-bottom: 20px;
-      border: 1px solid #ccc;
+      border: 1px solid #e0e0e0;
       border-radius: 8px;
       font-size: 1rem;
       resize: vertical;
       outline: none;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
+    
     #kontak input[type="text"]:focus,
     #kontak input[type="email"]:focus,
     #kontak textarea:focus {
       border-color: #28a745;
+      box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.15);
     }
+    
     #kontak button {
       background-color: #28a745;
       color: white;
@@ -242,38 +431,160 @@
       padding: 12px 25px;
       font-size: 1rem;
       font-weight: bold;
-      border-radius: 25px;
+      border-radius: 24px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      user-select: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 auto;
     }
-    #kontak button:hover, #kontak button:focus {
+    
+    #kontak button:hover {
       background-color: #218838;
-      outline: none;
+      transform: translateY(-2px);
     }
+    
+    #kontak button::after {
+      content: '\f1d8';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+    }
+    
     /* Footer */
     footer {
       background-color: #004d40;
       color: white;
       text-align: center;
-      padding: 20px 30px;
+      padding: 20px;
       font-size: 0.9rem;
+      width: 100%;
+      margin-top: auto;
     }
-    /* Responsive */
-    @media (max-width: 600px) {
-      .hero {
-        flex-direction: column;
-        padding: 40px 20px;
-        min-height: auto;
+    
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero-text h1 {
+        font-size: 2.3rem;
       }
+      
+      section {
+        padding: 50px 20px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero {
+        padding: 50px 0;
+      }
+      
+      .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      
       .hero-text h1 {
         font-size: 2rem;
       }
-      section {
-        padding: 40px 20px 60px 20px;
+      
+      .hero-image {
+        max-width: 250px;
       }
+      
       .feature-cards {
-        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      h2.section-title {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .menu-toggle {
+        display: block;
+        z-index: 1010;
+        padding: 15px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      nav {
+        position: fixed;
+        top: 60px;
+        right: -100%;
+        background: #004d40;
+        width: 80%;
+        height: 100vh;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        margin: 10px 0;
+        font-size: 1.1rem;
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 8px;
+      }
+      
+      nav a:hover {
+        background-color: rgba(255,255,255,0.1);
+      }
+      
+      .hero {
+        min-height: calc(100vh - 60px);
+      }
+      
+      .hero-text {
+        padding: 0 15px;
+      }
+      
+      .hero-text h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero-text p {
+        font-size: 1rem;
+      }
+      
+      .cta-button {
+        width: 100%;
+      }
+      
+      section {
+        padding: 40px 15px;
+      }
+      
+      .feature-card {
+        padding: 20px;
+      }
+      
+      #kontak form {
+        padding: 20px;
+      }
+      
+      .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 60px);
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+      }
+      
+      .nav-overlay.active {
+        display: block;
       }
     }
   </style>
@@ -281,27 +592,61 @@
 <body>
   <div id="page-home" class="page active" role="main" aria-label="Halaman utama website chatbot akademik">
     <header>
-      <div class="logo">UIN SuKa Chatbot</div>
+      <div class="logo">
+        <i class="fas fa-robot"></i>
+        UIN SuKa Chatbot
+      </div>
+      
+      <button type="button" class="menu-toggle" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      
       <nav>
-        <a href="#page-home" onclick="scrollToSection(event, 'page-home')">Beranda</a>
-        <a href="#tentang" onclick="scrollToSection(event, 'tentang')">Tentang</a>
-        <a href="#fitur" onclick="scrollToSection(event, 'fitur')">Fitur</a>
-        <a href="#faq" onclick="scrollToSection(event, 'faq')">FAQ</a>
-        <a href="#dokumentasi" onclick="scrollToSection(event, 'dokumentasi')">Dokumentasi</a>
-        <a href="#kontak" onclick="scrollToSection(event, 'kontak')">Kontak</a>
-        <a href="login.html" id="logoutBtn" aria-label="Keluar dari akun">Logout</a>
+        <a href="#page-home" class="nav-link" data-target="page-home">
+          <i class="fas fa-home"></i> Beranda
+        </a>
+        <a href="#tentang" class="nav-link" data-target="tentang">
+          <i class="fas fa-info-circle"></i> Tentang
+        </a>
+        <a href="#fitur" class="nav-link" data-target="fitur">
+          <i class="fas fa-list-check"></i> Fitur
+        </a>
+        <a href="#faq" class="nav-link" data-target="faq">
+          <i class="fas fa-question-circle"></i> FAQ
+        </a>
+        <a href="#dokumentasi" class="nav-link" data-target="dokumentasi">
+          <i class="fas fa-file-alt"></i> Dokumentasi
+        </a>
+        <a href="#kontak" class="nav-link" data-target="kontak">
+          <i class="fas fa-envelope"></i> Kontak
+        </a>
+        <a href="chat.html">
+          <i class="fas fa-comments"></i> Chat
+        </a>
+        <a href="login.html" id="logoutBtn" aria-label="Keluar dari akun">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
       </nav>
     </header>
 
-    <section class="hero" aria-label="Bagian pembuka halaman utama" id="page-home">
-      <div class="hero-text">
-        <h1>Chatbot Akademik UIN Sunan Kalijaga</h1>
-        <p>Membantu Mahasiswa Mendapatkan Informasi Akademik dengan Cepat dan Mudah</p>
-        <button class="cta-button" id="startChatBtn" aria-label="Mulai chat sekarang">Mulai Chat Sekarang</button>
-        <p id="welcomeMessage" style="font-weight: bold; margin: 20px 30px;"></p>
+    <div class="nav-overlay"></div>
+
+    <div class="hero">
+      <div class="hero-container">
+        <div class="hero-text">
+          <h1>Chatbot Akademik UIN Sunan Kalijaga</h1>
+          <p>Membantu Mahasiswa Mendapatkan Informasi Akademik dengan Cepat dan Mudah</p>
+          <a href="chat.html" class="cta-button" id="startChatBtn" aria-label="Mulai chat sekarang">
+            Mulai Chat Sekarang
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <p id="welcomeMessage" style="font-weight: bold; margin: 20px 0;">Halo, 211060500461 Selamat datang di Chatbot Akademik.</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="chatbot-icon.png" alt="Ilustrasi Chatbot" class="hero-image" id="heroImage" />
+        </div>
       </div>
-      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Ilustrasi Chatbot" class="hero-image" />
-    </section>
+    </div>
 
     <section id="tentang" aria-label="Tentang Chatbot Akademik">
       <h2 class="section-title">Tentang</h2>
@@ -313,64 +658,85 @@
     <section id="fitur" aria-label="Fitur Utama Chatbot">
       <h2 class="section-title">Fitur</h2>
       <div class="feature-cards">
+        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Informasi Akademik">
+          <div class="feature-icon" aria-hidden="true"><i class="fas fa-book-open"></i></div>
+          <div class="feature-title">Informasi Akademik</div>
+          <div class="feature-desc">Dapatkan berbagai informasi akademik seperti kalender akademik, pengumuman, dan regulasi kampus.</div>
+        </div>
+        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Jadwal Ujian">
+          <div class="feature-icon" aria-hidden="true"><i class="fas fa-calendar-check"></i></div>
+          <div class="feature-title">Jadwal Ujian</div>
+          <div class="feature-desc">Informasi jadwal ujian tengah semester, akhir semester, serta lokasi ujian.</div>
+        </div>
         <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Jadwal Kuliah">
-          <div class="feature-icon" aria-hidden="true">📅</div>
+          <div class="feature-icon" aria-hidden="true"><i class="fas fa-calendar-days"></i></div>
           <div class="feature-title">Jadwal Kuliah</div>
           <div class="feature-desc">Informasi jadwal kuliah harian dan lokasi kelas secara real-time.</div>
         </div>
         <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Informasi Beasiswa">
-          <div class="feature-icon" aria-hidden="true">🎓</div>
+          <div class="feature-icon" aria-hidden="true"><i class="fas fa-graduation-cap"></i></div>
           <div class="feature-title">Informasi Beasiswa</div>
           <div class="feature-desc">Data beasiswa, persyaratan, dan periode pendaftaran.</div>
         </div>
-        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Prosedur Administrasi">
-          <div class="feature-icon" aria-hidden="true">📝</div>
-          <div class="feature-title">Prosedur Administrasi</div>
-          <div class="feature-desc">Panduan pendaftaran ulang, cuti kuliah, dan pengajuan surat.</div>
-        </div>
-        <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Nilai dan Transkrip">
-          <div class="feature-icon" aria-hidden="true">📚</div>
-          <div class="feature-title">Nilai dan Transkrip</div>
-          <div class="feature-desc">Informasi nilai semester dan status akademik mahasiswa.</div>
-        </div>
         <div class="feature-card" tabindex="0" role="article" aria-label="Fitur Pengumuman Kampus">
-          <div class="feature-icon" aria-hidden="true">📢</div>
+          <div class="feature-icon" aria-hidden="true"><i class="fas fa-bullhorn"></i></div>
           <div class="feature-title">Pengumuman Kampus</div>
           <div class="feature-desc">Update pengumuman dan kegiatan kampus terkini.</div>
         </div>
       </div>
     </section>
 
+    <!-- Updated FAQ section to match screenshot -->
     <section id="faq" aria-label="Frequently Asked Questions">
       <h2 class="section-title">FAQ</h2>
-      <div class="faq-item" tabindex="0">
-        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq1" id="faq1-label">Bagaimana cara menggunakan chatbot ini?</div>
-        <div class="faq-answer" id="faq1" role="region" aria-labelledby="faq1-label">
-          Anda cukup mengetikkan pertanyaan seputar informasi akademik di kolom chat, lalu chatbot akan memberikan jawaban secara otomatis.
+      
+      <div class="faq-item" id="faq-item-1">
+        <div class="faq-question" id="faq-question-1">
+          <span>Bagaimana cara menggunakan chatbot ini?</span>
+          <span class="faq-question-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="faq-answer" id="faq-answer-1">
+          Anda cukup mengetikkan pertanyaan seputar informasi akademik di kolom chat, lalu chatbot akan memberikan jawaban secara otomatis. Anda bisa mengakses chatbot melalui halaman Chat di menu navigasi.
         </div>
       </div>
-      <div class="faq-item" tabindex="0">
-        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq2" id="faq2-label">Apakah chatbot ini bisa diakses kapan saja?</div>
-        <div class="faq-answer" id="faq2" role="region" aria-labelledby="faq2-label">
-          Ya, chatbot ini tersedia 24 jam sehari, 7 hari seminggu untuk membantu Anda kapan saja.
+      
+      <div class="faq-item" id="faq-item-2">
+        <div class="faq-question" id="faq-question-2">
+          <span>Apakah chatbot ini bisa diakses kapan saja?</span>
+          <span class="faq-question-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="faq-answer" id="faq-answer-2">
+          Ya, chatbot ini tersedia 24 jam sehari, 7 hari seminggu untuk membantu Anda kapan saja. Anda bisa mengaksesnya dari perangkat apapun yang terhubung ke internet.
         </div>
       </div>
-      <div class="faq-item" tabindex="0">
-        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq3" id="faq3-label">Apakah data saya aman saat menggunakan chatbot?</div>
-        <div class="faq-answer" id="faq3" role="region" aria-labelledby="faq3-label">
-          Kami menjaga privasi dan keamanan data Anda sesuai dengan kebijakan kampus dan standar keamanan data.
+      
+      <div class="faq-item" id="faq-item-3">
+        <div class="faq-question" id="faq-question-3">
+          <span>Apakah data saya aman saat menggunakan chatbot?</span>
+          <span class="faq-question-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="faq-answer" id="faq-answer-3">
+          Kami menjaga privasi dan keamanan data Anda sesuai dengan kebijakan kampus dan standar keamanan data. Seluruh percakapan Anda dienkripsi dan disimpan dengan aman.
         </div>
       </div>
-      <div class="faq-item" tabindex="0">
-        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq4" id="faq4-label">Bagaimana jika chatbot tidak bisa menjawab pertanyaan saya?</div>
-        <div class="faq-answer" id="faq4" role="region" aria-labelledby="faq4-label">
-          Anda dapat menghubungi bagian administrasi kampus melalui form kontak yang tersedia di halaman ini.
+      
+      <div class="faq-item" id="faq-item-4">
+        <div class="faq-question" id="faq-question-4">
+          <span>Bagaimana jika chatbot tidak bisa menjawab pertanyaan saya?</span>
+          <span class="faq-question-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="faq-answer" id="faq-answer-4">
+          Anda dapat menghubungi bagian administrasi kampus melalui form kontak yang tersedia di halaman ini. Tim kami akan membantu menjawab pertanyaan Anda sesegera mungkin.
         </div>
       </div>
-      <div class="faq-item" tabindex="0">
-        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq5" id="faq5-label">Apakah chatbot ini gratis digunakan?</div>
-        <div class="faq-answer" id="faq5" role="region" aria-labelledby="faq5-label">
-          Ya, layanan chatbot ini disediakan gratis untuk seluruh mahasiswa UIN Sunan Kalijaga.
+      
+      <div class="faq-item" id="faq-item-5">
+        <div class="faq-question" id="faq-question-5">
+          <span>Apakah chatbot ini gratis digunakan?</span>
+          <span class="faq-question-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+        <div class="faq-answer" id="faq-answer-5">
+          Ya, layanan chatbot ini disediakan gratis untuk seluruh mahasiswa UIN Sunan Kalijaga. Tidak ada biaya apapun yang dikenakan untuk mengakses dan menggunakan fitur-fitur yang tersedia.
         </div>
       </div>
     </section>
@@ -378,11 +744,10 @@
     <section id="dokumentasi" aria-label="Dokumentasi Resmi">
       <h2 class="section-title">Dokumentasi</h2>
       <ul>
-        <li><a href="docs/panduan_penggunaan_chatbot.pdf" target="_blank" rel="noopener noreferrer">Panduan Penggunaan Chatbot (PDF)</a></li>
-        <li><a href="docs/kebijakan_privasi.pdf" target="_blank" rel="noopener noreferrer">Kebijakan Privasi (PDF)</a></li>
-        <li><a href="docs/prosedur_administrasi.docx" target="_blank" rel="noopener noreferrer">Prosedur Administrasi (DOCX)</a></li>
-        <li><a href="docs/jadwal_kuliah_2025.pdf" target="_blank" rel="noopener noreferrer">Jadwal Kuliah Semester 2025 (PDF)</a></li>
-        <li><a href="docs/panduan_beasiswa.pdf" target="_blank" rel="noopener noreferrer">Panduan Beasiswa (PDF)</a></li>
+        <li><a href="/docs/pedoman_akademik_sarjana_2024.pdf" target="_blank" rel="noopener noreferrer">Panduan Penggunaan Chatbot (PDF)</a></li>
+        <li><a href="/docs/kebijakan_privasi.pdf" target="_blank" rel="noopener noreferrer">Kebijakan Privasi (PDF)</a></li>
+        <li><a href="/docs/pedoman_akademik_sarjana_2024.pdf" target="_blank" rel="noopener noreferrer">Pedoman Akademik (PDF)</a></li>
+        <li><a href="/docs/kalender_akademik_2025_2026.pdf" target="_blank" rel="noopener noreferrer">Kalender Akademik 2025/2026 (PDF)</a></li>
       </ul>
     </section>
 
@@ -404,107 +769,7 @@
     </footer>
   </div>
 
-  <script>
-    // Cek login sebelum masuk home
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('Silakan login terlebih dahulu.');
-      window.location.href = 'login.html';
-    }
-
-    // Scroll smooth ke section saat klik menu navigasi
-    function scrollToSection(event, sectionId) {
-      event.preventDefault();
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
-    // Toggle FAQ
-    document.querySelectorAll('#faq .faq-question').forEach(question => {
-      question.addEventListener('click', () => {
-        const item = question.parentElement;
-        const isOpen = item.classList.contains('open');
-        // Tutup semua FAQ
-        document.querySelectorAll('#faq .faq-item').forEach(i => i.classList.remove('open'));
-        // Jika sebelumnya tertutup, buka
-        if (!isOpen) {
-          item.classList.add('open');
-          question.setAttribute('aria-expanded', 'true');
-        } else {
-          question.setAttribute('aria-expanded', 'false');
-        }
-      });
-      question.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          question.click();
-        }
-      });
-    });
-
-    // Tombol Mulai Chat Sekarang arahkan ke halaman chat
-    document.getElementById('startChatBtn').addEventListener('click', () => {
-      window.location.href = 'chat.html';
-    });
-
-    // Validasi dan submit form kontak
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('emailContact').value.trim();
-      const message = document.getElementById('message').value.trim();
-
-      if (!name) {
-        alert('Nama harus diisi.');
-        document.getElementById('name').focus();
-        return;
-      }
-      if (!validateEmail(email)) {
-        alert('Harap masukkan email yang valid.');
-        document.getElementById('emailContact').focus();
-        return;
-      }
-      if (!message) {
-        alert('Pesan harus diisi.');
-        document.getElementById('message').focus();
-        return;
-      }
-
-      // Simulasi pengiriman data
-      alert('Terima kasih, pesan Anda telah terkirim.');
-      contactForm.reset();
-    });
-
-    // Fungsi validasi email sederhana
-    function validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return re.test(email);
-    }
-
-    // Konfirmasi logout
-    document.getElementById('logoutBtn').addEventListener('click', function(e) {
-      if (!confirm('Apakah Anda yakin ingin logout?')) {
-        e.preventDefault();
-        return;
-      }
-
-      // 👉 Bersihkan token & redirect ke login
-      localStorage.removeItem('token');
-      localStorage.removeItem('username');
-      window.location.href = 'login.html';
-    });
-    // Tampilkan ucapan selamat datang
-    const username = localStorage.getItem('username');
-    const welcomeEl = document.getElementById('welcomeMessage');
-
-    if (username && welcomeEl) {
-      welcomeEl.textContent = `Halo, ${username}! Selamat datang di Chatbot Akademik.`;
-    }
-
-  </script>
+  <script src="./js/main.js"></script>
+  <script src="./js/home.js"></script>
 </body>
 </html>

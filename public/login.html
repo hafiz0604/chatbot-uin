@@ -4,57 +4,147 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login - Chatbot Akademik UIN Sunan Kalijaga</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * { box-sizing: border-box; }
-    body {
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0; padding: 0;
       background-color: #f9f9f9;
       color: #333;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      overflow-x: hidden;
     }
-    a { text-decoration: none; color: #004d40; font-weight: 600; }
-    a:hover { text-decoration: underline; }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    a { 
+      text-decoration: none; 
+      color: inherit; 
+    }
+    
+    /* Header Styling */
+    header {
+      background-color: #004d40;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 100%;
+    }
+    
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Login Section */
+    .login-section {
+      background-color: #004d40;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      min-height: calc(100vh - 130px); /* Adjust for header and footer */
+      width: 100%;
+    }
+    
     .login-container {
       background: white;
       padding: 40px 30px;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
+      color: #333;
+      animation: fadeIn 0.5s ease;
     }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
     h1 {
       color: #004d40;
       margin-bottom: 30px;
-      font-size: 1.8rem;
+      font-size: 2rem;
       text-align: center;
+      position: relative;
+      padding-bottom: 15px;
     }
+    
+    h1:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background-color: #28a745;
+      border-radius: 2px;
+    }
+    
     form {
       display: flex;
       flex-direction: column;
     }
+    
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
     label {
       margin-bottom: 8px;
       font-weight: 600;
       color: #004d40;
+      display: block;
     }
+    
+    .input-icon {
+      position: absolute;
+      top: 39px;
+      left: 15px;
+      color: #aaa;
+    }
+    
     input[type="email"],
     input[type="password"] {
-      padding: 12px 15px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 25px;
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
       font-size: 1rem;
       outline: none;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
+    
     input[type="email"]:focus,
     input[type="password"]:focus {
       border-color: #28a745;
+      box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.15);
     }
+    
     button {
       background-color: #28a745;
       color: white;
@@ -62,80 +152,99 @@
       padding: 12px 25px;
       font-size: 1rem;
       font-weight: bold;
-      border-radius: 25px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      user-select: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
     }
+    
     button:hover {
       background-color: #218838;
+      transform: translateY(-2px);
     }
+    
     .signup-link {
-      margin-top: 20px;
+      margin-top: 25px;
       text-align: center;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    
+    .signup-link a {
+      color: #28a745;
+      font-weight: 600;
+    }
+    
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #004d40;
+      color: white;
+      text-align: center;
+      padding: 20px;
       font-size: 0.9rem;
+      width: 100%;
+      margin-top: auto;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="login-container" role="main" aria-label="Halaman login chatbot akademik">
-    <h1>Login</h1>
-    <form id="loginForm" action="#" method="post" aria-label="Form login pengguna">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required aria-required="true" />
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Masukkan password Anda" required aria-required="true" />
-      <button type="submit" aria-label="Tombol login">Masuk</button>
-    </form>
-    <div class="signup-link">
-      Belum punya akun? <a href="signin.html">Daftar di sini</a>
+  <header>
+    <div class="logo">
+      <i class="fas fa-robot"></i>
+      UIN SuKa Chatbot
     </div>
-  </main>
-  <script>
-    function validateEmail(email) {
-      const domain = '@student.uin-suka.ac.id';
-      return email.endsWith(domain);
-    }
+  </header>
 
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
+  <section class="login-section">
+    <div class="login-container">
+      <h1>Login</h1>
+      <form id="loginForm" autocomplete="off">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <i class="fas fa-envelope input-icon"></i>
+          <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required aria-required="true" />
+        </div>
+        
+        <div class="input-group">
+          <label for="password">Password</label>
+          <i class="fas fa-lock input-icon"></i>
+          <input type="password" id="password" name="password" placeholder="Masukkan password Anda" required aria-required="true" />
+        </div>
+        
+        <button type="submit" id="submitBtn" aria-label="Tombol login">
+          <i class="fas fa-sign-in-alt"></i> Masuk
+        </button>
+      </form>
+      
+      <div class="signup-link">
+        Belum punya akun? <a href="signin.html">Daftar di sini</a>
+      </div>
+    </div>
+  </section>
 
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
+  <footer>
+    &copy; 2025 UIN Sunan Kalijaga - Chatbot Akademik. All rights reserved.
+  </footer>
 
-      if (!validateEmail(email)) {
-        alert('Harap gunakan email dengan domain @student.uin-suka.ac.id');
-        return;
-      }
-
-      if (password === '') {
-        alert('Password tidak boleh kosong');
-        return;
-      }
-
-      const username = email.split('@')[0];
-
-      try {
-        const res = await fetch('/api/users/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
-        });
-
-        const data = await res.json();
-
-        if (res.ok && data.token) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('username', username);
-          window.location.href = 'chat.html';
-        } else {
-          alert(data.error || 'Login gagal');
-        }
-      } catch (err) {
-        console.error('🔴 Login error:', err);
-        alert('Terjadi kesalahan saat login');
-      }
-    });
-  </script>
+  <script src="/js/login.js" type="text/javascript"></script>
 </body>
 </html>

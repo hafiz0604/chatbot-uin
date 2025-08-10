@@ -4,279 +4,587 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chatbot Akademik UIN Sunan Kalijaga</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --primary: #004d40;
+      --accent: #28a745;
+      --bot-bg: #f4f5f7;
+      --user-bg: #28a745;
+      --user-color: #fff;
+      --border-light: #e0e5ea;
+      --footer-bg: #004d40;
+      --footer-color: #fff;
+      --header-bg: #004d40;
+      --header-color: #fff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%;
-      margin: 0; padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
+      background: #f9f9f9;
       color: #333;
-      overflow: hidden;
+      overflow-x: hidden;
     }
-    a { text-decoration: none; color: inherit; }
-    .page {
+    body {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      height: 100vh;
     }
+    a { text-decoration: none; color: inherit; }
     header {
-      background-color: #004d40;
-      color: white;
-      padding: 15px 30px;
+      background: var(--header-bg);
+      color: var(--header-color);
+      padding: 15px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-shrink: 0;
+      font-weight: 600;
+      font-size: 1.1rem;
+      position: sticky;
+      top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
     .logo {
       font-weight: bold;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 9px;
     }
     nav a {
-      color: white;
-      margin-left: 20px;
+      color: #fff;
+      margin-left: 18px;
       font-weight: 600;
       font-size: 1rem;
-      cursor: pointer;
+      letter-spacing: .01em;
+      padding: 4px 10px;
+      border-radius: 7px;
+      transition: background .12s;
+      display: inline-block;
     }
     nav a:hover {
-      text-decoration: underline;
+      background: #e0f2f1;
+      color: var(--primary);
     }
     .chat-container {
       flex: 1 1 auto;
       display: flex;
-      background: white;
-      margin: 20px 30px 20px 30px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      min-height: 0; /* important for flex children to scroll */
+      background: #fff;
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+      min-height: 0;
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 56px);
     }
-    #newChatBtn, #deleteHistoryBtn {
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: background-color 0.3s ease;
-    }
-
-    #newChatBtn:hover {
-      background-color: #28a745;
-      color: white;
-    }
-
-    #deleteHistoryBtn:hover {
-      background-color: #c9302c;
-    }
-
+    /* SIDEBAR RIWAYAT - DESKTOP */
     #chat-history {
-      width: 25%;
-      background-color: #f0f0f0;
-      padding: 20px;
+      width: 25vw;
+      min-width: 250px;
+      max-width: 380px;
+      background: #f8f9fa;
+      padding: 0;
       overflow-y: auto;
-      border-right: 1px solid #ddd;
-      color: #004d40;
+      border-right: 1px solid #e5e7eb;
+      color: var(--primary);
       font-weight: 600;
       min-height: 0;
+      position: relative;
+      z-index: 99;
+      box-shadow: none;
+      display: block;
+      flex-direction: column;
+      height: auto;
+      transition: none;
+    }
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 2;
+      border-radius: 0 18px 0 0;
+      box-shadow: 0 2px 8px rgba(33,150,83,0.04);
+      padding: 10px 16px 5px 16px;
+    }
+    #newChatBtn {
+      display: block;
+      width: 100%;
+      margin: 0 0 8px 0;
+      padding: 12px 0;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(40,167,69,0.07);
+      transition: background 0.18s, box-shadow 0.18s;
+    }
+    #newChatBtn:hover {
+      background: #218838;
+      box-shadow: 0 4px 12px rgba(40,167,69,0.17);
     }
     #chat-history h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      margin-bottom: 15px;
+      margin: 0 0 8px 0;
+      font-size: 1.12rem;
+      color: #004d40;
+      font-weight: 700;
+      letter-spacing: .01em;
     }
-    #chat-history ul {
-      list-style: none;
+    #historyList {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 8px 7px 16px 7px;
+      margin: 0;
+    }
+    #historyList li {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(33,150,83,0.06);
+      padding: 10px 15px 7px 15px;
+      margin-bottom: 13px;
+      border: 1.2px solid #e0e5ea;
+      transition: box-shadow 0.18s, background 0.17s;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      min-height: 58px;
+    }
+    #historyList li:hover {
+      background: #e8f5e8;
+      box-shadow: 0 4px 16px rgba(33,150,83,0.11);
+    }
+    .thread-content {
       padding: 0;
       margin: 0;
     }
-    #chat-history li {
-      padding: 10px;
-      margin-bottom: 10px;
-      background: white;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      transition: background-color 0.2s ease;
+    .thread-message {
+      font-size: 0.97rem;
+      color: #232323;
+      font-weight: 500;
+      line-height: 1.35;
+      margin-bottom: 6px;
+      word-break: break-word;
     }
-    #chat-history li:hover {
-      background-color: #d9f0e6;
+    .thread-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    #chat-history button {
-      margin-right: 5px;
-      padding: 6px 12px;
+    .thread-count {
+      background: #e0f2f1;
+      color: #009688;
+      padding: 2px 13px;
+      border-radius: 14px;
+      font-size: .95em;
+      font-weight: 600;
+      margin-right: 10px;
+      box-shadow: 0 1px 3px rgba(33,150,83,0.08);
+    }
+    .thread-time {
+      font-style: italic;
+      color: #888;
+      font-size: .97em;
+      font-weight: 500;
+    }
+    .delete-thread-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
       border: none;
-      background-color: #004d40;
-      color: white;
-      border-radius: 6px;
       cursor: pointer;
-      font-size: 0.9rem;
+      padding: 5px;
+      border-radius: 50%;
+      color: #bbb;
+      transition: background .14s, color .14s;
+      opacity: 0;
     }
-    #chat-history button:hover {
-      background-color: #00695c;
-    }
-
+    #historyList li:hover .delete-thread-btn { opacity: 1; color: #e53935; }
+    .delete-thread-btn:hover { background: #fbe9e7; color: #d32f2f; }
+    .close-history { display: none; }
+    .history-overlay { display: none !important; }
     .chat-main {
-      width: 75%;
+      width: 75vw;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       min-height: 0;
+      position: relative;
+      transition: none;
+      margin-left: 0;
     }
+    .show-history-btn { display: none !important; }
     .chat-box {
-      flex-grow: 1;
-      padding: 20px;
-      overflow-y: auto;
-      border-bottom: 1px solid #ddd;
+      background: #fff;
+      min-height: 0;
+      padding: 25px 4vw 0 4vw;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 13px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-light) #fff;
+      height: 70vh;
+      flex: 1 1 auto;
     }
-
-    /* Message container to hold message and timestamp */
+    .chat-box::-webkit-scrollbar { width: 4px; background: #fff;}
+    .chat-box::-webkit-scrollbar-thumb { background: var(--border-light);}
     .message-container {
       display: flex;
       flex-direction: column;
-      animation: fadeInUp 0.3s ease forwards;
-      opacity: 0;
-      transform: translateY(10px);
+      animation: fadeInUp .33s cubic-bezier(.3,.29,.25,1) forwards;
+      opacity: 0; transform: translateY(12px);
     }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Message bubbles */
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
     .message {
-      padding: 12px 18px;
-      border-radius: 20px;
+      padding: 13px 15px;
+      border-radius: 13px;
       font-size: 1rem;
-      line-height: 1.4;
-      word-wrap: break-word;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      position: relative;
-      white-space: pre-wrap;
+      line-height: 1.52;
+      max-width: 94vw;
+      margin-bottom: 2px;
+      background: var(--bot-bg);
+      color: #232323;
+      border: 1px solid var(--border-light);
+      font-weight: 400;
+      box-shadow: 0 1.5px 7px rgba(0,0,0,0.04);
     }
     .message.user {
-      background-color: #28a745;
-      color: white;
+      background: var(--user-bg);
+      color: var(--user-color);
       align-self: flex-end;
-      border-bottom-right-radius: 0;
-      box-shadow: 0 2px 6px rgba(40,167,69,0.4);
+      border: 1px solid var(--accent);
+      border-bottom-right-radius: 7px;
+      box-shadow: 0 2px 8px 0 rgba(40,167,69,.09);
     }
     .message.bot {
-      background-color: #e0e0e0;
-      color: #333;
+      background: var(--bot-bg);
+      color: #232323;
       align-self: flex-start;
-      border-bottom-left-radius: 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-bottom-left-radius: 7px;
     }
-
-    /* Timestamp below message */
     .timestamp {
-      font-size: 0.75rem;
-      color: #666;
-      margin-top: 4px;
-      align-self: flex-end;
-      user-select: none;
-      font-style: italic;
+      font-size: 0.80rem;
+      color: #b9bcc2;
+      margin-top: 2px;
+      font-weight: 500;
+      opacity: .87;
+      align-self: flex-start;
     }
     .message-container.user .timestamp {
       align-self: flex-end;
-      color: #d4f8d4;
-    }
-    .message-container.bot .timestamp {
-      align-self: flex-start;
-      color: #999;
+      color: #b7f5d4;
+      opacity: .67;
     }
     .chat-input {
-      flex-shrink: 0;
       display: flex;
-      padding: 15px 20px;
-      background-color: #f1f1f1;
-      border-radius: 0 0 12px 12px;
+      align-items: center;
+      gap: 7px;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0 0 13px 13px;
+      padding: 0 4vw 16px 4vw;
+      margin-top: 0;
+      position: static;
+      bottom: 0;
+      z-index: 50;
+      width: 100%;
     }
     .chat-input input[type="text"] {
-      flex-grow: 1;
-      padding: 12px 15px;
+      flex: 1 1 auto;
+      padding: 14px 17px;
       font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 25px;
-      outline: none;
-      transition: border-color 0.3s ease;
+      border: 1.4px solid var(--border-light);
+      border-radius: 20px;
+      background: #fff;
+      font-weight: 400;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+      transition: border .2s, box-shadow .2s;
     }
     .chat-input input[type="text"]:focus {
-      border-color: #28a745;
+      border-color: var(--accent);
+      box-shadow: 0 2px 10px #28a74522;
     }
     .chat-input button {
-      background-color: #28a745;
-      color: white;
+      background: var(--accent);
+      color: #fff;
       border: none;
-      padding: 12px 25px;
-      margin-left: 15px;
+      padding: 13px 22px;
       font-size: 1rem;
-      font-weight: bold;
-      border-radius: 25px;
+      font-weight: 600;
+      border-radius: 20px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      user-select: none;
+      transition: background .18s, box-shadow .18s;
+      box-shadow: 0 2px 8px rgba(30,170,120,0.13);
     }
-    .chat-input button:hover {
-      background-color: #218838;
+    .chat-input button:hover:not(:disabled) {
+      background: #218838;
+      box-shadow: 0 8px 25px rgba(30,170,120,0.13);
+    }
+    .chat-input button:disabled {
+      background: #bdbdbd;
+      cursor: not-allowed;
     }
     footer {
-      background-color: #004d40;
-      color: white;
+      background: var(--footer-bg);
+      color: var(--footer-color);
       text-align: center;
-      padding: 20px 30px;
-      font-size: 0.9rem;
+      padding: 11px 6px;
+      font-size: 0.87rem;
       flex-shrink: 0;
+      font-weight: 400;
+      width: 100vw;
     }
+    /* --- MOBILE PATCH --- */
     @media (max-width: 900px) {
-      .chat-container {
-        flex-direction: column;
-        margin: 10px 15px 10px 15px;
-      }
-      #chat-history, .chat-main {
-        width: 100%;
-        height: 300px;
-      }
       #chat-history {
-        border-right: none;
-        border-bottom: 1px solid #ddd;
+        display: none;
+        position: fixed;
+        left: 0; top: 0;
+        width: 94vw;
+        max-width: 400px;
+        height: 100vh;
+        background: #fff;
+        z-index: 200;
+        box-shadow: 2px 0 20px rgba(0,0,0,0.10);
+        padding: 0;
+        overflow-y: auto;
+        border-radius: 0 18px 18px 0;
+        animation: slideIn .21s cubic-bezier(.5,.9,.5,1.1);
+        display: flex;
+        flex-direction: column;
       }
+      #chat-history.active { display: flex; }
+      #chat-history .sticky-header {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 2;
+        border-radius: 0 18px 0 0;
+        box-shadow: 0 2px 8px rgba(33,150,83,0.04);
+        padding: 10px 16px 5px 16px;
+      }
+      #newChatBtn {
+        display: block;
+        width: 100%;
+        margin: 0 0 8px 0;
+        padding: 12px 0;
+        background: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        box-shadow: 0 2px 8px rgba(40,167,69,0.07);
+        transition: background 0.18s, box-shadow 0.18s;
+      }
+      #newChatBtn:hover {
+        background: #218838;
+        box-shadow: 0 4px 12px rgba(40,167,69,0.17);
+      }
+      #chat-history h2 {
+        margin: 0 0 8px 0;
+        font-size: 1.12rem;
+        color: #004d40;
+        font-weight: 700;
+        letter-spacing: .01em;
+      }
+      #historyList {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        padding: 8px 7px 16px 7px;
+        margin: 0;
+      }
+      #historyList li {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 2px 8px rgba(33,150,83,0.06);
+        padding: 10px 15px 7px 15px;
+        margin-bottom: 13px;
+        border: 1.2px solid #e0e5ea;
+        transition: box-shadow 0.18s, background 0.17s;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        min-height: 58px;
+      }
+      .thread-content {
+        padding: 0;
+        margin: 0;
+      }
+      .thread-message {
+        font-size: 0.97rem;
+        color: #232323;
+        font-weight: 500;
+        line-height: 1.35;
+        margin-bottom: 6px;
+        word-break: break-word;
+      }
+      .thread-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .thread-count {
+        background: #e0f2f1;
+        color: #009688;
+        padding: 2px 13px;
+        border-radius: 14px;
+        font-size: .95em;
+        font-weight: 600;
+        margin-right: 10px;
+        box-shadow: 0 1px 3px rgba(33,150,83,0.08);
+      }
+      .thread-time {
+        font-style: italic;
+        color: #888;
+        font-size: .97em;
+        font-weight: 500;
+      }
+      .close-history {
+        display: flex;
+        position: absolute;
+        top: 14px; right: 10px;
+        background: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 34px; height: 34px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        font-size: 1.23rem;
+        color: #28a745;
+        z-index: 210;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+      }
+      .history-overlay {
+        display: none;
+        position: fixed;
+        z-index: 198;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.15);
+        transition: opacity .17s;
+      }
+      .history-overlay.active { display: block; }
       .chat-main {
-        height: auto;
+        width: 100vw;
+        min-height: 0;
+        position: relative;
+        margin-left: 0;
       }
+        .show-history-btn {
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+          position: fixed;
+          left: 16px;
+          top: 72px;
+          z-index: 9999;
+          width: 46px;
+          height: 46px;
+          background: #28a745;
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          box-shadow: 0 2px 10px rgba(40,167,69,0.11);
+          font-size: 1.7rem;
+          cursor: pointer;
+          transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+          outline: none;
+          border: 2px solid #fff;
+        }
+        .show-history-btn:active,
+        .show-history-btn:focus {
+          background: #218838;
+          box-shadow: 0 6px 24px rgba(40,167,69,0.15);
+          transform: scale(0.95);
+        }
+        .show-history-btn:hover {
+          background: #219150;
+        }
+        .show-history-btn i {
+          pointer-events: none;
+        }
+        /* PATCH: Sembunyikan tombol garis tiga saat sidebar aktif */
+        #chat-history.active ~ .chat-main .show-history-btn,
+        #chat-history.active ~ .show-history-btn {
+          display: none !important;
+        } 
+      .chat-box {
+        padding: 18px 3vw 0 3vw;
+        min-height: 0;
+        padding-bottom: 70px !important;
+      }
+      .chat-input {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100vw;
+        background: #fff;
+        box-shadow: 0 -2px 12px rgba(0,0,0,0.03);
+        border-radius: 0;
+        z-index: 100;
+        padding: 12px 13vw 12px 4vw;
+      }
+      footer {
+        position: static;
+        width: 100vw;
+      }
+    }
+    @media (max-width: 480px) {
+      #chat-history {max-width: 99vw;}
+      #historyList {padding: 8px 3px 16px 3px;}
+      .thread-message {font-size: 0.95rem;}
+    }
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid #cccccc;
+      border-top: 3px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
     }
   </style>
 </head>
 <body>
   <div id="page-chat" class="page active" role="main" aria-label="Halaman percakapan chatbot akademik">
     <header>
-      <div class="logo">UIN SuKa Chatbot</div>
+      <div class="logo">
+        <i class="fas fa-robot"></i>
+        UIN SuKa Chatbot
+      </div>
       <nav>
         <a href="home.html">Beranda</a>
       </nav>
     </header>
     <section class="chat-container" aria-label="Area percakapan chatbot">
       <div id="chat-history" aria-label="Riwayat percakapan chatbot">
-        <div style="margin-top: 20px;">
-          <button id="newChatBtn" style="width: 100%; margin-bottom: 10px;">+ Chat Baru</button>
+        <div class="sticky-header">
+          <button id="newChatBtn">+ Chat Baru</button>
+          <h2>Riwayat Percakapan</h2>
         </div>
-        <h2>Riwayat Percakapan</h2>
-        <ul id="historyList">
-          <!-- Daftar riwayat percakapan akan muncul di sini -->
-        </ul>
+        <ul id="historyList"></ul>
+        <button class="close-history" title="Tutup riwayat"></button>
       </div>
+      <div class="history-overlay"></div>
       <div class="chat-main">
-        <div class="chat-box" id="chatBox" aria-live="polite" aria-relevant="additions">
-          <!-- Riwayat percakapan aktif akan muncul di sini -->
-        </div>
+          <button class="show-history-btn history-toggle" id="showHistoryBtn" aria-label="Tampilkan riwayat chat">
+            <i class="fas fa-lines-leaning"></i>
+          </button>
+        <div class="chat-box" id="chatBox" aria-live="polite" aria-relevant="additions"></div>
         <div class="chat-input" aria-label="Form input pengguna untuk chat">
           <input type="text" id="userInput" placeholder="Ketik pertanyaan Anda..." aria-label="Input teks pengguna" />
           <button id="sendBtn" aria-label="Kirim pertanyaan ke chatbot">Kirim</button>
@@ -287,6 +595,7 @@
       &copy; 2025 UIN Sunan Kalijaga - Chatbot Akademik. All rights reserved.
     </footer>
   </div>
-
-  <script src="chat.js"></script>
+  <script src="/js/chat.js"></script>
+  <script src="/js/ui-mobile.js"></script>
 </body>
+</html>

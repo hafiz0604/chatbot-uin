@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const { authenticateToken } = require('../middlewares/authMiddleware'); // opsional jika ingin aman
 
 // Import handler modular
 const { handleInformasiAkademik } = require('../handlers/prodiHandler');
@@ -11,8 +12,8 @@ const { handlePengumumanKampus } = require('../handlers/pengumumanHandler');
 
 // Konfigurasi API SIA
 const API_URL = "http://api.uin-suka.ac.id/akademik/v2";
-const NIP = "ACC.API.CHAT";
-const PASSWORD = "0274512474";
+const NIP = process.env.SIA_NIP || "ACC.API.CHAT";
+const PASSWORD = process.env.SIA_PASSWORD || "0274512474";
 
 // Token cache
 let cachedToken = null;
@@ -20,24 +21,38 @@ let tokenExpire = 0;
 async function getToken() {
   const now = Date.now();
   if (cachedToken && tokenExpire > now) return cachedToken;
-  const res = await axios.post(`${API_URL}/getToken`, { nip: NIP, password: PASSWORD });
-  cachedToken = res.data.token;
-  tokenExpire = now + 50 * 60 * 1000;
-  return cachedToken;
+  try {
+    const res = await axios.post(`${API_URL}/getToken`, {
+      nip: NIP,
+      password: PASSWORD
+    });
+    // Ambil token dari res.data.data.token
+    if (res.data && res.data.data && res.data.data.token) {
+      cachedToken = res.data.data.token;
+      tokenExpire = now + 50 * 60 * 1000;
+      return cachedToken;
+    } else {
+      console.error("Token tidak ditemukan di response:", res.data);
+      return null;
+    }
+  } catch (err) {
+    console.error("Gagal mendapatkan token SIA:", err.message, err.response?.data);
+    return null;
+  }
 }
 
 // Helper ekstrak tahun ajaran, semester, hari
 function getTahunAjaranFromText(text) {
-  const match = text.match(/\b(20\d{2})(?:\/20\d{2})?\b/);
+  const match = text && text.match(/\b(20\d{2})(?:\/20\d{2})?\b/);
   return match ? match[1] : null;
 }
 function getSemesterFromText(text) {
-  const match = text.match(/\bsemester\s*(\d+)\b/i) || text.match(/\bsmt\s*(\d+)\b/i);
+  const match = text && (text.match(/\bsemester\s*(\d+)\b/i) || text.match(/\bsmt\s*(\d+)\b/i));
   return match ? match[1] : null;
 }
 function getHariFromText(text) {
   const hariList = ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'];
-  text = text.toLowerCase();
+  text = (text || '').toLowerCase();
   for (const h of hariList) {
     if (text.includes(h)) return h;
   }
@@ -47,8 +62,19 @@ function capitalize(str) {
   return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : '';
 }
 
+// Fungsi deteksi pertanyaan profil/status
+function isPertanyaanProfil(msg) {
+  return msg && msg.match(/data ?diri|profil|info saya|status mahasiswa|status kuliah|dosen pa|dosen pembimbing|prodi|program studi|angkatan|kelas|jenjang|nim|nomor induk/i);
+}
+
+// Fungsi deteksi sapaan/salam
+function isSapaan(msg) {
+  if (!msg) return false;
+  return /^(halo|hai|hello|hi|assalamualaikum|selamat (siang|pagi|malam|sore))\b/i.test(msg.trim());
+}
+
 // Handler webhook menerima payload dari frontend
-router.post('/webhook', async (req, res) => {
+router.post('/', async (req, res) => {
   const body = req.body;
 
   // Payload dari frontend
@@ -60,25 +86,32 @@ router.post('/webhook', async (req, res) => {
     body.token ||
     await getToken();
 
-  // Logging debug
-  console.log("Token dari payload:", body.originalDetectIntentRequest?.payload?.token);
-  console.log("Token dari body:", body.token);
-  console.log("Seluruh body:", body);
+  // Logging debug (non-production)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log("Token dari payload:", body.originalDetectIntentRequest?.payload?.token);
+    console.log("Token dari body:", body.token);
+    console.log("Seluruh body:", body);
+  }
 
   // --- Intent detection manual ---
   let normalizedIntent = "";
   if (body.intent) {
     normalizedIntent = body.intent.trim().replace(/\s+/g, " ").toLowerCase();
   } else if (message) {
-    if (message.toLowerCase().includes("jadwal")) {
-      normalizedIntent = "informasi jadwal kuliah";
-    } else if (message.toLowerCase().includes("beasiswa")) {
-      normalizedIntent = "informasi beasiswa";
-    } else if (message.toLowerCase().includes("akademik")) {
+    const msg = message.toLowerCase();
+    if (
+      msg.match(/\b(dosen pa|dosen pembimbing|status mahasiswa|status kuliah|angkatan saya|prodi saya|program studi saya|nim saya|kelas saya|jenjang saya|data ?diri|profil|info saya|nomor induk)\b/i)
+    ) {
       normalizedIntent = "informasi akademik";
-    } else if (message.toLowerCase().includes("ujian")) {
+    } else if (msg.includes("ujian") || msg.includes("uas")) {
       normalizedIntent = "jadwal ujian";
-    } else if (message.toLowerCase().includes("pengumuman")) {
+    } else if (msg.includes("jadwal")) {
+      normalizedIntent = "informasi jadwal kuliah";
+    } else if (msg.includes("beasiswa")) {
+      normalizedIntent = "informasi beasiswa";
+    } else if (msg.includes("akademik")) {
+      normalizedIntent = "informasi akademik";
+    } else if (msg.includes("pengumuman")) {
       normalizedIntent = "pengumuman kampus";
     } else {
       normalizedIntent = "default fallback intent";
@@ -94,12 +127,48 @@ router.post('/webhook', async (req, res) => {
         intent: normalizedIntent,
       });
     }
-    // Handler routing sesuai intent
-    if (normalizedIntent === "default welcome intent") {
-      fulfillmentText = "Halo! Saya Chatbot Akademik UIN SuKa. Ada yang bisa saya bantu?";
-    } else if (normalizedIntent === "default fallback intent") {
-      fulfillmentText = "Maaf, saya tidak memahami pertanyaan Anda.";
-    } else if (normalizedIntent === "informasi akademik") {
+
+    // ======== PATCH: ROUTING SAPAAN LANGSUNG KE DIALOGFLOW (WELCOME) =========
+    if (isSapaan(message)) {
+      // Jika ingin, bisa juga request ke Dialogflow API, tapi default saja:
+      return res.json({
+        reply: "Halo! Ada yang bisa saya bantu seputar akademik UIN SuKa?",
+        intent: "Default Welcome Intent"
+      });
+    }
+    // ==========================================================================
+
+    // PATCH: Routing ke QA dokumen pedoman akademik
+    // Jika pertanyaan BUKAN profil/status/prodi/kelas/angkatan/dosen PA/NIM, langsung ke QA dokumen
+    if (!isPertanyaanProfil(message)
+      && normalizedIntent !== "informasi beasiswa"
+      && normalizedIntent !== "informasi jadwal kuliah"
+      && normalizedIntent !== "jadwal ujian"
+      && normalizedIntent !== "pengumuman kampus"
+    ) {
+      // Routing ke QA dokumen (bert/FastAPI)
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('Body sebelum QA:', req.body);
+      }
+      try {
+        // PENTING: pastikan field-nya "question", bukan "message"
+        const qaResp = await axios.post('http://localhost:3000/api/qa', { question: message });
+        if (process.env.NODE_ENV !== 'production') {
+          console.log('Jawaban dari QA:', qaResp.data);
+        }
+        if (qaResp.data && qaResp.data.jawaban) {
+          return res.json({ reply: qaResp.data.jawaban, intent: "qa_pedoman", score: qaResp.data.score, bab: qaResp.data.bab });
+        } else {
+          return res.json({ reply: "Maaf, saya tidak menemukan jawaban di dokumen.", intent: "qa_pedoman" });
+        }
+      } catch (err) {
+        console.error('Error QA dokumen:', err.message, err.response?.data, err.stack);
+        return res.json({ reply: "Maaf, terjadi kesalahan saat menjawab pertanyaan akademik.", intent: "qa_pedoman" });
+      }
+    }
+
+    // === LOGIC LAMA MASIH BERJALAN UNTUK INTENT LAIN ===
+    if (normalizedIntent === "informasi akademik") {
       fulfillmentText = await handleInformasiAkademik({
         message,
         token,
@@ -137,10 +206,15 @@ router.post('/webhook', async (req, res) => {
 
     // PATCH: fallback jika intent tidak dikenali tapi ada kata kunci jadwal/kelas/hari
     if (
-      (!fulfillmentText || fulfillmentText === "Maaf, saya tidak memahami pertanyaan Anda." || fulfillmentText === "Intent tidak dikenali atau belum diimplementasikan.") &&
+      normalizedIntent !== "jadwal ujian" &&
+      (
+        !fulfillmentText ||
+        fulfillmentText === "Maaf, saya tidak memahami pertanyaan Anda." ||
+        fulfillmentText === "Intent tidak dikenali atau belum diimplementasikan."
+      ) &&
       /jadwal|kelas|hari/i.test(message)
     ) {
-      // Panggil handler jadwal kuliah
+      if (process.env.NODE_ENV !== 'production') console.log("=== PATCH FALLBACK JALAN (KE KULIAH)===");
       fulfillmentText = await handleJadwalKuliah({
         message,
         parameters: body.parameters || {},
@@ -152,7 +226,6 @@ router.post('/webhook', async (req, res) => {
         getHariFromText
       });
     }
-
     res.json({ reply: fulfillmentText, intent: normalizedIntent });
   } catch (err) {
     console.error('[Webhook Error]', err.stack || err);

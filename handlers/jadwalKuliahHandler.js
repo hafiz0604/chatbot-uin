@@ -25,6 +25,7 @@ async function handleJadwalKuliah({
   getSemesterFromText,
   getHariFromText
 }) {
+  console.log("=== MASUK HANDLER KULIAH ===");
   // Ambil tahun ajaran, semester, hari dari parameter atau parsing message
   const tahunAjaran = parameters.kd_ta || (getTahunAjaranFromText && getTahunAjaranFromText(message)) || "2024";
   const semester = parameters.kd_smt || (getSemesterFromText && getSemesterFromText(message)) || "1";

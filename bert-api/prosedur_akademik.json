@@ -1,0 +1,794 @@
+[
+  {
+    "question": "Apa saja kebijakan utama penerimaan mahasiswa baru di UIN Sunan Kalijaga?",
+    "answer": "Ada empat kebijakan utama: (a) menerima mahasiswa berpotensi akademik dan kurang mampu secara ekonomi, (b) prinsip ekuitas tanpa diskriminasi SARA, gender, status sosial dan politik, (c) pemerataan wilayah asal dan keadilan akses, serta (d) penerimaan mahasiswa luar negeri dengan syarat tertentu."
+  },
+  {
+    "question": "Bagaimana kebijakan penerimaan mahasiswa berdasarkan prinsip ekuitas di UIN Sunan Kalijaga?",
+    "answer": "Penerimaan mahasiswa didasarkan pada kemampuan akademik tanpa mempertimbangkan latar belakang suku, agama, ras, antar golongan, gender, status sosial, dan politik."
+  },
+  {
+    "question": "Apakah UIN Sunan Kalijaga menerima mahasiswa dari luar negeri?",
+    "answer": "Ya, dengan syarat memiliki kemampuan akademik dan lulus tes Bahasa Indonesia dari UPT PPB. Jika belum lulus, wajib mengikuti matrikulasi Bahasa Indonesia sampai lulus."
+  },
+  {
+    "question": "Apakah mahasiswa transfer diterima di UIN Sunan Kalijaga?",
+    "answer": "Tidak menerima mahasiswa transfer, kecuali mahasiswa luar negeri dalam skema program kerjasama tertentu atau penerimaan berdasar kebijakan pemerintah."
+  },
+  {
+    "question": "Siapa yang menyelenggarakan proses penerimaan mahasiswa baru di UIN Sunan Kalijaga?",
+    "answer": "Diselenggarakan oleh Pusat Admisi UIN Sunan Kalijaga Yogyakarta dan unit kerja lain yang ditetapkan oleh Rektor."
+  },
+  {
+    "question": "Apa saja jalur seleksi penerimaan mahasiswa baru di UIN Sunan Kalijaga?",
+    "answer": "UIN Sunan Kalijaga memiliki lima jalur seleksi penerimaan mahasiswa baru: SNBP, UTBK SNBT, SPAN-PTKIN, UM-PTKIN, dan Mandiri."
+  },
+  {
+    "question": "Apa itu jalur SNBP di UIN Sunan Kalijaga?",
+    "answer": "SNBP (Seleksi Nasional Berdasarkan Prestasi) adalah seleksi nasional berdasarkan penelusuran prestasi akademik dan non akademik siswa, menggunakan rapor semester 1-5 (SMA/SMK/MA 3 tahun) atau 1-7 (SMK 4 tahun) dan tiga prestasi terbaik. Info lengkap: https://snpmb.bppp.kemdikbud.go.id/"
+  },
+  {
+    "question": "Apa itu jalur UTBK SNBT di UIN Sunan Kalijaga?",
+    "answer": "UTBK SNBT (Seleksi Nasional Berdasarkan Tes) adalah seleksi nasional menggunakan Ujian Tulis Berbasis Komputer. Peserta wajib mengikuti UTBK dan memenuhi persyaratan usia dan tahun kelulusan. Info lengkap: https://snpmb.bppp.kemdikbud.go.id/"
+  },
+  {
+    "question": "Apa itu jalur SPAN-PTKIN di UIN Sunan Kalijaga?",
+    "answer": "SPAN-PTKIN (Seleksi Prestasi Akademik Nasional PTKIN) adalah seleksi berdasarkan nilai rapor dan prestasi lainnya bagi siswa kelas terakhir pada tahun berjalan dari sekolah yang diakui pemerintah. Info lengkap: http://span-ptkin.ac.id."
+  },
+  {
+    "question": "Apa itu jalur UM-PTKIN di UIN Sunan Kalijaga?",
+    "answer": "UM-PTKIN (Ujian Masuk PTKIN) adalah seleksi nasional masuk UIN/IAIN/STAIN melalui ujian berbasis komputer menggunakan aplikasi SSE, terbuka untuk lulusan tahun 2022, 2023, dan 2024. Info lengkap: http://um-ptkin.ac.id."
+  },
+  {
+    "question": "Apa itu jalur Mandiri di UIN Sunan Kalijaga?",
+    "answer": "Jalur Mandiri adalah seleksi yang diselenggarakan secara langsung oleh UIN Sunan Kalijaga untuk semua program studi. Terdiri dari beberapa jenis seleksi: CBT (Computer-Based Test), PBT (Paper-Based Test, belum dilaksanakan lagi sejak 2020), Prestasi, dan Portofolio. Info lengkap: http://admisi.uin-suka.ac.id."
+  },
+  {
+    "question": "Apa itu Mandiri CBT di UIN Sunan Kalijaga?",
+    "answer": "Mandiri CBT adalah seleksi ujian online berbasis Android yang dilakukan dari rumah dengan ponsel dan paket data internet yang disiapkan peserta."
+  },
+  {
+    "question": "Apa itu Mandiri Prestasi di UIN Sunan Kalijaga?",
+    "answer": "Mandiri Prestasi adalah seleksi bagi calon mahasiswa dengan prestasi akademik, seni, olah raga, keagamaan, atau hafalan Al-Qur’an minimal 26 Juz, atau juara individu tingkat nasional (1-3) yang dibuktikan dengan sertifikat/piagam resmi."
+  },
+  {
+    "question": "Apa itu Mandiri Portofolio di UIN Sunan Kalijaga?",
+    "answer": "Mandiri Portofolio adalah seleksi menggunakan nilai UTBK-SNBT atau UM-PTKIN pada tahun berjalan. Termasuk program khusus untuk difabel, nonmuslim, dan daerah 3T. Info lengkap: http://admisi.uin-suka.ac.id."
+  },
+  {
+    "question": "Siapa saja yang dapat mengikuti jalur Mandiri Portofolio Keberagaman dan 3T di UIN Sunan Kalijaga?",
+    "answer": "Calon mahasiswa baru ber-KTP nonmuslim atau berdomisili di daerah 3T (Tertinggal, Terdepan, dan Terluar) dapat mengikuti jalur ini. Info lengkap: http://admisi.uin-suka.ac.id."
+  },
+    {
+    "question": "Apa saja syarat registrasi mahasiswa baru UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa baru harus: (1) Membayar biaya pendidikan di bank yang ditunjuk, (2) Mengisi data pribadi di http://akademik.uin-suka.ac.id, (3) Menyerahkan berkas registrasi seperti bukti pembayaran, fotokopi ijazah yang disahkan, fotokopi KTP/SIM/KK, surat pernyataan menaati peraturan, surat pernyataan kesanggupan membayar UKT, surat keterangan sehat, SBKRI dan akte kelahiran (untuk WNI keturunan asing), fotokopi paspor (untuk WNA), dan surat izin belajar (bagi yang sudah bekerja), (4) Mengambil foto dan sidik jari untuk KTM."
+  },
+  {
+    "question": "Apa itu herregistrasi di UIN Sunan Kalijaga dan bagaimana prosedurnya?",
+    "answer": "Herregistrasi adalah daftar ulang sebelum semester baru. Prosedurnya: (1) Membayar biaya pendidikan untuk semester berikutnya, (2) Memperbarui data pribadi secara online, (3) Mengisi KRS secara online (semester 1 dan 2 menggunakan sistem paket), (4) Mencetak KRS yang sudah disahkan dosen pembimbing. Mahasiswa yang tidak herregistrasi pada waktunya otomatis cuti akademik. Jika sudah membayar UKT tapi tidak isi KRS, tetap dianggap aktif dan semester tetap berjalan."
+  },
+  {
+    "question": "Bagaimana format Nomor Induk Mahasiswa (NIM) di UIN Sunan Kalijaga?",
+    "answer": "Mulai 2019, NIM terdiri dari 11 digit: dua digit pertama tahun masuk, ketiga jenjang studi (1=S1, 2=S2, 3=S3, 4=Profesi), keempat & kelima kode fakultas, keenam & ketujuh kode prodi, kedelapan kode kelas/semester, kesembilan hingga kesebelas nomor urut mahasiswa. Contoh: 19107021001."
+  },
+  {
+    "question": "Bagaimana aturan dan fungsi Kartu Tanda Mahasiswa (KTM) di UIN Sunan Kalijaga?",
+    "answer": "KTM adalah kartu identitas mahasiswa dan kartu anggota perpustakaan. Berlaku 8 semester (S1), bisa diperpanjang sekali jika belum lulus. Jika hilang, ajukan pengganti dengan surat kehilangan dari polisi dan kwitansi biaya pengganti. Jika rusak/habis masa berlaku, serahkan KTM lama dan kwitansi biaya pengganti. Proses di Layanan Terpadu Gd. Rektorat Lama Lt. 1."
+  },
+  {
+    "question": "Apakah mahasiswa boleh merangkap kuliah di perguruan tinggi lain?",
+    "answer": "Tidak boleh, kecuali untuk program double degree atau kampus merdeka. Jika merangkap kuliah, transaksi akademik tidak akan dilaporkan ke PDDIKTI dan mahasiswa harus memilih salah satu perguruan tinggi."
+  },
+  {
+    "question": "Bagaimana satuan waktu pendidikan di UIN Sunan Kalijaga?",
+    "answer": "UIN Sunan Kalijaga menggunakan satuan waktu semester. Dalam satu tahun akademik terdapat dua semester, yaitu Semester Gasal dan Semester Genap. Fakultas juga dapat menyelenggarakan Semester Antara jika diperlukan."
+  },
+  {
+    "question": "Apa itu Sistem Kredit Semester (SKS) di UIN Sunan Kalijaga?",
+    "answer": "Sistem Kredit Semester (SKS) adalah takaran waktu kegiatan belajar mahasiswa per minggu per semester. SKS digunakan untuk mengakomodasi perbedaan minat, bakat, dan kemampuan mahasiswa. Jumlah mata kuliah yang diambil per semester ditentukan oleh kemampuan individual mahasiswa berdasarkan IP, kecuali semester pertama dan kedua yang menggunakan sistem paket."
+  },
+  {
+    "question": "Apa tujuan penerapan Sistem Kredit Semester (SKS)?",
+    "answer": "Tujuan SKS adalah: (1) Memberikan kesempatan mahasiswa cakap dan giat belajar untuk menyelesaikan studi secepat mungkin, (2) Memberikan kesempatan memilih kegiatan sesuai minat, bakat, dan kemampuan, (3) Mempermudah penyesuaian kurikulum terhadap perkembangan ilmu dan teknologi."
+  },
+  {
+    "question": "Berapa SKS yang setara dengan satu semester belajar di UIN Sunan Kalijaga?",
+    "answer": "Satu SKS setara dengan 45 jam per semester. Pemenuhan beban belajar dapat dilakukan melalui kuliah, praktikum, seminar, tugas akhir, magang, pengabdian masyarakat, atau bentuk pembelajaran lain."
+  },
+  {
+    "question": "Berapa beban SKS dan masa studi program Sarjana di UIN Sunan Kalijaga?",
+    "answer": "Beban studi program Sarjana minimal 144 SKS dan maksimal 160 SKS, terdiri dari mata kuliah wajib dan pilihan. Masa studi normal adalah 8 semester, dengan batas maksimal 14 semester (termasuk cuti). Jika tidak selesai dalam 14 semester, dinyatakan gagal atau Drop Out (DO)."
+  },
+  {
+    "question": "Bagaimana proses pengisian Kartu Rencana Studi (KRS) di UIN Sunan Kalijaga?",
+    "answer": "Setiap awal semester, mahasiswa wajib mengisi KRS secara online setelah membayar biaya pendidikan. Mahasiswa semester I dan II pengisian KRS dilakukan oleh petugas fakultas. Pengisian KRS harus berkonsultasi dengan Dosen Penasihat Akademik dan sesuai jadwal program studi."
+  },
+  {
+    "question": "Berapa jumlah SKS yang dapat diambil mahasiswa per semester di UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa baru (semester I dan II) maksimal 20 SKS. Mulai semester III, jumlah SKS berdasarkan IP semester sebelumnya: IP ≥ 3,00: maksimal 24 SKS; IP 2,50–2,99: maksimal 22 SKS; IP 2,00–2,49: maksimal 20 SKS; IP 1,50–1,99: maksimal 18 SKS; IP < 1,50: maksimal 16 SKS."
+  },
+  {
+    "question": "Bagaimana aturan pengambilan SKS bagi mahasiswa yang aktif kembali dari cuti akademik?",
+    "answer": "Pengambilan jumlah SKS didasarkan pada IP semester terakhir sebelum cuti."
+  },
+  {
+    "question": "Apa tanggung jawab mahasiswa dalam pengisian KRS?",
+    "answer": "Kesalahan dalam pengisian KRS (input KRS) sepenuhnya menjadi tanggung jawab mahasiswa."
+  },
+  {
+    "question": "Apakah mahasiswa yang mengambil KKN reguler boleh mengambil mata kuliah lain?",
+    "answer": "Mahasiswa yang mengambil KKN reguler pada semester yang sama tidak diperbolehkan mengambil mata kuliah lain, kecuali skripsi, tugas akhir, atau mata kuliah dari program MBKM."
+  },
+  {
+    "question": "Bagaimana kurikulum yang diterapkan di UIN Sunan Kalijaga?",
+    "answer": "UIN Sunan Kalijaga menerapkan kurikulum berbasis Outcome Based Education (OBE) yang mengacu pada Kerangka Kualifikasi Nasional Indonesia (KKNI) dan Standar Nasional Pendidikan Tinggi (SN-DIKTI), dengan integrasi ilmu keislaman dan ilmu umum. Kurikulum senantiasa diperbaharui sesuai kebutuhan, perkembangan IPTEKS, dan capaian pembelajaran."
+  },
+  {
+    "question": "Apa saja kompetensi yang harus dicapai oleh lulusan UIN Sunan Kalijaga menurut Permendikbudristek No 53 Tahun 2023?",
+    "answer": "Kompetensi lulusan mencakup: (a) penguasaan ilmu pengetahuan dan teknologi serta aplikasinya, (b) kecakapan umum sebagai dasar penguasaan ilmu dan teknologi, (c) pengetahuan dan keterampilan dunia kerja atau studi lanjut, serta (d) kemampuan berpikir mandiri dan kritis sebagai pembelajar sepanjang hayat."
+  },
+  {
+    "question": "Apa saja kompetensi utama lulusan program Sarjana (S1) di UIN Sunan Kalijaga?",
+    "answer": "Lulusan S1 harus menguasai konsep teoretis bidang pengetahuan dan keterampilan tertentu untuk menyelesaikan masalah secara prosedural sesuai lingkup pekerjaannya, dan mampu beradaptasi terhadap situasi perubahan."
+  },
+  {
+    "question": "Bagaimana implementasi kebijakan Merdeka Belajar-Kampus Merdeka (MBKM) di UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa berhak mengambil 1 semester (20 SKS) pembelajaran di luar prodi dalam kampus yang sama, dan maksimal 2 semester (40 SKS) di perguruan tinggi berbeda atau di luar perguruan tinggi. Bentuk kegiatan pembelajaran: pertukaran pelajar, magang, asisten mengajar, penelitian, proyek kemanusiaan, wirausaha, studi/proyek independen, membangun desa, dan moderasi beragama."
+  },
+  {
+    "question": "Apa indikator utama kegiatan pembelajaran di luar prodi agar mendapatkan SKS penuh (20 SKS) di UIN Sunan Kalijaga?",
+    "answer": "Setiap kegiatan seperti magang, asisten mengajar, penelitian, proyek kemanusiaan, wirausaha, studi independen, membangun desa, pertukaran pelajar, dan moderasi beragama memiliki kriteria khusus, misalnya: tingkat kesulitan setara sarjana, keterlibatan aktif, evaluasi capaian, kontribusi nyata, dan pengembangan kompetensi sesuai bidang."
+  },
+  {
+    "question": "Bagaimana prinsip hak belajar di luar prodi di UIN Sunan Kalijaga?",
+    "answer": "Prinsipnya adalah major (mata kuliah utama/capaian pembelajaran) dan minor (mata kuliah pilihan di luar prodi untuk memperkuat kompetensi tertentu). Jika mata kuliah minor tidak tersedia, prodi wajib menyediakan yang ekuivalen."
+  },
+  {
+    "question": "Berapa maksimal SKS yang dapat diambil mahasiswa di luar program studi di UIN Sunan Kalijaga?",
+    "answer": "Maksimal 60 SKS: 20 SKS di luar prodi dalam UIN Sunan Kalijaga dan 40 SKS di luar UIN Sunan Kalijaga."
+  },
+  {
+    "question": "Kapan mahasiswa dapat mengambil MBKM internal dan eksternal di UIN Sunan Kalijaga?",
+    "answer": "MBKM internal dan eksternal untuk mata kuliah di luar prodi dapat diambil pada semester 5, 6, atau 7. MBKM internal untuk mata kuliah penciri nasional dan universitas dapat diambil sejak semester 1."
+  },
+  {
+    "question": "Bagaimana mahasiswa menentukan mata kuliah yang diambil di luar prodi?",
+    "answer": "Penentuan dilakukan melalui diskusi dengan Dosen Penasihat Akademik dan Ketua Program Studi, bisa dalam bentuk paket atau pilihan mata kuliah yang menunjang kompetensi keilmuan mahasiswa."
+  },
+  {
+    "question": "Di mana aturan detail tentang hak belajar di luar prodi diatur?",
+    "answer": "Aturan detail diatur dalam pedoman hak belajar di luar prodi yang dikeluarkan oleh UIN Sunan Kalijaga."
+  },
+   {
+    "question": "Apa itu Rencana Pembelajaran Semester (RPS) di UIN Sunan Kalijaga?",
+    "answer": "RPS adalah dokumen program pembelajaran yang dirancang untuk menghasilkan lulusan dengan kemampuan sesuai Capaian Pembelajaran Lulusan (CPL). RPS dikembangkan dosen bersama kelompok keahlian di prodi, memuat minimal: nama prodi, kode mata kuliah, capaian pembelajaran, kemampuan akhir, bahan kajian, metode pembelajaran, waktu, pengalaman belajar, kriteria/indikator/bobot penilaian, dan daftar referensi."
+  },
+  {
+    "question": "Siapa yang menyusun dan mengembangkan RPS di UIN Sunan Kalijaga?",
+    "answer": "RPS disusun dan dikembangkan oleh dosen secara mandiri bersama dalam kelompok keahlian di program studi masing-masing."
+  },
+  {
+    "question": "Apa saja bentuk bahan ajar yang digunakan di UIN Sunan Kalijaga?",
+    "answer": "Bahan ajar dapat berupa buku ajar, diktat, modul, petunjuk praktikum, model, alat bantu, audio visual, naskah tutorial, atau job sheet, baik dalam bentuk cetak maupun digital, dan diberikan dosen kepada mahasiswa pada awal perkuliahan."
+  },
+  {
+    "question": "Apa perbedaan buku ajar, diktat, dan modul menurut pedoman akademik UIN Sunan Kalijaga?",
+    "answer": "Buku ajar adalah buku pegangan resmi yang disusun pakar dan diterbitkan luas. Diktat adalah bahan ajar yang disusun dosen dan disebarluaskan kepada peserta kuliah. Modul adalah bagian bahan ajar untuk satu mata kuliah yang juga disusun dosen dan disebarluaskan."
+  },
+  {
+    "question": "Apa itu kontrak belajar di UIN Sunan Kalijaga?",
+    "answer": "Kontrak belajar adalah kesepakatan tertulis antara dosen dan mahasiswa dalam kelas, berisi jadwal kuliah, kehadiran, kedisiplinan, sistem penilaian, tugas, dan ketertiban berpakaian. Kontrak belajar dibuat pada hari pertama kuliah untuk menjamin perkuliahan yang tertib dan kondusif."
+  },
+  {
+    "question": "Bagaimana cara mengukur keefektifan kontrak belajar di UIN Sunan Kalijaga?",
+    "answer": "Keefektifan kontrak belajar diukur dari tingkat kepatuhan dosen dan mahasiswa terhadap peraturan yang telah disepakati bersama dalam kontrak belajar."
+  },
+    {
+    "question": "Bagaimana strategi proses pembelajaran di UIN Sunan Kalijaga?",
+    "answer": "Strategi pembelajaran menggunakan active learning, di mana dosen sebagai fasilitator dan mahasiswa sebagai subjek yang dituntut belajar secara kreatif dan mandiri. Pembelajaran dapat dilakukan di kelas, luar kelas, maupun online, serta memanfaatkan sumber belajar di lingkungan sekitar."
+  },
+  {
+    "question": "Apa saja tahapan proses pembelajaran di UIN Sunan Kalijaga?",
+    "answer": "Tahapan proses pembelajaran meliputi: 1) Kegiatan pra-kuliah (PBAK, sosialisasi SIA, pelatihan ICT, SOSPEM, dsb.), 2) Persiapan perkuliahan (bimbingan rencana studi minimal 2 minggu sebelum kuliah), 3) Pelaksanaan perkuliahan (pemaparan RPS, kontrak belajar, daftar hadir, kuliah umum, perkuliahan minimal 16 minggu per semester), 4) Evaluasi proses perkuliahan (pengisian penilaian efektivitas pembelajaran dan beban belajar secara online)."
+  },
+  {
+    "question": "Apa prinsip-prinsip penilaian pembelajaran di UIN Sunan Kalijaga?",
+    "answer": "Penilaian pembelajaran harus: valid, reliabel, transparan, akuntabel, berkeadilan, objektif, dan edukatif. Penilaian menyangkut proses dan hasil belajar mahasiswa."
+  },
+  {
+    "question": "Apa saja teknik dan instrumen penilaian yang digunakan di UIN Sunan Kalijaga?",
+    "answer": "Teknik penilaian meliputi penilaian formatif (memantau perkembangan belajar, memberi umpan balik) dan sumatif (menilai pencapaian akhir). Instrumen penilaian dapat berupa rubrik (holistik, deskriptif, skala persepsi), tes, nontes, proyek, portofolio, tugas, atau uji kompetensi."
+  },
+  {
+    "question": "Apa itu rubrik penilaian dan apa macamnya?",
+    "answer": "Rubrik penilaian adalah panduan yang menggambarkan kriteria dan tingkatan capaian belajar mahasiswa. Macam rubrik: holistik (kesan keseluruhan), deskriptif (tingkatan kriteria dengan deskripsi dan skor), dan skala persepsi (tingkatan skor tanpa deskripsi)."
+  },
+  {
+    "question": "Bagaimana mekanisme dan prosedur penilaian di UIN Sunan Kalijaga?",
+    "answer": "Mekanisme penilaian meliputi: penyepakatan tahap dan teknik penilaian di awal pertemuan, pembuatan instrumen, validasi dan pengesahan instrumen, pelaksanaan penilaian, pemberian umpan balik, dan dokumentasi hasil secara transparan di SIA. Prosedur penilaian meliputi: perencanaan, pemberian tugas, observasi kinerja, pengembalian hasil, dan pemberian nilai akhir."
+  },
+  {
+    "question": "Siapa yang melaksanakan penilaian hasil belajar mahasiswa?",
+    "answer": "Pelaksanaan penilaian dilakukan oleh dosen pengampu atau tim dosen pengampu, bisa melibatkan mahasiswa dan/atau pemangku kepentingan yang relevan."
+  },
+  {
+    "question": "Apa saja komponen dan ranah penilaian di UIN Sunan Kalijaga?",
+    "answer": "Komponen penilaian meliputi capaian pembelajaran di 4 ranah: (a) penguasaan ilmu pengetahuan dan teknologi, (b) kecakapan umum, (c) pengetahuan dan keterampilan kerja/studi lanjut, (d) kemampuan intelektual berpikir mandiri dan kritis. Bobot penilaian disesuaikan dengan karakteristik mata kuliah."
+  },
+  {
+    "question": "Bagaimana sistem pelaporan penilaian hasil belajar mahasiswa?",
+    "answer": "Penilaian hasil belajar dilakukan per semester. Mahasiswa harus hadir minimal 75% untuk mengikuti ujian akhir. Tidak ada ujian susulan kecuali alasan tertentu (sakit, force majeure, keluarga inti meninggal, tugas resmi). Nilai dilaporkan dalam bentuk huruf (A, B, C, D, E) sesuai PAP dengan rentang nilai angka dan bobot tertentu."
+  },
+  {
+    "question": "Bagaimana mekanisme perubahan dan penganuliran nilai di UIN Sunan Kalijaga?",
+    "answer": "Perubahan nilai dapat diajukan mahasiswa dengan formulir setelah nilai diumumkan. Nilai dapat berubah naik jika keluhan benar, atau turun jika keluhan tidak benar. Penganuliran nilai dilakukan jika mahasiswa terbukti curang atau plagiat. Plagiarisme pada skripsi sebelum ujian wajib menulis ulang, setelah ujian bisa menyebabkan pencabutan gelar."
+  },
+    {
+    "question": "Apa saja kategori evaluasi keberhasilan studi di UIN Sunan Kalijaga?",
+    "answer": "Evaluasi keberhasilan studi meliputi: Indeks Prestasi (IP), keterangan lulus/tidak lulus, dan rata-rata nilai capaian pembelajaran lulusan (CPL)."
+  },
+  {
+    "question": "Apa itu Indeks Prestasi Semester (IPS) dan Indeks Prestasi Kumulatif (IPK)?",
+    "answer": "IPS adalah nilai hasil belajar mahasiswa pada satu semester. IPK adalah nilai rata-rata seluruh hasil belajar dari semester pertama hingga semester terakhir."
+  },
+  {
+    "question": "Bagaimana rumus penghitungan IPS dan IPK di UIN Sunan Kalijaga?",
+    "answer": "IPS/IPK = Total Bobot (Bobot Nilai Mata Kuliah x SKS) / Total SKS."
+  },
+  {
+    "question": "Bagaimana klasifikasi predikat kelulusan sarjana di UIN Sunan Kalijaga?",
+    "answer": "Predikat Pujian (IPK ≥ 3,51, studi ≤ 10 semester), Sangat Memuaskan (IPK 3,01–3,50), Memuaskan (IPK 2,76–3,00), Cukup (IPK 2,00–2,75). IPK < 2,00 dinyatakan gagal/tidak lulus."
+  },
+  {
+    "question": "Kapan mahasiswa boleh mengulang mata kuliah di UIN Sunan Kalijaga?",
+    "answer": "Mata kuliah dengan nilai B ke bawah boleh diulang. Mata kuliah wajib yang tidak lulus (nilai < C) harus diulang sebagai syarat ujian tugas akhir. Nilai terbaik yang diambil."
+  },
+  {
+    "question": "Apa itu penghapusan mata kuliah dan syaratnya?",
+    "answer": "Penghapusan mata kuliah adalah penghilangan mata kuliah dari transkrip akademik dengan syarat tertentu, seperti untuk meningkatkan IPK atau perubahan kurikulum. Harus disetujui Ketua Prodi dan Wakil Dekan Akademik, minimal SKS untuk lulus tetap dipenuhi, dan hanya dilakukan saat pendaftaran munaqasyah."
+  },
+  {
+    "question": "Apa itu Kuliah Kerja Nyata (KKN) di UIN Sunan Kalijaga?",
+    "answer": "KKN adalah kegiatan akademik wajib S1 berupa pengabdian kepada masyarakat yang mengembangkan kemampuan sesuai kompetensi prodi. Terdapat dua model: KKN Reguler (tema, lokasi, kelompok, dan DPL ditetapkan LP2M) dan KKN Non-Reguler/Mandiri (diusulkan oleh mahasiswa/dosen/fakultas/dll)."
+  },
+  {
+    "question": "Apa saja syarat mengikuti KKN Reguler dan Non-Reguler?",
+    "answer": "KKN Reguler: mahasiswa aktif, minimal 110 SKS, lulus minimal 100 SKS, lulus pembekalan, surat sehat, KKN di KRS, tidak boleh ambil mata kuliah lain kecuali skripsi/tugas akhir. KKN Non-Reguler: mahasiswa aktif, minimal 120 SKS, lulus pembekalan, surat sehat, KKN di KRS, maksimal 12 SKS termasuk KKN dan skripsi, kelompok 8–10 mahasiswa lintas prodi/fakultas, boleh usul lokasi dan DPL."
+  },
+  {
+    "question": "Apa aturan pengambilan mata kuliah bersamaan dengan KKN?",
+    "answer": "Mahasiswa yang mengambil KKN pada semester yang sama tidak boleh mengambil mata kuliah lain, kecuali skripsi atau tugas akhir."
+  },
+  {
+    "question": "Apa itu PPL/PLP/PKL/KP/PPS di UIN Sunan Kalijaga?",
+    "answer": "Program Pengalaman Lapangan (PPL), Program Latihan Profesi (PLP), Program Kerja Lapangan/Kerja Praktek (PKL/KP), dan Praktek Pekerjaan Sosial (PPS) adalah kegiatan akademik wajib di beberapa prodi untuk memberi pengalaman langsung di bidang keilmuan mahasiswa."
+  },
+    {
+    "question": "Apa saja bentuk tugas akhir program Sarjana di UIN Sunan Kalijaga?",
+    "answer": "Tugas akhir dapat berupa Skripsi, Prototype, Proyek, atau bentuk tugas akhir lain yang sejenis sesuai kebijakan program studi."
+  },
+  {
+    "question": "Apa tahapan penyusunan skripsi/tugas akhir di UIN Sunan Kalijaga?",
+    "answer": "Tahapan: 1) Proposal (pengajuan topik, persetujuan, seminar proposal), 2) Penelitian dan Penulisan (bimbingan, penulisan skripsi, waktu 2 semester + perpanjangan 2 bulan jika perlu), 3) Ujian Skripsi/Munaqasyah (memenuhi syarat SKS, IPK, lulus KKN dan PPL, sertifikat bahasa & ICT, persyaratan administrasi)."
+  },
+  {
+    "question": "Apa yang dimaksud dengan Yudisium Online di UIN Sunan Kalijaga?",
+    "answer": "Yudisium Online adalah proses penyelesaian semua persyaratan administrasi akademik secara online sebagai syarat kelulusan dan mengikuti wisuda. Mahasiswa harus aktif, menyerahkan skripsi/TA ke fakultas & pembimbing, mengurus surat bebas pustaka, mencetak draft ijazah & transkrip, dan memastikan seluruh proses yudisium selesai."
+  },
+  {
+    "question": "Bagaimana evaluasi hasil studi mahasiswa di UIN Sunan Kalijaga?",
+    "answer": "Evaluasi dilakukan setiap akhir semester, setelah 4 semester, 8 semester, dan akhir program. Syarat lanjut studi: lulus minimal 30 SKS (semester 4), minimal 80 SKS (semester 8), dan total SKS sesuai prodi. Jika tidak memenuhi syarat, bisa dikenakan Drop Out (DO)."
+  },
+  {
+    "question": "Apa saja penyebab putus studi (Drop Out/DO) di UIN Sunan Kalijaga?",
+    "answer": "Penyebab DO: sampai semester 4 tidak lulus minimal 30 SKS dan nilai C, tidak lulus dalam 14 semester, atau terkena sanksi pelanggaran kode etik mahasiswa."
+  },
+  {
+    "question": "Apa itu cuti akademik dan apa ketentuannya di UIN Sunan Kalijaga?",
+    "answer": "Cuti akademik adalah izin tidak mengikuti kegiatan akademik/nonakademik maksimal 2 semester (semester 2-14), dihitung sebagai masa studi, diajukan sebelum semester berikut, dan harus daftar ulang setelah cuti. Tidak daftar ulang setelah 2 semester cuti dianggap mengundurkan diri."
+  },
+  {
+    "question": "Apa saja syarat mengikuti wisuda di UIN Sunan Kalijaga?",
+    "answer": "Syarat wisuda: telah daftar munaqasyah dan yudisium online, lulus munaqasyah dan sidang yudisium, status lulus di SIA, membayar biaya wisuda (non UKT), mengisi data pribadi online, mencetak dan menyerahkan dokumen wisuda ke fakultas, serta mengambil toga, undangan, dan samir di fakultas."
+  },
+    {
+    "question": "Apa saja layanan administrasi akademik yang diberikan oleh UIN Sunan Kalijaga?",
+    "answer": "Layanan administrasi akademik meliputi registrasi, herregistrasi, penerbitan ijazah, penyelenggaraan wisuda, pendataan alumni (oleh Pusat Administrasi Universitas), serta pengesahan ijazah, transkrip akademik, SKPI, dan kegiatan penelitian/pengabdian masyarakat (oleh Administrasi Fakultas)."
+  },
+  {
+    "question": "Apa saja jenis beasiswa yang tersedia di UIN Sunan Kalijaga?",
+    "answer": "Beasiswa yang tersedia antara lain: Bidik Misi, KIP Kuliah, beasiswa dari bank (BNI, BPD DIY, BI, BRI, BSM), Hafidz Qur’an, Prestasi Kementerian Agama RI, Prestasi Pionir, Supersemar, Dikpora DIY, PT Djarum, Bank Indonesia, Laziz PLN, Prodi Keagamaan, Indonesia Bangkit, dan LPDP untuk Magister dan Doktor. Info lebih lanjut di https://uin-suka.ac.id/id/page/universitas/77-beasiswa."
+  },
+  {
+    "question": "Bagaimana mahasiswa memperoleh surat keterangan di UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa bisa mengunduh surat keterangan seperti surat aktif kuliah, lulus, izin penelitian, izin PPL, SK pindah studi, dan lainnya melalui sistem http://autosurat.uin-suka.ac.id. Jika memerlukan tanda tangan rektor/pejabat universitas, pengajuan melalui pimpinan fakultas dengan dokumen pendukung."
+  },
+  {
+    "question": "Bagaimana cara memperoleh Surat Keterangan Pengganti Ijazah atau Transkrip Akademik yang hilang/rusak?",
+    "answer": "Surat Keterangan Pengganti Ijazah diterbitkan jika ijazah rusak, hilang, atau musnah dengan bukti keterangan kepolisian, ditandatangani Dekan dan Rektor. Surat Keterangan Pengganti Transkrip Akademik diterbitkan jika transkrip rusak/hilang, ditandatangani Dekan Fakultas."
+  },
+  {
+    "question": "Bagaimana jika ada kesalahan penulisan pada Ijazah, Transkrip, atau SKPI?",
+    "answer": "Jika terdapat kesalahan penulisan pada Ijazah, Transkrip, atau SKPI, dapat diajukan Surat Keterangan Ralat ke Dekan Fakultas dengan melampirkan dokumen terkait. Surat Keterangan Ralat Ijazah ditandatangani Dekan dan Rektor; Surat Keterangan Ralat Transkrip Akademik dan SKPI ditandatangani Dekan."
+  },
+    {
+    "question": "Apa itu Ijazah, Transkrip Akademik, dan Surat Keterangan Pendamping Ijazah (SKPI) di UIN Sunan Kalijaga?",
+    "answer": "Ijazah adalah dokumen pengakuan prestasi belajar dan penyelesaian jenjang pendidikan. Transkrip Akademik adalah kumpulan nilai mata kuliah yang telah ditempuh dan lulus. SKPI memuat informasi pencapaian akademik, kualifikasi lulusan, serta prestasi dan aktivitas lain selama menjadi mahasiswa."
+  },
+  {
+    "question": "Apa saja yang dapat dimasukkan dalam SKPI (Surat Keterangan Pendamping Ijazah) di UIN Sunan Kalijaga?",
+    "answer": "Capaian Pembelajaran Lulusan (CPL), prestasi dan penghargaan (sertifikat lomba, narasumber, penulis buku, HAKI, penelitian), keikutsertaan organisasi (internal/eksternal), sertifikat keahlian (bahasa asing, akademik, non-akademik), kerja praktik/magang, dan pendidikan karakter (pelatihan softskill, dsb)."
+  },
+  {
+    "question": "Bagaimana prosedur pengambilan Ijazah, Transkrip Akademik, dan SKPI di UIN Sunan Kalijaga?",
+    "answer": "Dokumen diambil di administrasi fakultas setelah wisuda dengan syarat sama seperti wisuda, ditambah bukti pengembalian toga dan tanda terima. Jika belum diambil 2 bulan setelah wisuda dikenai sanksi administrasi, dan setelah 6 bulan bukan tanggung jawab kampus."
+  },
+  {
+    "question": "Bagaimana cara menerjemahkan dan legalisasi Ijazah serta Transkrip Akademik?",
+    "answer": "Permohonan terjemahan diajukan ke Pusat Pengembangan Bahasa (P2B) dengan melampirkan fotokopi ijazah dan transkrip legalisir, membayar biaya terjemahan, serta pas foto. Legalisasi dilakukan di fakultas masing-masing."
+  },
+  {
+    "question": "Apa itu Semester Antara di UIN Sunan Kalijaga?",
+    "answer": "Semester Antara adalah semester singkat antara semester genap dan gasal, untuk mengulang atau memperbaiki nilai mata kuliah, atau mengambil mata kuliah baru jika disetujui fakultas. Maksimum 9 SKS, nilai maksimal A/B, dan berlangsung minimal 8 minggu."
+  },
+  {
+    "question": "Apa tugas Dosen Penasihat Akademik (DPA) di UIN Sunan Kalijaga?",
+    "answer": "DPA membimbing rencana studi mahasiswa, membantu pengembangan bakat/minat, memberi motivasi dan arahan, memonitor IPK, memeriksa dan menandatangani KRS/RKRS, memberi laporan dan rekomendasi ke Kaprodi, serta membimbing penentuan judul skripsi."
+  },
+  {
+    "question": "Apa tugas Program Studi di UIN Sunan Kalijaga?",
+    "answer": "Program Studi menyusun rencana kerja, mengkoordinasi pendidikan, membuat kurikulum, memonitor perkuliahan, mengajukan penugasan dosen wali, menyiapkan akreditasi, dan mengelola kegiatan kemahasiswaan serta laporan evaluasi diri."
+  },
+  {
+    "question": "Apa layanan yang disediakan oleh Klinik Konseling Islam UIN Sunan Kalijaga?",
+    "answer": "Klinik Konseling Islam menyediakan layanan bimbingan konseling, terapi, dan konseling privat bagi civitas akademika, khususnya di Fakultas Dakwah dan Komunikasi. Jenis layanan dapat diakses di https://kki.uin-suka.ac.id/id/"
+  },
+  {
+    "question": "Apa saja layanan kesehatan yang tersedia di Klinik Pratama UIN Sunan Kalijaga?",
+    "answer": "Layanan kesehatan umum, pemeriksaan gigi dan mulut, KIA-KB, laboratorium sederhana, farmasi, dan ambulans. Melayani juga pemeriksaan gawat darurat, resep, dan sampling laboratorium."
+  },
+  {
+    "question": "Apa saja layanan untuk mahasiswa difabel di UIN Sunan Kalijaga?",
+    "answer": "Pusat Layanan Difabel (PLD) menyediakan layanan pendidikan inklusif (admisi, pendampingan kuliah, kelas inklusif, ujian, KKN, academic writing) dan layanan umum (riset, juru bahasa isyarat, advokasi). Layanan bersifat on demand sesuai kebutuhan mahasiswa."
+  },
+  {
+    "question": "Apa tugas Pusat Layanan Terpadu (PLT) di UIN Sunan Kalijaga?",
+    "answer": "PLT menangani kasus kekerasan seksual, menyediakan pencegahan dan penanganan, pendampingan korban, advokasi, sistem rujukan, dan rekomendasi sanksi bagi pelaku. Hak korban: kerahasiaan, pendampingan, perlindungan, pemulihan."
+  },
+  {
+    "question": "Apa saja layanan bimbingan karir, minat, dan bakat di UIN Sunan Kalijaga?",
+    "answer": "Dikelola oleh CENDI, meliputi: konseling karir, workshop persiapan karir, walk in interview, serta job fair/bursa kerja dengan perusahaan lokal, nasional, dan internasional."
+  },
+    {
+    "question": "Apa itu Lembaga Penelitian dan Pengabdian Kepada Masyarakat (LP2M) di UIN Sunan Kalijaga?",
+    "answer": "LP2M adalah lembaga yang melaksanakan, mengkoordinasikan, memantau, dan menilai kegiatan penelitian serta pengabdian kepada masyarakat. Tugasnya meliputi perencanaan, evaluasi, pelaporan, penelitian, publikasi, pengabdian masyarakat, serta layanan difabel melalui PLD (Pusat Layanan Difabel) yang mengelola layanan dan kebijakan untuk mahasiswa difabel."
+  },
+  {
+    "question": "Apa tugas Lembaga Penjaminan Mutu (LPM) di UIN Sunan Kalijaga?",
+    "answer": "LPM bertugas mengkoordinasikan, mengendalikan, mengaudit, memantau, menilai, dan mengembangkan mutu akademik. Fungsinya meliputi pengembangan standar mutu, audit dan pengendalian mutu, pelaksanaan akreditasi, serta digitalisasi sistem penjaminan mutu."
+  },
+  {
+    "question": "Apa fungsi Satuan Pengawas Internal (SPI) di UIN Sunan Kalijaga?",
+    "answer": "SPI bertugas melakukan pengawasan non-akademik, menyusun rencana pengawasan internal, pemeriksaan kepatuhan, evaluasi manajemen risiko, memberi saran perbaikan, mereviu laporan keuangan, dan memberikan rekomendasi peningkatan tata kelola. SPI bertanggung jawab langsung kepada Rektor."
+  },
+  {
+    "question": "Apa fasilitas dan layanan yang diberikan Pusat Perpustakaan UIN Sunan Kalijaga?",
+    "answer": "Layanan meliputi: sirkulasi (peminjaman/pengembalian), perpustakaan digital, jurnal elektronik/cetak, multimedia, referensi, berbagai corner (Difabel, Iranian, Sunan Kalijaga, Canadian, BI), informasi & promosi, bebas pustaka, kunci locker elektronik, dan upload mandiri tugas akhir. Semua layanan mengharuskan KTM."
+  },
+  {
+    "question": "Apa saja layanan Pusat Teknologi Informasi dan Pangkalan Data (PTIPD) di UIN Sunan Kalijaga?",
+    "answer": "PTIPD menyediakan: training ICT, sertifikat ICT, akses internet, akun email, pengelolaan sistem informasi (akademik, e-learning, pustaka, dsb), IP telephone, IP TV Broadcast, IP Camera, Google Corner, dan Live@Edu Corner."
+  },
+  {
+    "question": "Apa layanan Pusat Pengembangan Bahasa (PPB) di UIN Sunan Kalijaga?",
+    "answer": "PPB meliputi pelatihan bahasa Arab dan Inggris (untuk sivitas dan umum), tes IKLA (TOAFL), TOEC (TOEFL), UPBI, layanan terjemah dokumen, pelatihan bahasa Indonesia untuk mahasiswa asing, pelatihan IELTS/TOEFL/TOAFL preparation, serta penyewaan gedung teatrikal."
+  },
+  {
+    "question": "Apa saja unit usaha yang dikelola Pusat Pengembangan Bisnis (PPB) UIN Sunan Kalijaga?",
+    "answer": "Unit usaha meliputi: Hotel University, property management (Multipurpose Building, Club House, CSC, Convention Hall, Staff Housing, Sport Venue), kantin dan SUKA-Resto, poliklinik (layanan dokter umum/gigi/laboratorium/fisioterapi), SUKA-Press (penerbitan ilmiah), TK Roudlotul Athfal, dan PAUD Griya Nanda."
+  },
+    {
+    "question": "Apa saja fasilitas laboratorium yang tersedia di UIN Sunan Kalijaga?",
+    "answer": "Setiap Program Studi di UIN Sunan Kalijaga memiliki akses ke laboratorium sesuai disiplin ilmunya, antara lain: Laboratorium Komputer Ilmu Perpustakaan, Laboratorium Bahasa, Laboratorium Dakwah (grafis, audio, audio visual, konseling, manajemen dakwah, pengembangan masyarakat), Laboratorium Syariah & Hukum (sidang peradilan semu, ilmu falak, komputer & mini bank syariah), Laboratorium Pendidikan (micro teaching, pengembangan media, madrasah), Laboratorium Fakultas Ushuluddin (religi & budaya lokal, filsafat, studi Qur'an & Hadist, sosiologi agama), Laboratorium Matematika & Teknik Informatika (pemrograman, jaringan, multimedia, self development), Laboratorium Fisika (fisika dasar, elektronika, termodinamika, dll), Laboratorium Kimia (kimia dasar, organik, anorganik, analis, biokimia), Laboratorium Biologi (botani, zoologi, mikrobiologi, bioteknologi, fisologi, green house), Laboratorium Teknik Industri (produksi, sistem, desain kerja, ergonomi), Laboratorium Psikologi (faal, eksperimen, pendidikan, agama, klinis, industri, psikodiagnostik, life lab), Laboratorium Ilmu Komunikasi (animasi, advertising, audio-video, PR, monitoring), Laboratorium Sosiologi (life lab), dan Laboratorium Ekonomi & Bisnis Islam (perbankan syariah, komputer, akuntansi, perpajakan)."
+  },
+  {
+    "question": "Apakah laboratorium di UIN Sunan Kalijaga dapat digunakan lintas program studi?",
+    "answer": "Ya, fasilitas laboratorium di UIN Sunan Kalijaga dapat digunakan oleh semua program studi, sesuai kebutuhan dan koordinasi, misal laboratorium bahasa untuk prodi bahasa, laboratorium pendidikan untuk prodi kependidikan, laboratorium komputer untuk prodi sains dan teknologi, dan seterusnya."
+  },
+    {
+    "question": "Apa yang dimaksud dengan kebijakan pemerataan wilayah asal mahasiswa di UIN Sunan Kalijaga?",
+    "answer": "Kebijakan pemerataan wilayah asal mahasiswa adalah upaya UIN Sunan Kalijaga menerima mahasiswa dari seluruh wilayah Indonesia, serta melakukan promosi khusus ke daerah-daerah target agar terjadi pemerataan penerimaan mahasiswa baru. Khusus wilayah 3T (Tertinggal, Terdepan, Terluar) diberikan prioritas akses pendidikan."
+  },
+  {
+    "question": "Apa syarat penerimaan mahasiswa baru dari luar negeri di UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa luar negeri harus memiliki kemampuan akademik dan lulus tes Bahasa Indonesia dari UPT Pusat Pengembangan Bahasa (PPB). Jika belum lulus tes, wajib mengikuti matrikulasi Bahasa Indonesia di UPT PPB sampai dinyatakan lulus."
+  },
+  {
+    "question": "Apakah UIN Sunan Kalijaga menerima mahasiswa transfer dari perguruan tinggi lain?",
+    "answer": "UIN Sunan Kalijaga tidak menerima mahasiswa transfer baik antar program studi, antar fakultas, maupun dari perguruan tinggi lain, kecuali mahasiswa luar negeri dalam skema program kerjasama tertentu atau berdasarkan kebijakan pemerintah."
+  },
+  {
+    "question": "Siapa yang menyelenggarakan proses penerimaan mahasiswa baru di UIN Sunan Kalijaga?",
+    "answer": "Proses penerimaan mahasiswa baru diselenggarakan oleh Pusat Admisi UIN Sunan Kalijaga Yogyakarta dan unit kerja lain yang ditetapkan oleh Rektor dalam sebuah kepanitiaan."
+  },
+  {
+    "question": "Apa itu seleksi Mandiri di UIN Sunan Kalijaga dan apa saja jenisnya?",
+    "answer": "Seleksi Mandiri adalah pola seleksi penerimaan mahasiswa baru yang diselenggarakan langsung oleh UIN Sunan Kalijaga untuk semua program studi. Jenis seleksi Mandiri meliputi: CBT (Computer-Based Test), PBT (Paper-Based Test, tidak dilaksanakan sejak 2020), Prestasi, dan Portofolio."
+  },
+  {
+    "question": "Apa itu Mandiri CBT di UIN Sunan Kalijaga?",
+    "answer": "Mandiri CBT adalah seleksi ujian online berbasis Android yang dilakukan dari rumah dengan ponsel dan paket data internet yang disiapkan peserta."
+  },
+  {
+    "question": "Apa itu Mandiri Prestasi di UIN Sunan Kalijaga?",
+    "answer": "Mandiri Prestasi adalah seleksi bagi calon mahasiswa yang memiliki prestasi akademik, seni, olahraga, keagamaan, atau hafalan Al-Qur’an minimal 26 Juz, atau juara individu tingkat nasional (1-3) yang dibuktikan dengan sertifikat/piagam resmi."
+  },
+  {
+    "question": "Apa itu Mandiri Portofolio di UIN Sunan Kalijaga?",
+    "answer": "Mandiri Portofolio adalah seleksi menggunakan nilai UTBK-SNBT atau UM-PTKIN pada tahun berjalan. Termasuk program khusus untuk difabel, nonmuslim, dan daerah 3T."
+  },
+  {
+    "question": "Siapa saja yang dapat mengikuti jalur Mandiri Portofolio Keberagaman dan 3T di UIN Sunan Kalijaga?",
+    "answer": "Calon mahasiswa baru ber-KTP nonmuslim atau berdomisili di daerah 3T (Tertinggal, Terdepan, dan Terluar) dapat mengikuti jalur ini."
+  },
+  {
+    "question": "Apa saja syarat registrasi mahasiswa baru di UIN Sunan Kalijaga?",
+    "answer": "Syarat registrasi mahasiswa baru meliputi: membayar biaya pendidikan di bank yang ditunjuk, mengisi data pribadi mahasiswa secara online, menyerahkan berkas seperti bukti pembayaran, fotokopi ijazah yang disahkan, fotokopi identitas (KTP/SIM/KK), surat pernyataan menaati peraturan dan membayar UKT, surat keterangan sehat dari dokter, dokumen khusus untuk WNI keturunan asing atau WNA, dan surat izin belajar bagi yang sudah bekerja. Juga melakukan pengambilan foto dan sidik jari untuk mendapatkan KTM."
+  },
+  {
+    "question": "Apa saja syarat herregistrasi mahasiswa di UIN Sunan Kalijaga?",
+    "answer": "Syarat herregistrasi: membayar biaya pendidikan untuk semester berikutnya, memperbarui data pribadi secara online, mengisi KRS online (mahasiswa semester 1 dan 2 sistem paket), dan mencetak KRS yang sudah disahkan dosen pembimbing. Mahasiswa yang tidak herregistrasi otomatis cuti akademik."
+  },
+  {
+    "question": "Apa yang terjadi jika mahasiswa sudah membayar UKT tapi tidak mengisi KRS di UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa yang sudah membayar UKT tapi tidak mengisi KRS tetap dianggap aktif, masa studi tetap berjalan, dan uang yang telah dibayarkan tidak dapat ditarik kembali."
+  },
+  {
+    "question": "Bagaimana format Nomor Induk Mahasiswa (NIM) di UIN Sunan Kalijaga?",
+    "answer": "Mulai 2019, NIM terdiri dari 11 digit: dua digit pertama tahun masuk, ketiga jenjang studi (1=S1, 2=S2, 3=S3, 4=Profesi), keempat & kelima kode fakultas, keenam & ketujuh kode prodi, kedelapan kode kelas/semester, kesembilan hingga kesebelas nomor urut mahasiswa. Contoh: 19107021001."
+  },
+  {
+    "question": "Bagaimana cara mengurus KTM yang hilang, rusak, atau habis masa berlaku di UIN Sunan Kalijaga?",
+    "answer": "Jika KTM hilang, ajukan surat kehilangan dari kepolisian dan kwitansi biaya pengganti ke Layanan Terpadu Gd. Rektorat Lama Lt. 1. Jika rusak/habis masa berlaku, serahkan KTM lama dan kwitansi biaya pengganti ke tempat yang sama. Perpanjangan KTM berlaku satu semester dan bisa diajukan lagi jika studi belum selesai."
+  },
+  {
+    "question": "Apakah mahasiswa UIN Sunan Kalijaga boleh merangkap kuliah di perguruan tinggi lain?",
+    "answer": "Tidak boleh, kecuali untuk program double degree atau kampus merdeka. Jika merangkap kuliah, transaksi akademik tidak akan dilaporkan ke PDDIKTI dan mahasiswa harus memilih salah satu perguruan tinggi."
+  },
+    {
+    "question": "Apa yang dimaksud dengan satuan waktu pendidikan di UIN Sunan Kalijaga?",
+    "answer": "Satuan waktu pendidikan di UIN Sunan Kalijaga adalah semester. Satu tahun akademik terdiri dari dua semester, yaitu Semester Gasal dan Semester Genap. Fakultas juga dapat menyelenggarakan Semester Antara jika diperlukan."
+  },
+  {
+    "question": "Apa itu Sistem Kredit Semester (SKS) di UIN Sunan Kalijaga?",
+    "answer": "Sistem Kredit Semester (SKS) adalah takaran waktu kegiatan belajar mahasiswa per minggu per semester. SKS digunakan untuk mengakomodasi perbedaan minat, bakat, dan kemampuan mahasiswa. Jumlah mata kuliah yang diambil per semester ditentukan oleh kemampuan individual mahasiswa berdasarkan IP, kecuali semester pertama dan kedua yang menggunakan sistem paket."
+  },
+  {
+    "question": "Apa tujuan penerapan Sistem Kredit Semester (SKS)?",
+    "answer": "Tujuan SKS adalah: (1) Memberikan kesempatan mahasiswa cakap dan giat belajar untuk menyelesaikan studi secepat mungkin, (2) Memberikan kesempatan memilih kegiatan sesuai minat, bakat, dan kemampuan, (3) Mempermudah penyesuaian kurikulum terhadap perkembangan ilmu dan teknologi."
+  },
+  {
+    "question": "Berapa SKS yang setara dengan satu semester belajar di UIN Sunan Kalijaga?",
+    "answer": "Satu SKS setara dengan 45 jam per semester. Pemenuhan beban belajar dapat dilakukan melalui kuliah, praktikum, seminar, tugas akhir, magang, pengabdian masyarakat, atau bentuk pembelajaran lain."
+  },
+  {
+    "question": "Berapa beban SKS dan masa studi program Sarjana di UIN Sunan Kalijaga?",
+    "answer": "Beban studi program Sarjana minimal 144 SKS dan maksimal 160 SKS, terdiri dari mata kuliah wajib dan pilihan. Masa studi normal adalah 8 semester, dengan batas maksimal 14 semester (termasuk cuti). Jika tidak selesai dalam 14 semester, dinyatakan gagal atau Drop Out (DO)."
+  },
+  {
+    "question": "Bagaimana proses pengisian Kartu Rencana Studi (KRS) di UIN Sunan Kalijaga?",
+    "answer": "Setiap awal semester, mahasiswa wajib mengisi KRS secara online setelah membayar biaya pendidikan. Mahasiswa semester I dan II pengisian KRS dilakukan oleh petugas fakultas. Pengisian KRS harus berkonsultasi dengan Dosen Penasihat Akademik dan sesuai jadwal program studi."
+  },
+  {
+    "question": "Berapa jumlah SKS yang dapat diambil mahasiswa per semester di UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa baru (semester I dan II) maksimal 20 SKS. Mulai semester III, jumlah SKS berdasarkan IP semester sebelumnya: IP ≥ 3,00: maksimal 24 SKS; IP 2,50–2,99: maksimal 22 SKS; IP 2,00–2,49: maksimal 20 SKS; IP 1,50–1,99: maksimal 18 SKS; IP < 1,50: maksimal 16 SKS."
+  },
+  {
+    "question": "Bagaimana aturan pengambilan SKS bagi mahasiswa yang aktif kembali dari cuti akademik?",
+    "answer": "Pengambilan jumlah SKS didasarkan pada IP semester terakhir sebelum cuti."
+  },
+  {
+    "question": "Apa tanggung jawab mahasiswa dalam pengisian KRS?",
+    "answer": "Kesalahan dalam pengisian KRS (input KRS) sepenuhnya menjadi tanggung jawab mahasiswa."
+  },
+  {
+    "question": "Apakah mahasiswa yang mengambil KKN reguler boleh mengambil mata kuliah lain?",
+    "answer": "Mahasiswa yang mengambil KKN reguler pada semester yang sama tidak diperbolehkan mengambil mata kuliah lain, kecuali skripsi, tugas akhir, atau mata kuliah dari program MBKM."
+  },
+  {
+    "question": "Bagaimana kurikulum yang diterapkan di UIN Sunan Kalijaga?",
+    "answer": "UIN Sunan Kalijaga menerapkan kurikulum berbasis Outcome Based Education (OBE) yang mengacu pada Kerangka Kualifikasi Nasional Indonesia (KKNI) dan Standar Nasional Pendidikan Tinggi (SN-DIKTI), dengan integrasi ilmu keislaman dan ilmu umum. Kurikulum senantiasa diperbaharui sesuai kebutuhan, perkembangan IPTEKS, dan capaian pembelajaran."
+  },
+  {
+    "question": "Apa saja kompetensi yang harus dicapai oleh lulusan UIN Sunan Kalijaga menurut Permendikbudristek No 53 Tahun 2023?",
+    "answer": "Kompetensi lulusan mencakup: (a) penguasaan ilmu pengetahuan dan teknologi serta aplikasinya, (b) kecakapan umum sebagai dasar penguasaan ilmu dan teknologi, (c) pengetahuan dan keterampilan dunia kerja atau studi lanjut, serta (d) kemampuan berpikir mandiri dan kritis sebagai pembelajar sepanjang hayat."
+  },
+  {
+    "question": "Apa saja kompetensi utama lulusan program Sarjana (S1) di UIN Sunan Kalijaga?",
+    "answer": "Lulusan S1 harus menguasai konsep teoretis bidang pengetahuan dan keterampilan tertentu untuk menyelesaikan masalah secara prosedural sesuai lingkup pekerjaannya, dan mampu beradaptasi terhadap situasi perubahan."
+  },
+  {
+    "question": "Bagaimana implementasi kebijakan Merdeka Belajar-Kampus Merdeka (MBKM) di UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa berhak mengambil 1 semester (20 SKS) pembelajaran di luar prodi dalam kampus yang sama, dan maksimal 2 semester (40 SKS) di perguruan tinggi berbeda atau di luar perguruan tinggi. Bentuk kegiatan pembelajaran: pertukaran pelajar, magang, asisten mengajar, penelitian, proyek kemanusiaan, wirausaha, studi/proyek independen, membangun desa, dan moderasi beragama."
+  },
+  {
+    "question": "Apa indikator utama kegiatan pembelajaran di luar prodi agar mendapatkan SKS penuh (20 SKS) di UIN Sunan Kalijaga?",
+    "answer": "Setiap kegiatan seperti magang, asisten mengajar, penelitian, proyek kemanusiaan, wirausaha, studi independen, membangun desa, pertukaran pelajar, dan moderasi beragama memiliki kriteria khusus, misalnya: tingkat kesulitan setara sarjana, keterlibatan aktif, evaluasi capaian, kontribusi nyata, dan pengembangan kompetensi sesuai bidang."
+  },
+  {
+    "question": "Bagaimana prinsip hak belajar di luar prodi di UIN Sunan Kalijaga?",
+    "answer": "Prinsipnya adalah major (mata kuliah utama/capaian pembelajaran) dan minor (mata kuliah pilihan di luar prodi untuk memperkuat kompetensi tertentu). Jika mata kuliah minor tidak tersedia, prodi wajib menyediakan yang ekuivalen."
+  },
+  {
+    "question": "Berapa maksimal SKS yang dapat diambil mahasiswa di luar program studi di UIN Sunan Kalijaga?",
+    "answer": "Maksimal 60 SKS: 20 SKS di luar prodi dalam UIN Sunan Kalijaga dan 40 SKS di luar UIN Sunan Kalijaga."
+  },
+  {
+    "question": "Kapan mahasiswa dapat mengambil MBKM internal dan eksternal di UIN Sunan Kalijaga?",
+    "answer": "MBKM internal dan eksternal untuk mata kuliah di luar prodi dapat diambil pada semester 5, 6, atau 7. MBKM internal untuk mata kuliah penciri nasional dan universitas dapat diambil sejak semester 1."
+  },
+  {
+    "question": "Bagaimana mahasiswa menentukan mata kuliah yang diambil di luar prodi?",
+    "answer": "Penentuan dilakukan melalui diskusi dengan Dosen Penasihat Akademik dan Ketua Program Studi, bisa dalam bentuk paket atau pilihan mata kuliah yang menunjang kompetensi keilmuan mahasiswa."
+  },
+  {
+    "question": "Di mana aturan detail tentang hak belajar di luar prodi diatur?",
+    "answer": "Aturan detail diatur dalam pedoman hak belajar di luar prodi yang dikeluarkan oleh UIN Sunan Kalijaga."
+  },
+  {
+    "question": "Apa itu Rencana Pembelajaran Semester (RPS) di UIN Sunan Kalijaga?",
+    "answer": "RPS adalah dokumen program pembelajaran yang dirancang untuk menghasilkan lulusan dengan kemampuan sesuai Capaian Pembelajaran Lulusan (CPL). RPS dikembangkan dosen bersama kelompok keahlian di prodi, memuat minimal: nama prodi, kode mata kuliah, capaian pembelajaran, kemampuan akhir, bahan kajian, metode pembelajaran, waktu, pengalaman belajar, kriteria/indikator/bobot penilaian, dan daftar referensi."
+  },
+  {
+    "question": "Siapa yang menyusun dan mengembangkan RPS di UIN Sunan Kalijaga?",
+    "answer": "RPS disusun dan dikembangkan oleh dosen secara mandiri bersama dalam kelompok keahlian di program studi masing-masing."
+  },
+    {
+    "question": "Apa saja bentuk bahan ajar yang digunakan di UIN Sunan Kalijaga?",
+    "answer": "Bahan ajar dapat berupa buku ajar, diktat, modul, petunjuk praktikum, model, alat bantu, audio visual, naskah tutorial, atau job sheet, baik dalam bentuk cetak maupun digital, dan diberikan dosen kepada mahasiswa pada awal perkuliahan."
+  },
+  {
+    "question": "Apa perbedaan buku ajar, diktat, dan modul menurut pedoman akademik UIN Sunan Kalijaga?",
+    "answer": "Buku ajar adalah buku pegangan resmi yang disusun pakar dan diterbitkan luas. Diktat adalah bahan ajar yang disusun dosen dan disebarluaskan kepada peserta kuliah. Modul adalah bagian bahan ajar untuk satu mata kuliah yang juga disusun dosen dan disebarluaskan."
+  },
+  {
+    "question": "Apa itu petunjuk praktikum di UIN Sunan Kalijaga?",
+    "answer": "Petunjuk praktikum adalah pedoman pelaksanaan praktikum yang berisi tata cara, persiapan, pelaksanaan, dan analisis data pelaporan. Disusun oleh kelompok dosen praktikum dan mengikuti kaidah ilmiah."
+  },
+  {
+    "question": "Apa itu kontrak belajar di UIN Sunan Kalijaga?",
+    "answer": "Kontrak belajar adalah kesepakatan tertulis antara dosen dan mahasiswa dalam kelas, berisi jadwal kuliah, kehadiran, kedisiplinan, sistem penilaian, tugas, dan ketertiban berpakaian. Kontrak belajar dibuat pada hari pertama kuliah untuk menjamin perkuliahan yang tertib dan kondusif."
+  },
+  {
+    "question": "Bagaimana cara mengukur keefektifan kontrak belajar di UIN Sunan Kalijaga?",
+    "answer": "Keefektifan kontrak belajar diukur dari tingkat kepatuhan dosen dan mahasiswa terhadap peraturan yang telah disepakati bersama dalam kontrak belajar."
+  },
+  {
+    "question": "Bagaimana strategi proses pembelajaran di UIN Sunan Kalijaga?",
+    "answer": "Strategi pembelajaran menggunakan active learning, di mana dosen sebagai fasilitator dan mahasiswa sebagai subjek yang dituntut belajar secara kreatif dan mandiri. Pembelajaran dapat dilakukan di kelas, luar kelas, maupun online, serta memanfaatkan sumber belajar di lingkungan sekitar."
+  },
+  {
+    "question": "Apa saja tahapan proses pembelajaran di UIN Sunan Kalijaga?",
+    "answer": "Tahapan proses pembelajaran meliputi: 1) Kegiatan pra-kuliah (PBAK, sosialisasi SIA, pelatihan ICT, SOSPEM, dsb.), 2) Persiapan perkuliahan (bimbingan rencana studi minimal 2 minggu sebelum kuliah), 3) Pelaksanaan perkuliahan (pemaparan RPS, kontrak belajar, daftar hadir, kuliah umum, perkuliahan minimal 16 minggu per semester), 4) Evaluasi proses perkuliahan (pengisian penilaian efektivitas pembelajaran dan beban belajar secara online)."
+  },
+  {
+    "question": "Apa prinsip-prinsip penilaian pembelajaran di UIN Sunan Kalijaga?",
+    "answer": "Penilaian pembelajaran harus: valid, reliabel, transparan, akuntabel, berkeadilan, objektif, dan edukatif. Penilaian menyangkut proses dan hasil belajar mahasiswa."
+  },
+  {
+    "question": "Apa saja teknik dan instrumen penilaian yang digunakan di UIN Sunan Kalijaga?",
+    "answer": "Teknik penilaian meliputi penilaian formatif (memantau perkembangan belajar, memberi umpan balik) dan sumatif (menilai pencapaian akhir). Instrumen penilaian dapat berupa rubrik (holistik, deskriptif, skala persepsi), tes, nontes, proyek, portofolio, tugas, atau uji kompetensi."
+  },
+  {
+    "question": "Apa itu rubrik penilaian dan apa macamnya?",
+    "answer": "Rubrik penilaian adalah panduan yang menggambarkan kriteria dan tingkatan capaian belajar mahasiswa. Macam rubrik: holistik (kesan keseluruhan), deskriptif (tingkatan kriteria dengan deskripsi dan skor), dan skala persepsi (tingkatan skor tanpa deskripsi)."
+  },
+  {
+    "question": "Apa itu penilaian portofolio di UIN Sunan Kalijaga?",
+    "answer": "Penilaian portofolio adalah penilaian berkelanjutan berbasis kumpulan karya mahasiswa, baik yang menunjukkan perkembangan (portofolio perkembangan), hasil terbaik (showcase), maupun seluruh karya selama proses pembelajaran (komprehensif)."
+  },
+  {
+    "question": "Bagaimana mekanisme dan prosedur penilaian di UIN Sunan Kalijaga?",
+    "answer": "Mekanisme penilaian meliputi: penyepakatan tahap dan teknik penilaian di awal pertemuan, pembuatan instrumen, validasi dan pengesahan instrumen, pelaksanaan penilaian, pemberian umpan balik, dan dokumentasi hasil secara transparan di SIA. Prosedur penilaian meliputi: perencanaan, pemberian tugas, observasi kinerja, pengembalian hasil, dan pemberian nilai akhir."
+  },
+  {
+    "question": "Siapa yang melaksanakan penilaian hasil belajar mahasiswa?",
+    "answer": "Pelaksanaan penilaian dilakukan oleh dosen pengampu atau tim dosen pengampu, bisa melibatkan mahasiswa dan/atau pemangku kepentingan yang relevan."
+  },
+  {
+    "question": "Apa saja komponen dan ranah penilaian di UIN Sunan Kalijaga?",
+    "answer": "Komponen penilaian meliputi capaian pembelajaran di 4 ranah: (a) penguasaan ilmu pengetahuan dan teknologi, (b) kecakapan umum, (c) pengetahuan dan keterampilan kerja/studi lanjut, (d) kemampuan intelektual berpikir mandiri dan kritis. Bobot penilaian disesuaikan dengan karakteristik mata kuliah."
+  },
+  {
+    "question": "Bagaimana sistem pelaporan penilaian hasil belajar mahasiswa?",
+    "answer": "Penilaian hasil belajar dilakukan per semester. Mahasiswa harus hadir minimal 75% untuk mengikuti ujian akhir. Tidak ada ujian susulan kecuali alasan tertentu (sakit, force majeure, keluarga inti meninggal, tugas resmi). Nilai dilaporkan dalam bentuk huruf (A, B, C, D, E) sesuai PAP dengan rentang nilai angka dan bobot tertentu."
+  },
+  {
+    "question": "Bagaimana mekanisme perubahan dan penganuliran nilai di UIN Sunan Kalijaga?",
+    "answer": "Perubahan nilai dapat diajukan mahasiswa dengan formulir setelah nilai diumumkan. Nilai dapat berubah naik jika keluhan benar, atau turun jika keluhan tidak benar. Penganuliran nilai dilakukan jika mahasiswa terbukti curang atau plagiat. Plagiarisme pada skripsi sebelum ujian wajib menulis ulang, setelah ujian bisa menyebabkan pencabutan gelar."
+  },
+    {
+    "question": "Apa saja kategori evaluasi keberhasilan studi di UIN Sunan Kalijaga?",
+    "answer": "Evaluasi keberhasilan studi meliputi: Indeks Prestasi (IP), keterangan lulus/tidak lulus, dan rata-rata nilai capaian pembelajaran lulusan (CPL)."
+  },
+  {
+    "question": "Apa itu Indeks Prestasi Semester (IPS) dan Indeks Prestasi Kumulatif (IPK)?",
+    "answer": "IPS adalah nilai hasil belajar mahasiswa pada satu semester. IPK adalah nilai rata-rata seluruh hasil belajar dari semester pertama hingga semester terakhir."
+  },
+  {
+    "question": "Bagaimana rumus penghitungan IPS dan IPK di UIN Sunan Kalijaga?",
+    "answer": "IPS/IPK = Total Bobot (Bobot Nilai Mata Kuliah x SKS) / Total SKS."
+  },
+  {
+    "question": "Bagaimana klasifikasi predikat kelulusan sarjana di UIN Sunan Kalijaga?",
+    "answer": "Predikat Pujian (IPK ≥ 3,51, studi ≤ 10 semester), Sangat Memuaskan (IPK 3,01–3,50), Memuaskan (IPK 2,76–3,00), Cukup (IPK 2,00–2,75). IPK < 2,00 dinyatakan gagal/tidak lulus."
+  },
+  {
+    "question": "Kapan mahasiswa boleh mengulang mata kuliah di UIN Sunan Kalijaga?",
+    "answer": "Mata kuliah dengan nilai B ke bawah boleh diulang. Mata kuliah wajib yang tidak lulus (nilai < C) harus diulang sebagai syarat ujian tugas akhir. Nilai terbaik yang diambil."
+  },
+  {
+    "question": "Apa itu penghapusan mata kuliah dan syaratnya?",
+    "answer": "Penghapusan mata kuliah adalah penghilangan mata kuliah dari transkrip akademik dengan syarat tertentu, seperti untuk meningkatkan IPK atau perubahan kurikulum. Harus disetujui Ketua Prodi dan Wakil Dekan Akademik, minimal SKS untuk lulus tetap dipenuhi, dan hanya dilakukan saat pendaftaran munaqasyah."
+  },
+  {
+    "question": "Apa itu Kuliah Kerja Nyata (KKN) di UIN Sunan Kalijaga?",
+    "answer": "KKN adalah kegiatan akademik wajib S1 berupa pengabdian kepada masyarakat yang mengembangkan kemampuan sesuai kompetensi prodi. Terdapat dua model: KKN Reguler (tema, lokasi, kelompok, dan DPL ditetapkan LP2M) dan KKN Non-Reguler/Mandiri (diusulkan oleh mahasiswa/dosen/fakultas/dll)."
+  },
+  {
+    "question": "Apa saja syarat mengikuti KKN Reguler dan Non-Reguler?",
+    "answer": "KKN Reguler: mahasiswa aktif, minimal 110 SKS, lulus minimal 100 SKS, lulus pembekalan, surat sehat, KKN di KRS, tidak boleh ambil mata kuliah lain kecuali skripsi/tugas akhir. KKN Non-Reguler: mahasiswa aktif, minimal 120 SKS, lulus pembekalan, surat sehat, KKN di KRS, maksimal 12 SKS termasuk KKN dan skripsi, kelompok 8–10 mahasiswa lintas prodi/fakultas, boleh usul lokasi dan DPL."
+  },
+  {
+    "question": "Apa aturan pengambilan mata kuliah bersamaan dengan KKN?",
+    "answer": "Mahasiswa yang mengambil KKN pada semester yang sama tidak boleh mengambil mata kuliah lain, kecuali skripsi atau tugas akhir."
+  },
+  {
+    "question": "Apa itu PPL/PLP/PKL/KP/PPS di UIN Sunan Kalijaga?",
+    "answer": "Program Pengalaman Lapangan (PPL), Program Latihan Profesi (PLP), Program Kerja Lapangan/Kerja Praktek (PKL/KP), dan Praktek Pekerjaan Sosial (PPS) adalah kegiatan akademik wajib di beberapa prodi untuk memberi pengalaman langsung di bidang keilmuan mahasiswa."
+  },
+  {
+    "question": "Apa saja bentuk tugas akhir program Sarjana di UIN Sunan Kalijaga?",
+    "answer": "Tugas akhir dapat berupa Skripsi, Prototype, Proyek, atau bentuk tugas akhir lain yang sejenis sesuai kebijakan program studi."
+  },
+  {
+    "question": "Apa tahapan penyusunan skripsi/tugas akhir di UIN Sunan Kalijaga?",
+    "answer": "Tahapan: 1) Proposal (pengajuan topik, persetujuan, seminar proposal), 2) Penelitian dan Penulisan (bimbingan, penulisan skripsi, waktu 2 semester + perpanjangan 2 bulan jika perlu), 3) Ujian Skripsi/Munaqasyah (memenuhi syarat SKS, IPK, lulus KKN dan PPL, sertifikat bahasa & ICT, persyaratan administrasi)."
+  },
+  {
+    "question": "Apa yang dimaksud dengan Yudisium Online di UIN Sunan Kalijaga?",
+    "answer": "Yudisium Online adalah proses penyelesaian semua persyaratan administrasi akademik secara online sebagai syarat kelulusan dan mengikuti wisuda. Mahasiswa harus aktif, menyerahkan skripsi/TA ke fakultas & pembimbing, mengurus surat bebas pustaka, mencetak draft ijazah & transkrip, dan memastikan seluruh proses yudisium selesai."
+  },
+  {
+    "question": "Bagaimana evaluasi hasil studi mahasiswa di UIN Sunan Kalijaga?",
+    "answer": "Evaluasi dilakukan setiap akhir semester, setelah 4 semester, 8 semester, dan akhir program. Syarat lanjut studi: lulus minimal 30 SKS (semester 4), minimal 80 SKS (semester 8), dan total SKS sesuai prodi. Jika tidak memenuhi syarat, bisa dikenakan Drop Out (DO)."
+  },
+  {
+    "question": "Apa saja penyebab putus studi (Drop Out/DO) di UIN Sunan Kalijaga?",
+    "answer": "Penyebab DO: sampai semester 4 tidak lulus minimal 30 SKS dan nilai C, tidak lulus dalam 14 semester, atau terkena sanksi pelanggaran kode etik mahasiswa."
+  },
+  {
+    "question": "Apa itu cuti akademik dan apa ketentuannya di UIN Sunan Kalijaga?",
+    "answer": "Cuti akademik adalah izin tidak mengikuti kegiatan akademik/nonakademik maksimal 2 semester (semester 2-14), dihitung sebagai masa studi, diajukan sebelum semester berikut, dan harus daftar ulang setelah cuti. Tidak daftar ulang setelah 2 semester cuti dianggap mengundurkan diri."
+  },
+  {
+    "question": "Apa saja syarat mengikuti wisuda di UIN Sunan Kalijaga?",
+    "answer": "Syarat wisuda: telah daftar munaqasyah dan yudisium online, lulus munaqasyah dan sidang yudisium, status lulus di SIA, membayar biaya wisuda (non UKT), mengisi data pribadi online, mencetak dan menyerahkan dokumen wisuda ke fakultas, serta mengambil toga, undangan, dan samir di fakultas."
+  },
+    {
+    "question": "Apa saja layanan administrasi akademik yang diberikan oleh UIN Sunan Kalijaga?",
+    "answer": "Layanan administrasi akademik meliputi registrasi, herregistrasi, penerbitan ijazah, penyelenggaraan wisuda, pendataan alumni (oleh Pusat Administrasi Universitas), serta pengesahan ijazah, transkrip akademik, SKPI, dan kegiatan penelitian/pengabdian masyarakat (oleh Administrasi Fakultas)."
+  },
+  {
+    "question": "Apa saja jenis beasiswa yang tersedia di UIN Sunan Kalijaga?",
+    "answer": "Beasiswa yang tersedia antara lain: Bidik Misi, KIP Kuliah, beasiswa dari bank (BNI, BPD DIY, BI, BRI, BSM), Hafidz Qur’an, Prestasi Kementerian Agama RI, Prestasi Pionir, Supersemar, Dikpora DIY, PT Djarum, Bank Indonesia, Laziz PLN, Prodi Keagamaan, Indonesia Bangkit, dan LPDP untuk Magister dan Doktor. Info lebih lanjut di https://uin-suka.ac.id/id/page/universitas/77-beasiswa."
+  },
+  {
+    "question": "Bagaimana mahasiswa memperoleh surat keterangan di UIN Sunan Kalijaga?",
+    "answer": "Mahasiswa bisa mengunduh surat keterangan seperti surat aktif kuliah, lulus, izin penelitian, izin PPL, SK pindah studi, dan lainnya melalui sistem http://autosurat.uin-suka.ac.id. Jika memerlukan tanda tangan rektor/pejabat universitas, pengajuan melalui pimpinan fakultas dengan dokumen pendukung."
+  },
+  {
+    "question": "Bagaimana cara memperoleh Surat Keterangan Pengganti Ijazah atau Transkrip Akademik yang hilang/rusak?",
+    "answer": "Surat Keterangan Pengganti Ijazah diterbitkan jika ijazah rusak, hilang, atau musnah dengan bukti keterangan kepolisian, ditandatangani Dekan dan Rektor. Surat Keterangan Pengganti Transkrip Akademik diterbitkan jika transkrip rusak/hilang, ditandatangani Dekan Fakultas."
+  },
+  {
+    "question": "Bagaimana jika ada kesalahan penulisan pada Ijazah, Transkrip, atau SKPI?",
+    "answer": "Jika terdapat kesalahan penulisan pada Ijazah, Transkrip, atau SKPI, dapat diajukan Surat Keterangan Ralat ke Dekan Fakultas dengan melampirkan dokumen terkait. Surat Keterangan Ralat Ijazah ditandatangani Dekan dan Rektor; Surat Keterangan Ralat Transkrip Akademik dan SKPI ditandatangani Dekan."
+  },
+  {
+    "question": "Apa itu Ijazah, Transkrip Akademik, dan Surat Keterangan Pendamping Ijazah (SKPI) di UIN Sunan Kalijaga?",
+    "answer": "Ijazah adalah dokumen pengakuan prestasi belajar dan penyelesaian jenjang pendidikan. Transkrip Akademik adalah kumpulan nilai mata kuliah yang telah ditempuh dan lulus. SKPI memuat informasi pencapaian akademik, kualifikasi lulusan, serta prestasi dan aktivitas lain selama menjadi mahasiswa."
+  },
+  {
+    "question": "Apa saja yang dapat dimasukkan dalam SKPI (Surat Keterangan Pendamping Ijazah) di UIN Sunan Kalijaga?",
+    "answer": "Capaian Pembelajaran Lulusan (CPL), prestasi dan penghargaan (sertifikat lomba, narasumber, penulis buku, HAKI, penelitian), keikutsertaan organisasi (internal/eksternal), sertifikat keahlian (bahasa asing, akademik, non-akademik), kerja praktik/magang, dan pendidikan karakter (pelatihan softskill, dsb)."
+  },
+  {
+    "question": "Bagaimana prosedur pengambilan Ijazah, Transkrip Akademik, dan SKPI di UIN Sunan Kalijaga?",
+    "answer": "Dokumen diambil di administrasi fakultas setelah wisuda dengan syarat sama seperti wisuda, ditambah bukti pengembalian toga dan tanda terima. Jika belum diambil 2 bulan setelah wisuda dikenai sanksi administrasi, dan setelah 6 bulan bukan tanggung jawab kampus."
+  },
+  {
+    "question": "Bagaimana cara menerjemahkan dan legalisasi Ijazah serta Transkrip Akademik?",
+    "answer": "Permohonan terjemahan diajukan ke Pusat Pengembangan Bahasa (P2B) dengan melampirkan fotokopi ijazah dan transkrip legalisir, membayar biaya terjemahan, serta pas foto. Legalisasi dilakukan di fakultas masing-masing."
+  },
+    {
+    "question": "Apa itu Semester Antara di UIN Sunan Kalijaga?",
+    "answer": "Semester Antara adalah semester singkat antara semester Genap dan Gasal. Digunakan untuk mengulang mata kuliah yang belum lulus atau memperbaiki nilai, atau untuk mengambil mata kuliah baru jika disetujui fakultas. Maksimal 9 SKS, minimal 8 minggu, nilai maksimal A/B, dan tatap muka minimal 16 kali."
+  },
+  {
+    "question": "Apa tugas Dosen Penasihat Akademik (DPA) di UIN Sunan Kalijaga?",
+    "answer": "DPA membimbing rencana studi mahasiswa, membantu pengembangan bakat/minat, memberi motivasi dan arahan, memonitor IPK, memeriksa dan menandatangani KRS/RKRS, memberi laporan dan rekomendasi ke Kaprodi, serta membimbing penentuan judul skripsi."
+  },
+  {
+    "question": "Apa tugas Program Studi di UIN Sunan Kalijaga?",
+    "answer": "Program Studi menyusun rencana kerja, mengkoordinasi pendidikan, membuat kurikulum, memonitor perkuliahan, mengajukan penugasan dosen wali, menyiapkan akreditasi, dan mengelola kegiatan kemahasiswaan serta laporan evaluasi diri."
+  },
+  {
+    "question": "Apa layanan yang disediakan oleh Klinik Konseling Islam UIN Sunan Kalijaga?",
+    "answer": "Klinik Konseling Islam menyediakan layanan bimbingan konseling, terapi, dan konseling privat bagi civitas akademika, khususnya di Fakultas Dakwah dan Komunikasi. Jenis layanan dapat diakses di https://kki.uin-suka.ac.id/id/"
+  },
+  {
+    "question": "Apa saja layanan kesehatan yang tersedia di Klinik Pratama UIN Sunan Kalijaga?",
+    "answer": "Layanan kesehatan umum, pemeriksaan gigi dan mulut, KIA-KB, laboratorium sederhana, farmasi, dan ambulans. Melayani juga pemeriksaan gawat darurat, resep, dan sampling laboratorium."
+  },
+  {
+    "question": "Apa saja layanan untuk mahasiswa difabel di UIN Sunan Kalijaga?",
+    "answer": "Pusat Layanan Difabel (PLD) menyediakan layanan pendidikan inklusif (admisi, pendampingan kuliah, kelas inklusif, ujian, KKN, academic writing) dan layanan umum (riset, juru bahasa isyarat, advokasi). Layanan bersifat on demand sesuai kebutuhan mahasiswa."
+  },
+  {
+    "question": "Apa tugas Pusat Layanan Terpadu (PLT) di UIN Sunan Kalijaga?",
+    "answer": "PLT menangani kasus kekerasan seksual, menyediakan pencegahan dan penanganan, pendampingan korban, advokasi, sistem rujukan, dan rekomendasi sanksi bagi pelaku. Hak korban: kerahasiaan, pendampingan, perlindungan, pemulihan."
+  },
+  {
+    "question": "Apa saja layanan bimbingan karir, minat, dan bakat di UIN Sunan Kalijaga?",
+    "answer": "Dikelola oleh CENDI, meliputi: konseling karir, workshop persiapan karir, walk in interview, serta job fair/bursa kerja dengan perusahaan lokal, nasional, dan internasional."
+  },
+    {
+    "question": "Apa itu Lembaga Penelitian dan Pengabdian Kepada Masyarakat (LP2M) di UIN Sunan Kalijaga?",
+    "answer": "LP2M bertugas melaksanakan, mengkoordinasikan, memantau, dan menilai kegiatan penelitian serta pengabdian kepada masyarakat. Fungsi LP2M meliputi perencanaan, evaluasi program, penelitian ilmiah dan terapan, pengabdian kepada masyarakat, publikasi hasil penelitian, dan administrasi lembaga."
+  },
+  {
+    "question": "Apa tugas Pusat Penelitian dan Penerbitan di UIN Sunan Kalijaga?",
+    "answer": "Tugasnya merumuskan kebijakan penelitian dan penerbitan, melaksanakan penelitian dan penerbitan buku keagamaan, IPTEKS, dan seni, mengembangkan sistem pendidikan, serta menerbitkan jurnal, karya ilmiah, dan buku untuk pengembangan UIN Sunan Kalijaga."
+  },
+  {
+    "question": "Apa tugas Pusat Pengabdian Kepada Masyarakat di UIN Sunan Kalijaga?",
+    "answer": "Tugasnya merumuskan kebijakan pengabdian kepada masyarakat, melaksanakan KKN, pengamalan nilai agama dan IPTEKS untuk pembangunan, peningkatan relevansi program, pemberian bantuan masyarakat, dan pengembangan berbagai bentuk pengabdian."
+  },
+  {
+    "question": "Apa fungsi Pusat Layanan Difabel (PLD) di UIN Sunan Kalijaga?",
+    "answer": "PLD melaksanakan layanan untuk mahasiswa difabel, mengkoordinasi pendampingan, mendorong kebijakan khusus admisi, menyediakan Difabel Corner dengan teknologi bantu, memodifikasi teknik pengajaran, dan menyediakan informasi melalui http://psld.uin-suka.ac.id."
+  },
+  {
+    "question": "Apa itu Lembaga Penjaminan Mutu (LPM) di UIN Sunan Kalijaga?",
+    "answer": "LPM bertugas mengkoordinasikan, mengendalikan, mengaudit, memantau, menilai, dan mengembangkan mutu akademik. Fungsinya meliputi penyusunan rencana, evaluasi program, pengembangan standar mutu, pelaksanaan audit, akreditasi, dan digitalisasi sistem penjaminan mutu."
+  },
+  {
+    "question": "Apa fungsi Satuan Pengawas Internal (SPI) di UIN Sunan Kalijaga?",
+    "answer": "SPI bertugas melakukan pengawasan non-akademik, menyusun rencana pengawasan internal, pemeriksaan kepatuhan, evaluasi manajemen risiko, memberi saran perbaikan, mereviu laporan keuangan, dan memberikan rekomendasi peningkatan tata kelola. SPI bertanggung jawab langsung kepada Rektor."
+  },
+  {
+    "question": "Apa fasilitas dan layanan yang diberikan Pusat Perpustakaan UIN Sunan Kalijaga?",
+    "answer": "Layanan meliputi: sirkulasi (peminjaman/pengembalian), perpustakaan digital, jurnal elektronik/cetak, multimedia, referensi, berbagai corner (Difabel, Iranian, Sunan Kalijaga, Canadian, BI), informasi & promosi, bebas pustaka, kunci locker elektronik, dan upload mandiri tugas akhir. Semua layanan mengharuskan KTM."
+  },
+  {
+    "question": "Apa saja layanan Pusat Teknologi Informasi dan Pangkalan Data (PTIPD) di UIN Sunan Kalijaga?",
+    "answer": "PTIPD menyediakan: training ICT, sertifikat ICT, akses internet, akun email, pengelolaan sistem informasi (akademik, e-learning, pustaka, dsb), IP telephone, IP TV Broadcast, IP Camera, Google Corner, dan Live@Edu Corner."
+  },
+  {
+    "question": "Apa layanan Pusat Pengembangan Bahasa (PPB) di UIN Sunan Kalijaga?",
+    "answer": "PPB meliputi pelatihan bahasa Arab dan Inggris (untuk sivitas dan umum), tes IKLA (TOAFL), TOEC (TOEFL), UPBI, layanan terjemah dokumen, pelatihan bahasa Indonesia untuk mahasiswa asing, pelatihan IELTS/TOEFL/TOAFL preparation, serta penyewaan gedung teatrikal."
+  },
+  {
+    "question": "Apa saja unit usaha yang dikelola Pusat Pengembangan Bisnis (PPB) UIN Sunan Kalijaga?",
+    "answer": "Unit usaha meliputi: Hotel University, property management (Multipurpose Building, Club House, CSC, Convention Hall, Staff Housing, Sport Venue), kantin dan SUKA-Resto, poliklinik (layanan dokter umum/gigi/laboratorium/fisioterapi), SUKA-Press (penerbitan ilmiah), TK Roudlotul Athfal, dan PAUD Griya Nanda."
+  },
+  {
+    "question": "Apa saja fasilitas laboratorium yang tersedia di UIN Sunan Kalijaga?",
+    "answer": "Setiap Program Studi di UIN Sunan Kalijaga memiliki akses ke laboratorium sesuai disiplin ilmunya, antara lain: Laboratorium Komputer Ilmu Perpustakaan, Laboratorium Bahasa, Laboratorium Dakwah (grafis, audio, audio visual, konseling, manajemen dakwah, pengembangan masyarakat), Laboratorium Syariah & Hukum (sidang peradilan semu, ilmu falak, komputer & mini bank syariah), Laboratorium Pendidikan (micro teaching, pengembangan media, madrasah), Laboratorium Fakultas Ushuluddin (religi & budaya lokal, filsafat, studi Qur'an & Hadist, sosiologi agama), Laboratorium Matematika & Teknik Informatika (pemrograman, jaringan, multimedia, self development), Laboratorium Fisika (fisika dasar, elektronika, termodinamika, dll), Laboratorium Kimia (kimia dasar, organik, anorganik, analis, biokimia), Laboratorium Biologi (botani, zoologi, mikrobiologi, bioteknologi, fisologi, green house), Laboratorium Teknik Industri (produksi, sistem, desain kerja, ergonomi), Laboratorium Psikologi (faal, eksperimen, pendidikan, agama, klinis, industri, psikodiagnostik, life lab), Laboratorium Ilmu Komunikasi (animasi, advertising, audio-video, PR, monitoring), Laboratorium Sosiologi (life lab), dan Laboratorium Ekonomi & Bisnis Islam (perbankan syariah, komputer, akuntansi, perpajakan)."
+  },
+  {
+    "question": "Apakah laboratorium di UIN Sunan Kalijaga dapat digunakan lintas program studi?",
+    "answer": "Ya, fasilitas laboratorium di UIN Sunan Kalijaga dapat digunakan oleh semua program studi, sesuai kebutuhan dan koordinasi, misal laboratorium bahasa untuk prodi bahasa, laboratorium pendidikan untuk prodi kependidikan, laboratorium komputer untuk prodi sains dan teknologi, dan seterusnya."
+  }
+]

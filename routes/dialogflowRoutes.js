@@ -1,16 +1,28 @@
 const express = require('express');
 const axios = require('axios');
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
 
-// Handler relay agar payload ke webhook tetap utuh
-router.post('/', async (req, res) => {
+// Rate limiter: max 20 request per menit per IP
+const dialogflowLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 100,
+  message: { error: 'Terlalu sering request. Coba lagi nanti.' }
+});
+
+router.post('/', dialogflowLimiter, async (req, res) => {
   const payload = req.body;
+
+  // Validasi basic payload (ubah sesuai kebutuhan Dialogflow kamu)
+  if (!payload || typeof payload !== 'object' || !payload.sessionId) {
+    return res.status(400).json({ error: 'Payload tidak valid.' });
+  }
+
   try {
     const response = await axios.post('http://localhost:3000/api/dialogflow/webhook', payload, {
       headers: { 'Content-Type': 'application/json' }
     });
-    // PASTIKAN response.data ada field 'reply'
-    // Jika tidak, tambahkan fallback di bawah:
+
     if (!response.data.reply && response.data.fulfillmentText) {
       res.json({ reply: response.data.fulfillmentText });
     } else {
@@ -20,5 +32,6 @@ router.post('/', async (req, res) => {
     res.status(500).json({ reply: 'Terjadi kesalahan saat menghubungi server.', details: e.message });
   }
 });
+
 
 module.exports = router;

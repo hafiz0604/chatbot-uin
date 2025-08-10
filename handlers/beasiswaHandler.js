@@ -1,90 +1,179 @@
 const axios = require('axios');
-const Fuse = require('fuse.js');
-const API_URL = "http://api.uin-suka.ac.id/akademik/v2";
 
-/**
- * Helper untuk ambil parameter dari Dialogflow
- */
-function getParamField(parameters, name) {
-  if (parameters?.fields && parameters.fields[name]) {
-    if ('stringValue' in parameters.fields[name]) return parameters.fields[name].stringValue;
-    if ('structValue' in parameters.fields[name]) return parameters.fields[name].structValue;
+const API_BASE = "http://api.uin-suka.ac.id/akademik/v2";
+const NIP = "ACC.API.CHAT";
+const PASSWORD = "0274512474";
+
+let cachedToken = null;
+let tokenExpire = 0;
+async function getToken() {
+  const now = Date.now();
+  if (cachedToken && tokenExpire > now) return cachedToken;
+  try {
+    const response = await axios.post(`${API_BASE}/getToken`, {
+      nip: NIP,
+      password: PASSWORD
+    });
+    cachedToken = response.data.token;
+    tokenExpire = now + (50 * 60 * 1000); // 50 menit
+    return cachedToken;
+  } catch (err) {
+    throw new Error("Gagal mengambil token SIA.");
   }
-  return parameters?.[name] || '';
 }
 
-/**
- * Deteksi pertanyaan umum beasiswa tanpa nama
- */
-function isGeneralBeasiswaQuery(text) {
-  return /(syarat|persyaratan|cara daftar|pendaftaran|info|informasi)[\s\S]*beasiswa/i.test(text);
+async function getBeasiswaList(token) {
+  try {
+    const res = await axios.post(
+      `${API_BASE}/beasiswa/getBeasiswa`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return Array.isArray(res.data.data) ? res.data.data : [];
+  } catch (err) {
+    throw new Error("Gagal mengambil data beasiswa dari SIA.");
+  }
 }
 
-/**
- * Handler utama informasi beasiswa
- * @param {object} args - { message, parameters, token, context }
- */
-async function handleInformasiBeasiswa({ message, parameters, token, context }) {
-  const userMessage = (message || "").toLowerCase();
-  const namaBeasiswa = (getParamField(parameters, 'nama_beasiswa') || '').toLowerCase();
+async function getBeasiswaDetail(token, namaBeasiswa) {
+  try {
+    const res = await axios.post(
+      `${API_BASE}/beasiswa/getBeasiswa`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    const list = Array.isArray(res.data.data) ? res.data.data : [];
+    const found = list.find(b =>
+      (b.NAMA_BEASISWA || '').toLowerCase().includes(namaBeasiswa) ||
+      (b.NM_BEASISWA || '').toLowerCase().includes(namaBeasiswa) ||
+      (b.nama_beasiswa || '').toLowerCase().includes(namaBeasiswa)
+    );
+    return found || null;
+  } catch (err) {
+    return null;
+  }
+}
 
+function extractNamaBeasiswa(msg) {
+  let text = (msg || '').toLowerCase();
+  text = text.replace(/\b(informasi|info|tentang|detail|beasiswa|tahun|terbaru|syarat|cara daftar|prosedur|jadwal)\b/gi, '');
+  text = text.replace(/[^\w\s]/gi, ''); // hilangkan tanda baca
+  text = text.trim();
+  return text;
+}
+
+function findBeasiswaDetail(list, query, rawMsg) {
+  const q = (query || '').toLowerCase();
+  // Coba match yang lebih robust, cek seluruh string di setiap properti
+  return list.find(b => {
+    const allNames = [
+      b.NAMA_BEASISWA, b.NM_BEASISWA, b.nama_beasiswa, b.PEMBERI_BEASISWA
+    ].filter(Boolean).map(str => str.toLowerCase());
+    return allNames.some(n => n.includes(q)) || allNames.some(n => (rawMsg || '').toLowerCase().includes(n));
+  });
+}
+
+function isGeneralBeasiswaQuery(msg) {
+  if (!msg) return false;
+  const lower = msg.toLowerCase();
+  // Jika mengandung kata 'terbaru' atau hanya 'beasiswa', tanpa nama spesifik
+  return (
+    lower.includes('terbaru') ||
+    (
+      lower.includes('beasiswa') &&
+      !lower.match(/baznas|kip|pln|inspirasi|cendekia|scholarship|nama|cahaya|bsi|kip kuliah|ybm/i)
+    )
+  );
+}
+
+function cleanHtml(html) {
+  return (html || '').replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
+}
+
+// Tambahan: deteksi permintaan SYARAT, CARA DAFTAR, atau JADWAL
+function detectDetailType(msg) {
+  const text = msg.toLowerCase();
+  if (text.includes('syarat')) return 'syarat';
+  if (text.includes('cara daftar') || text.includes('prosedur')) return 'cara_daftar';
+  if (text.includes('jadwal')) return 'jadwal';
+  return null;
+}
+
+async function handleInformasiBeasiswa({ message, parameters, token: userToken, context }) {
+  const userMessage = (message || "").trim();
+
+  let token = userToken;
   if (!token) {
-    return "Token autentikasi tidak ditemukan. Silakan login ulang.";
+    try {
+      token = await getToken();
+    } catch (e) {
+      return "Maaf, terjadi kesalahan saat mengambil token SIA.";
+    }
   }
 
   let beasiswaList = [];
   try {
-    const resp = await axios.post(`${API_URL}/beasiswa/getBeasiswa`, new URLSearchParams(), {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    beasiswaList = Array.isArray(resp.data?.data) ? resp.data.data : [];
-    if (!beasiswaList.length) return "Data beasiswa tidak tersedia untuk saat ini.";
+    beasiswaList = await getBeasiswaList(token);
   } catch (e) {
-    console.error("ERROR getBeasiswa:", e?.response?.data || e?.message || e);
-    return "Terjadi kesalahan saat mengambil data beasiswa. Silakan coba beberapa saat lagi.";
+    return "Maaf, terjadi kesalahan saat mengambil data beasiswa dari SIA.";
+  }
+  if (!Array.isArray(beasiswaList) || beasiswaList.length === 0) {
+    return "Maaf, data beasiswa belum tersedia.";
   }
 
-  // Jika user sebut nama beasiswa (atau sedang menjawab multi-turn)
-  if (context === "menjawab_nama_beasiswa" || namaBeasiswa) {
-    // Fuzzy search toleran typo
-    const fuse = new Fuse(beasiswaList, {
-      keys: ['NAMA_BEASISWA', 'NM_BEASISWA', 'nama_beasiswa'],
-      threshold: 0.4
-    });
-    const searchTerm = namaBeasiswa || userMessage;
-    const result = fuse.search(searchTerm);
-    const bea = result.length ? result[0].item : null;
+  // ==== LOGIKA BARU: Jika pertanyaan umum, tampilkan daftar ====
+  if (isGeneralBeasiswaQuery(userMessage)) {
+    const daftar = beasiswaList.slice(0, 5).map((b, i) =>
+      `${i + 1}. ${b.NAMA_BEASISWA || b.NM_BEASISWA || b.nama_beasiswa || 'Tanpa Nama'} (${b.PEMBERI_BEASISWA || '-'})`
+    ).join('\n');
+    return `Berikut beasiswa yang tersedia:\n${daftar}`;
+  }
 
-    if (bea) {
-      return (
-        `Informasi Beasiswa *${bea.NAMA_BEASISWA || bea.NM_BEASISWA || bea.nama_beasiswa}*\n` +
-        `Periode: ${bea.PERIODE || bea.periode || '-'}\n` +
-        `Syarat/Petunjuk: ${bea.KETERANGAN || bea.deskripsi || '-'}`
-      );
+  // ==== Kalau query spesifik, tampilkan detail SYARAT/CARA DAFTAR/JADWAL ====
+  const detailType = detectDetailType(userMessage);
+  const namaEkstrak = extractNamaBeasiswa(userMessage);
+  const beaDetail = findBeasiswaDetail(beasiswaList, namaEkstrak, userMessage);
+
+  if (beaDetail && detailType) {
+    let detail = '';
+    if (detailType === 'syarat' && beaDetail.SYARAT) detail = cleanHtml(beaDetail.SYARAT);
+    else if (detailType === 'syarat' && beaDetail.PENGUMUMAN) detail = cleanHtml(beaDetail.PENGUMUMAN);
+    else if (detailType === 'syarat' && beaDetail.DESKRIPSI) detail = cleanHtml(beaDetail.DESKRIPSI);
+    if (detailType === 'cara_daftar' && beaDetail.CARA_DAFTAR) detail = cleanHtml(beaDetail.CARA_DAFTAR);
+    if (detailType === 'jadwal' && beaDetail.TGL_MULAI_PENDAFTARAN && beaDetail.TGL_AKHIR_PENDAFTARAN)
+      detail = `Pendaftaran: ${beaDetail.TGL_MULAI_PENDAFTARAN} s/d ${beaDetail.TGL_AKHIR_PENDAFTARAN}`;
+
+    if (detail) {
+      let label = detailType === 'syarat' ? 'Syarat' : detailType === 'cara_daftar' ? 'Prosedur Pendaftaran' : 'Jadwal';
+      return `Berikut ${label} Beasiswa ${beaDetail.NAMA_BEASISWA || beaDetail.NM_BEASISWA || beaDetail.nama_beasiswa}:\n${detail}`;
     } else {
-      // Tampilkan 5 daftar terdekat untuk membantu user memilih
-      const daftar = beasiswaList.slice(0, 5).map((b, i) =>
-        `${i + 1}. ${b.NAMA_BEASISWA || b.NM_BEASISWA || b.nama_beasiswa || 'Tanpa Nama'}`
-      ).join('\n');
-      return `Maaf, beasiswa dengan nama "${searchTerm}" tidak ditemukan.\nCek daftar beasiswa berikut:\n${daftar}`;
+      // PATCH: Jika pertanyaan spesifik, tapi detail kosong, JANGAN fallback ke daftar, langsung jawab tidak tersedia
+      return "Maaf, informasi yang Anda minta belum tersedia.";
     }
   }
 
-  // Jika user tanya syarat/cara daftar/info beasiswa tanpa sebut nama
-  if (isGeneralBeasiswaQuery(userMessage)) {
-    return "Beasiswa apa yang Anda maksud? Silakan sebutkan nama beasiswanya (misal: KIP Kuliah, BAZNAS, dsb).";
+  // ==== Kalau query spesifik tapi tidak menanyakan SYARAT/CARA/JADWAL, tampilkan info umum ====
+  if (beaDetail) {
+    const nama = beaDetail.NAMA_BEASISWA || beaDetail.NM_BEASISWA || beaDetail.nama_beasiswa || "-";
+    const pemberi = beaDetail.PEMBERI_BEASISWA || "-";
+    const periode = (beaDetail.TGL_MULAI_BEASISWA && beaDetail.TGL_AKHIR_BEASISWA)
+      ? `${beaDetail.TGL_MULAI_BEASISWA} s/d ${beaDetail.TGL_AKHIR_BEASISWA}`
+      : "-";
+    const pengumuman = cleanHtml(beaDetail.PENGUMUMAN) || "-";
+    const pendaftaran = (beaDetail.TGL_MULAI_PENDAFTARAN && beaDetail.TGL_AKHIR_PENDAFTARAN)
+      ? `${beaDetail.TGL_MULAI_PENDAFTARAN} s/d ${beaDetail.TGL_AKHIR_PENDAFTARAN}`
+      : "-";
+    return (
+      `Informasi Beasiswa *${nama}*\n` +
+      `Pemberi: ${pemberi}\n` +
+      `Periode: ${periode}\n` +
+      `Pendaftaran: ${pendaftaran}\n` +
+      `Deskripsi/Syarat: ${pengumuman}`
+    );
   }
 
-  // Jika user hanya tanya "beasiswa" (tampilkan daftar)
-  if (userMessage.includes('beasiswa')) {
-    const daftar = beasiswaList.map((b, i) =>
-      `${i + 1}. ${b.NAMA_BEASISWA || b.NM_BEASISWA || b.nama_beasiswa || 'Tanpa Nama'} (${b.PERIODE || b.periode || '-'})`
-    ).join('\n');
-    return "Berikut daftar beasiswa yang tersedia di UIN Sunan Kalijaga:\n" + daftar;
-  }
-
-  // Fallback
-  return "Silakan tanyakan info, syarat, atau cara daftar beasiswa tertentu.";
+  // PATCH: Jika query spesifik TIDAK KETEMU beasiswanya, langsung jawab tidak tersedia!
+  return "Maaf, informasi yang Anda minta belum tersedia.";
 }
 
 module.exports = { handleInformasiBeasiswa };

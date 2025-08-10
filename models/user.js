@@ -1,9 +1,35 @@
 const mongoose = require('mongoose');
 
+// Definisi Schema User
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // simpan hash, bukan plain
-  email: { type: String, required: false }
+  username: { 
+    type: String, 
+    required: true, 
+    unique: true,
+    minlength: 4
+  },
+  password: { 
+    type: String, 
+    required: true 
+  },
+  email: { 
+    type: String, 
+    required: true,
+    unique: true,
+    match: /@student\.uin-suka\.ac\.id$/
+  },
+  name: { 
+    type: String, 
+    required: false 
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-module.exports = mongoose.model('User', userSchema);
+// Pastikan model dibuat dengan benar
+const User = mongoose.model('User', userSchema);
+
+// Export model
+module.exports = User;

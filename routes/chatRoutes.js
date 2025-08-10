@@ -1,54 +1,34 @@
 const express = require('express');
 const router = express.Router();
-const Chat = require('../models/chat');
+const chatController = require('../controllers/chatController');
+const { authenticateToken } = require('../middlewares/authMiddleware'); // Tambahkan import middleware
 
-// Ambil semua pesan dalam thread tertentu
-router.get('/user/:username', async (req, res) => {
-  const { username } = req.params;
-  const { threadId } = req.query;
-  try {
-    const chats = await Chat.find({ username, threadId }).sort({ createdAt: 1 });
-    res.json(chats);
-  } catch (err) {
-    res.status(500).json({ error: 'Gagal mengambil chat.' });
+// Endpoint untuk mendapatkan user yang sedang login
+router.get('/me', authenticateToken, (req, res) => {
+  console.log('🔍 /api/chats/me endpoint hit');
+  console.log('User:', req.user);
+
+  if (req.user) {
+    console.log('✅ User found in req.user:', req.user);
+    return res.json({
+      username: req.user.username,
+      email: req.user.email
+    });
   }
+
+  console.log('❌ No user found in session');
+  res.status(401).json({ error: 'User not authenticated' });
 });
 
-// Simpan pesan
-router.post('/', async (req, res) => {
-  try {
-    const { username, message, sender, threadId } = req.body;
-    const chat = new Chat({ username, message, sender, threadId });
-    await chat.save();
-    res.json(chat);
-  } catch (err) {
-    res.status(500).json({ error: 'Gagal menyimpan chat.' });
-  }
-});
+// Tambahkan authenticateToken ke rute yang perlu autentikasi
+router.get('/threads/:username', authenticateToken, chatController.getUserThreads);
+router.delete('/:username/thread/:threadId', authenticateToken, chatController.deleteThread);
+router.get('/:username/messages', authenticateToken, chatController.getThreadMessages);
+router.get('/user/:username', authenticateToken, chatController.getThreadMessages);
+router.post('/:username/messages', authenticateToken, chatController.saveMessage);
+router.post('/', authenticateToken, chatController.saveMessage);
 
-// Ambil daftar semua thread milik user (untuk sidebar)
-router.get('/threads/:username', async (req, res) => {
-  try {
-    const threads = await Chat.aggregate([
-      { $match: { username: req.params.username } },
-      { $group: { _id: "$threadId", lastMessage: { $last: "$message" }, lastAt: { $last: "$createdAt" } } },
-      { $sort: { lastAt: -1 } }
-    ]);
-    res.json(threads);
-  } catch (e) {
-    res.status(500).json({ error: "Gagal mengambil thread." });
-  }
-});
-
-// Hapus semua chat pada thread tertentu milik user
-router.delete('/thread/:username/:threadId', async (req, res) => {
-  const { threadId } = req.params;
-  try {
-    await Chat.deleteMany({ threadId });
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: 'Gagal menghapus thread.' });
-  }
-});
+// Rute bot tidak memerlukan autentikasi token karena mungkin dipanggil oleh sistem
+router.post('/bot', chatController.chatBotHandler);
 
 module.exports = router;
