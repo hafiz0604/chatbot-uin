@@ -17,6 +17,7 @@
       --footer-color: #fff;
       --header-bg: #004d40;
       --header-color: #fff;
+      --header-h: 56px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -78,9 +79,9 @@
       min-height: 0;
       position: relative;
       width: 100vw;
-      height: calc(100vh - 56px);
+      height: calc(100vh - var(--header-h));
     }
-    /* SIDEBAR RIWAYAT - DESKTOP */
+    /* Sidebar - Desktop */
     #chat-history {
       width: 25vw;
       min-width: 250px;
@@ -107,12 +108,22 @@
       z-index: 2;
       border-radius: 0 18px 0 0;
       box-shadow: 0 2px 8px rgba(33,150,83,0.04);
-      padding: 10px 16px 5px 16px;
+      padding: 10px 16px 10px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #chat-history h2 {
+      margin: 0;
+      font-size: 1.12rem;
+      color: #004d40;
+      font-weight: 700;
+      letter-spacing: .01em;
     }
     #newChatBtn {
       display: block;
       width: 100%;
-      margin: 0 0 8px 0;
+      margin: 0;
       padding: 12px 0;
       background: #28a745;
       color: #fff;
@@ -127,13 +138,9 @@
       background: #218838;
       box-shadow: 0 4px 12px rgba(40,167,69,0.17);
     }
-    #chat-history h2 {
-      margin: 0 0 8px 0;
-      font-size: 1.12rem;
-      color: #004d40;
-      font-weight: 700;
-      letter-spacing: .01em;
-    }
+    /* Close button hidden on desktop */
+    .close-history { display: none; }
+
     #historyList {
       flex: 1 1 auto;
       overflow-y: auto;
@@ -144,7 +151,7 @@
       background: #fff;
       border-radius: 15px;
       box-shadow: 0 2px 8px rgba(33,150,83,0.06);
-      padding: 10px 15px 7px 15px;
+      padding: 10px 42px 7px 15px; /* space for delete button */
       margin-bottom: 13px;
       border: 1.2px solid #e0e5ea;
       transition: box-shadow 0.18s, background 0.17s;
@@ -158,10 +165,7 @@
       background: #e8f5e8;
       box-shadow: 0 4px 16px rgba(33,150,83,0.11);
     }
-    .thread-content {
-      padding: 0;
-      margin: 0;
-    }
+    .thread-content { padding: 0; margin: 0; }
     .thread-message {
       font-size: 0.97rem;
       color: #232323;
@@ -170,11 +174,7 @@
       margin-bottom: 6px;
       word-break: break-word;
     }
-    .thread-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .thread-info { display: flex; justify-content: space-between; align-items: center; }
     .thread-count {
       background: #e0f2f1;
       color: #009688;
@@ -196,19 +196,23 @@
       right: 8px;
       top: 50%;
       transform: translateY(-50%);
-      background: none;
-      border: none;
+      background: #fff;
+      border: 1px solid #f1c7c7;
       cursor: pointer;
-      padding: 5px;
-      border-radius: 50%;
-      color: #bbb;
-      transition: background .14s, color .14s;
-      opacity: 0;
+      padding: 6px;
+      border-radius: 10px;
+      color: #d32f2f;           /* always visible */
+      box-shadow: 0 2px 6px rgba(211,47,47,0.08);
+      transition: background .14s, color .14s, box-shadow .14s;
+      opacity: 1;               /* ensure visible */
     }
-    #historyList li:hover .delete-thread-btn { opacity: 1; color: #e53935; }
-    .delete-thread-btn:hover { background: #fbe9e7; color: #d32f2f; }
-    .close-history { display: none; }
-    .history-overlay { display: none !important; }
+    .delete-thread-btn:hover {
+      background: #fdecec;
+      color: #b71c1c;
+      box-shadow: 0 4px 12px rgba(211,47,47,0.16);
+    }
+
+    .history-overlay { display: none; }
     .chat-main {
       width: 75vw;
       min-width: 0;
@@ -219,7 +223,9 @@
       transition: none;
       margin-left: 0;
     }
+    /* Hide toggle on desktop */
     .show-history-btn { display: none !important; }
+
     .chat-box {
       background: #fff;
       min-height: 0;
@@ -231,9 +237,12 @@
       scrollbar-color: var(--border-light) #fff;
       height: 70vh;
       flex: 1 1 auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
-    .chat-box::-webkit-scrollbar { width: 4px; background: #fff;}
-    .chat-box::-webkit-scrollbar-thumb { background: var(--border-light);}
+    .chat-box::-webkit-scrollbar { width: 4px; background: #fff; }
+    .chat-box::-webkit-scrollbar-thumb { background: var(--border-light); }
+
     .message-container {
       display: flex;
       flex-direction: column;
@@ -284,7 +293,7 @@
     .chat-input {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       background: transparent;
       box-shadow: none;
       border-radius: 0 0 13px 13px;
@@ -294,9 +303,11 @@
       bottom: 0;
       z-index: 50;
       width: 100%;
+      flex-wrap: nowrap;
     }
     .chat-input input[type="text"] {
       flex: 1 1 auto;
+      min-width: 0;              /* allow flex item to shrink */
       padding: 14px 17px;
       font-size: 1rem;
       border: 1.4px solid var(--border-light);
@@ -310,7 +321,7 @@
       border-color: var(--accent);
       box-shadow: 0 2px 10px #28a74522;
     }
-    .chat-input button {
+    .chat-input button#sendBtn {
       background: var(--accent);
       color: #fff;
       border: none;
@@ -321,12 +332,14 @@
       cursor: pointer;
       transition: background .18s, box-shadow .18s;
       box-shadow: 0 2px 8px rgba(30,170,120,0.13);
+      flex: 0 0 auto;
+      white-space: nowrap;
     }
-    .chat-input button:hover:not(:disabled) {
+    .chat-input button#sendBtn:hover:not(:disabled) {
       background: #218838;
       box-shadow: 0 8px 25px rgba(30,170,120,0.13);
     }
-    .chat-input button:disabled {
+    .chat-input button#sendBtn:disabled {
       background: #bdbdbd;
       cursor: not-allowed;
     }
@@ -340,15 +353,17 @@
       font-weight: 400;
       width: 100vw;
     }
+
     /* --- MOBILE PATCH --- */
     @media (max-width: 900px) {
       #chat-history {
         display: none;
         position: fixed;
-        left: 0; top: 0;
+        left: 0;
+        top: var(--header-h);
         width: 94vw;
         max-width: 400px;
-        height: 100vh;
+        height: calc(100vh - var(--header-h));
         background: #fff;
         z-index: 200;
         box-shadow: 2px 0 20px rgba(0,0,0,0.10);
@@ -356,10 +371,10 @@
         overflow-y: auto;
         border-radius: 0 18px 18px 0;
         animation: slideIn .21s cubic-bezier(.5,.9,.5,1.1);
-        display: flex;
         flex-direction: column;
       }
       #chat-history.active { display: flex; }
+
       #chat-history .sticky-header {
         position: sticky;
         top: 0;
@@ -367,160 +382,57 @@
         z-index: 2;
         border-radius: 0 18px 0 0;
         box-shadow: 0 2px 8px rgba(33,150,83,0.04);
-        padding: 10px 16px 5px 16px;
+        padding: 10px 16px 10px 16px;
       }
-      #newChatBtn {
-        display: block;
-        width: 100%;
-        margin: 0 0 8px 0;
-        padding: 12px 0;
-        background: #28a745;
-        color: #fff;
-        border: none;
-        border-radius: 10px;
+
+      /* Close button tepat di bawah judul pada mobile */
+      .close-history {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        position: static;
+        background: #ffffff;
+        color: #28a745;
+        border: 1.4px solid #e0e5ea;
+        border-radius: 999px;
+        padding: 8px 12px;
         font-weight: 600;
-        font-size: 1rem;
-        box-shadow: 0 2px 8px rgba(40,167,69,0.07);
-        transition: background 0.18s, box-shadow 0.18s;
+        font-size: 0.95rem;
+        width: fit-content;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        cursor: pointer;
       }
-      #newChatBtn:hover {
-        background: #218838;
-        box-shadow: 0 4px 12px rgba(40,167,69,0.17);
-      }
-      #chat-history h2 {
-        margin: 0 0 8px 0;
-        font-size: 1.12rem;
-        color: #004d40;
-        font-weight: 700;
-        letter-spacing: .01em;
-      }
+      .close-history i { font-size: 1rem; }
+      .close-history:hover { background: #f7faf7; }
+
       #historyList {
         flex: 1 1 auto;
         overflow-y: auto;
         padding: 8px 7px 16px 7px;
         margin: 0;
       }
-      #historyList li {
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 2px 8px rgba(33,150,83,0.06);
-        padding: 10px 15px 7px 15px;
-        margin-bottom: 13px;
-        border: 1.2px solid #e0e5ea;
-        transition: box-shadow 0.18s, background 0.17s;
-        position: relative;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        min-height: 58px;
-      }
-      .thread-content {
-        padding: 0;
-        margin: 0;
-      }
-      .thread-message {
-        font-size: 0.97rem;
-        color: #232323;
-        font-weight: 500;
-        line-height: 1.35;
-        margin-bottom: 6px;
-        word-break: break-word;
-      }
-      .thread-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .thread-count {
-        background: #e0f2f1;
-        color: #009688;
-        padding: 2px 13px;
-        border-radius: 14px;
-        font-size: .95em;
-        font-weight: 600;
-        margin-right: 10px;
-        box-shadow: 0 1px 3px rgba(33,150,83,0.08);
-      }
-      .thread-time {
-        font-style: italic;
-        color: #888;
-        font-size: .97em;
-        font-weight: 500;
-      }
-      .close-history {
-        display: flex;
-        position: absolute;
-        top: 14px; right: 10px;
-        background: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 34px; height: 34px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        font-size: 1.23rem;
-        color: #28a745;
-        z-index: 210;
-        cursor: pointer;
-        align-items: center;
-        justify-content: center;
-      }
+
       .history-overlay {
         display: none;
         position: fixed;
         z-index: 198;
-        top: 0; left: 0; width: 100vw; height: 100vh;
+        top: var(--header-h);
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - var(--header-h));
         background: rgba(0,0,0,0.15);
         transition: opacity .17s;
       }
       .history-overlay.active { display: block; }
+
       .chat-main {
         width: 100vw;
         min-height: 0;
         position: relative;
         margin-left: 0;
       }
-        .show-history-btn {
-          display: flex !important;
-          align-items: center;
-          justify-content: center;
-          position: fixed;
-          left: 16px;
-          top: 72px;
-          z-index: 9999;
-          width: 46px;
-          height: 46px;
-          background: #28a745;
-          color: #fff;
-          border: none;
-          border-radius: 50%;
-          box-shadow: 0 2px 10px rgba(40,167,69,0.11);
-          font-size: 1.7rem;
-          cursor: pointer;
-          transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
-          outline: none;
-          border: 2px solid #fff;
-        }
-        .show-history-btn:active,
-        .show-history-btn:focus {
-          background: #218838;
-          box-shadow: 0 6px 24px rgba(40,167,69,0.15);
-          transform: scale(0.95);
-        }
-        .show-history-btn:hover {
-          background: #219150;
-        }
-        .show-history-btn i {
-          pointer-events: none;
-        }
-        /* PATCH: Sembunyikan tombol garis tiga saat sidebar aktif */
-        #chat-history.active ~ .chat-main .show-history-btn,
-        #chat-history.active ~ .show-history-btn {
-          display: none !important;
-        } 
-      .chat-box {
-        padding: 18px 3vw 0 3vw;
-        min-height: 0;
-        padding-bottom: 70px !important;
-      }
+
+      /* Pindahkan tombol toggle ke kiri input di mobile */
       .chat-input {
         position: fixed;
         left: 0;
@@ -530,18 +442,67 @@
         box-shadow: 0 -2px 12px rgba(0,0,0,0.03);
         border-radius: 0;
         z-index: 100;
-        padding: 12px 13vw 12px 4vw;
+        padding: 12px 12px;  /* lebih kompak */
+        gap: 8px;
+        align-items: center;
+        flex-wrap: nowrap;  /* pastikan tidak wrap */
       }
-      footer {
-        position: static;
-        width: 100vw;
+      .chat-input .show-history-btn {
+        display: flex !important;   /* override desktop hidden */
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 2px 10px rgba(40,167,69,0.11);
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+        outline: none;
+        flex: 0 0 40px;
       }
+      .chat-input .show-history-btn:active,
+      .chat-input .show-history-btn:focus { background: #218838; transform: scale(0.97); }
+      .chat-input .show-history-btn:hover { background: #219150; }
+      .chat-input .show-history-btn i { pointer-events: none; }
+
+      .chat-input input[type="text"] {
+        flex: 1 1 auto;
+        min-width: 0;             /* penting agar input tidak dorong tombol */
+        width: auto;
+        padding: 12px 14px;
+        font-size: 0.98rem;
+      }
+      .chat-input button#sendBtn {
+        flex: 0 0 auto;
+        padding: 10px 14px;       /* lebih kecil agar muat */
+        font-size: 0.95rem;
+        white-space: nowrap;
+      }
+
+      /* Sembunyikan toggle saat sidebar aktif */
+      #chat-history.active ~ .chat-main .show-history-btn,
+      #chat-history.active ~ .show-history-btn {
+        display: none !important;
+      }
+
+      .chat-box {
+        padding: 18px 3vw 0 3vw;
+        min-height: 0;
+        padding-bottom: 74px !important; /* ruang untuk input fixed */
+      }
+      footer { position: static; width: 100vw; }
     }
+
     @media (max-width: 480px) {
-      #chat-history {max-width: 99vw;}
-      #historyList {padding: 8px 3px 16px 3px;}
-      .thread-message {font-size: 0.95rem;}
+      #chat-history { max-width: 99vw; }
+      #historyList { padding: 8px 3px 16px 3px; }
+      .thread-message { font-size: 0.95rem; }
     }
+
     .spinner {
       display: inline-block;
       width: 18px;
@@ -554,8 +515,8 @@
       margin-right: 6px;
     }
     @keyframes spin {
-      0% { transform: rotate(0deg);}
-      100% { transform: rotate(360deg);}
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -570,27 +531,36 @@
         <a href="home.html">Beranda</a>
       </nav>
     </header>
+
     <section class="chat-container" aria-label="Area percakapan chatbot">
       <div id="chat-history" aria-label="Riwayat percakapan chatbot">
         <div class="sticky-header">
-          <button id="newChatBtn">+ Chat Baru</button>
           <h2>Riwayat Percakapan</h2>
+          <!-- Chat Baru di atas tombol Tutup -->
+          <button id="newChatBtn">+ Chat Baru</button>
+          <button class="close-history" title="Tutup riwayat" aria-label="Tutup riwayat">
+            <i class="fas fa-times" aria-hidden="true"></i>
+            <span>Tutup</span>
+          </button>
         </div>
         <ul id="historyList"></ul>
-        <button class="close-history" title="Tutup riwayat"></button>
       </div>
+
       <div class="history-overlay"></div>
+
       <div class="chat-main">
-          <button class="show-history-btn history-toggle" id="showHistoryBtn" aria-label="Tampilkan riwayat chat">
-            <i class="fas fa-lines-leaning"></i>
-          </button>
         <div class="chat-box" id="chatBox" aria-live="polite" aria-relevant="additions"></div>
         <div class="chat-input" aria-label="Form input pengguna untuk chat">
+          <!-- Toggle dipindah ke kiri input (mobile) -->
+          <button class="show-history-btn history-toggle" id="showHistoryBtn" aria-label="Tampilkan riwayat chat">
+            <i class="fas fa-bars-staggered" aria-hidden="true"></i>
+          </button>
           <input type="text" id="userInput" placeholder="Ketik pertanyaan Anda..." aria-label="Input teks pengguna" />
           <button id="sendBtn" aria-label="Kirim pertanyaan ke chatbot">Kirim</button>
         </div>
       </div>
     </section>
+
     <footer>
       &copy; 2025 UIN Sunan Kalijaga - Chatbot Akademik. All rights reserved.
     </footer>

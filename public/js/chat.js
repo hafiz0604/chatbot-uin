@@ -6,11 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const newChatBtn = document.getElementById('newChatBtn');
   const historyList = document.getElementById('historyList');
   const chatHistory = document.getElementById('chat-history');
-  
-  // User configuration - ambil username dari session atau localStorage
+
+  // User configuration
   let username;
-  
-  // Fungsi untuk mendapatkan auth headers untuk API calls
+
   function getAuthHeaders() {
     const token = localStorage.getItem('token');
     return {
@@ -18,10 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
       'Authorization': token ? `Bearer ${token}` : ''
     };
   }
-  
-  // Fungsi untuk mendapatkan username pengguna yang sedang login
+
   function getCurrentUsername() {
-    // Coba ambil dari localStorage (simpan setelah login berhasil)
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       try {
@@ -31,12 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("Error parsing user data from localStorage", e);
       }
     }
-    
-    // Jika tidak ada di localStorage, coba ambil dari token JWT
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        // Parse token (JWT biasanya terdiri dari 3 bagian yang dipisahkan dengan .)
         const tokenParts = token.split('.');
         if (tokenParts.length === 3) {
           const payload = JSON.parse(atob(tokenParts[1]));
@@ -48,41 +42,29 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("Error parsing JWT token", e);
       }
     }
-    
-    // Jika tidak berhasil mendapatkan username, redirect ke login
     window.location.href = '/login.html';
     return null;
   }
-  
+
   let currentThreadId = generateThreadId();
   let chatThreads = [];
   let isLoadingThread = false;
-  
-  // Generate thread ID
+
   function generateThreadId() {
     return 'thread_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }
-  
-  // Initialize the application
+
   async function init() {
-    // Get current username first
     username = getCurrentUsername();
-    
-    // If no username, abort initialization
-    if (!username) {
-      return;
-    }
-    
-    // Display username on UI if needed
+    if (!username) return;
+
     const usernameDisplay = document.getElementById('usernameDisplay');
-    if (usernameDisplay) {
-      usernameDisplay.textContent = username;
-    }
-    
+    if (usernameDisplay) usernameDisplay.textContent = username;
+
     await loadChatThreads();
 
-    // Mobile: langsung tampilkan percakapan terakhir, sidebar riwayat tidak auto-muncul
-    if (window.innerWidth <= 900 && chatThreads.length > 0) {
+    // Jika ada thread, load thread terbaru agar tidak buat chat baru saat refresh
+    if (chatThreads.length > 0) {
       const lastThread = chatThreads[0];
       if (lastThread && lastThread._id) {
         await loadThread(lastThread._id);
@@ -94,8 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupMobileHandlers();
   }
 
-  
-  // Show welcome message and save it
   async function showWelcomeMessage() {
     if (chatBox && chatBox.children.length === 0) {
       const welcomeMsg = 'Selamat datang di UIN SuKa Chatbot! Bagaimana saya bisa membantu Anda hari ini?';
@@ -114,8 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } catch (error) {}
     }
   }
-  
-  // Add message to chat box
+
   function addMessage(content, sender, timestamp = null) {
     if (!chatBox) return;
     const messageContainer = document.createElement('div');
@@ -136,8 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
       messageContainer.style.transform = 'translateY(0)';
     }, 10);
   }
-  
-  // Send message function
+
   async function sendMessage() {
     const message = userInput.value.trim();
     if (!message || !userInput || !sendBtn || isLoadingThread) return;
@@ -148,30 +126,27 @@ document.addEventListener('DOMContentLoaded', function() {
     userInput.value = '';
     const typingIndicator = addTypingIndicator();
     try {
-        const response = await fetch('/api/chats/bot', {
-          method: 'POST',
-          headers: getAuthHeaders(),
-          body: JSON.stringify({
-            username: username,
-            message: message,
-            sender: 'user',
-            threadId: currentThreadId
-          })
-        });
+      const response = await fetch('/api/chats/bot', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          username: username,
+          message: message,
+          sender: 'user',
+          threadId: currentThreadId
+        })
+      });
       if (!response.ok) {
         if (response.status === 401) {
-          // Token tidak valid, redirect ke login
           window.location.href = '/login.html';
           return;
         }
-        const errorText = await response.text();
+        await response.text();
         throw new Error(`Server error: ${response.status} ${response.statusText}`);
       }
       const data = await response.json();
       removeTypingIndicator(typingIndicator);
-      if (data.response) {
-        addMessage(data.response, 'bot');
-      }
+      if (data.response) addMessage(data.response, 'bot');
       await loadChatThreads();
     } catch (error) {
       removeTypingIndicator(typingIndicator);
@@ -185,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-  
+
   function addTypingIndicator() {
     if (!chatBox) return null;
     const messageContainer = document.createElement('div');
@@ -203,14 +178,11 @@ document.addEventListener('DOMContentLoaded', function() {
       indicator.parentNode.removeChild(indicator);
     }
   }
-  
-  // Load chat threads for sidebar
+
   async function loadChatThreads() {
     try {
       const url = `/api/chats/threads/${username}`;
-      const response = await fetch(url, {
-        headers: getAuthHeaders()
-      });
+      const response = await fetch(url, { headers: getAuthHeaders() });
       if (!response.ok) {
         if (response.status === 401) {
           window.location.href = '/login.html';
@@ -223,31 +195,55 @@ document.addEventListener('DOMContentLoaded', function() {
       renderChatThreads(threads);
     } catch (error) {}
   }
-  
-  // Render chat threads in sidebar
+
+  // Helper jumlah pesan (fallback beberapa kemungkinan properti)
+  function getThreadCount(thread) {
+    const candidates = [
+      thread.messageCount,
+      thread.count,
+      thread.totalMessages,
+      thread.total,
+      thread.messagesCount,
+      Array.isArray(thread.messages) ? thread.messages.length : undefined,
+      Array.isArray(thread.items) ? thread.items.length : undefined
+    ];
+    for (const c of candidates) {
+      if (typeof c === 'number' && c >= 0) return c;
+      if (typeof c === 'string' && c.trim() !== '' && !isNaN(Number(c))) return Number(c);
+    }
+    return 0;
+  }
+
+  function safeTruncate(text, n) {
+    if (!text || typeof text !== 'string') return '';
+    return text.length > n ? text.substring(0, n) + '...' : text;
+  }
+
   function renderChatThreads(threads) {
     if (!historyList) return;
     historyList.innerHTML = '';
-    if (threads.length === 0) {
+    if (!threads || threads.length === 0) {
       const emptyLi = document.createElement('li');
       emptyLi.innerHTML = '<span style="color: #999; font-style: italic;">Belum ada riwayat chat</span>';
       emptyLi.style.cursor = 'default';
       historyList.appendChild(emptyLi);
       return;
     }
-    threads.forEach((thread, index) => {
+    threads.forEach((thread) => {
       const li = document.createElement('li');
-      const truncatedMessage = thread.lastMessage.length > 40 ? thread.lastMessage.substring(0, 40) + '...' : thread.lastMessage;
+
+      const truncatedMessage = safeTruncate(thread.lastMessage || 'Percakapan', 40);
+      const count = getThreadCount(thread);
+
       li.innerHTML = `
         <div class="thread-content" data-thread-id="${thread._id}">
           <div class="thread-message">${truncatedMessage}</div>
           <div class="thread-info">
-            <span class="thread-count">${thread.messageCount || 0} pesan</span>
             <span class="thread-time">${formatDate(thread.lastAt)}</span>
           </div>
         </div>
-        <button class="delete-thread-btn" data-thread-id="${thread._id}" title="Hapus chat">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <button class="delete-thread-btn" data-thread-id="${thread._id}" title="Hapus chat" aria-label="Hapus chat">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
           </svg>
         </button>
@@ -256,33 +252,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     addThreadEventListeners();
   }
-  
+
   function addThreadEventListeners() {
     const threadContents = historyList.querySelectorAll('.thread-content');
-    threadContents.forEach((threadContent, index) => {
+    threadContents.forEach((threadContent) => {
       threadContent.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         const threadId = this.getAttribute('data-thread-id');
-        if (threadId) {
-          loadThread(threadId);
-        }
+        if (threadId) loadThread(threadId);
       });
     });
     const deleteButtons = historyList.querySelectorAll('.delete-thread-btn');
-    deleteButtons.forEach((deleteBtn, index) => {
+    deleteButtons.forEach((deleteBtn) => {
       deleteBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         const threadId = this.getAttribute('data-thread-id');
-        if (threadId) {
-          deleteThread(threadId);
-        }
+        if (threadId) deleteThread(threadId);
       });
     });
   }
-  
+
   function formatDate(dateString) {
+    if (!dateString) return '';
     const date = new Date(dateString);
     const now = new Date();
     const diffMs = now - date;
@@ -297,15 +290,13 @@ document.addEventListener('DOMContentLoaded', function() {
       return date.toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit' });
     }
   }
-  
+
   async function loadThread(threadId) {
     if (isLoadingThread) return;
     try {
       isLoadingThread = true;
       const url = `/api/chats/user/${username}?threadId=${threadId}`;
-      const response = await fetch(url, {
-        headers: getAuthHeaders()
-      });
+      const response = await fetch(url, { headers: getAuthHeaders() });
       if (!response.ok) {
         if (response.status === 401) {
           window.location.href = '/login.html';
@@ -316,10 +307,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const messages = await response.json();
       if (chatBox) chatBox.innerHTML = '';
       currentThreadId = threadId;
-      messages.forEach(msg => {
-        addMessage(msg.message, msg.sender, msg.createdAt);
-      });
-      // Hide sidebar on mobile after loading thread
+      messages.forEach(msg => addMessage(msg.message, msg.sender, msg.createdAt));
+      // Tutup sidebar di mobile setelah memilih thread
       if (window.innerWidth <= 900 && chatHistory) {
         chatHistory.classList.remove('active');
         const overlay = document.querySelector('.history-overlay');
@@ -331,12 +320,12 @@ document.addEventListener('DOMContentLoaded', function() {
       isLoadingThread = false;
     }
   }
-  
+
   async function deleteThread(threadId) {
     if (!confirm('Apakah Anda yakin ingin menghapus chat ini?')) return;
     try {
       const url = `/api/chats/${username}/thread/${threadId}`;
-      const response = await fetch(url, { 
+      const response = await fetch(url, {
         method: 'DELETE',
         headers: getAuthHeaders()
       });
@@ -345,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       if (response.ok) {
-        const result = await response.json();
+        await response.json();
         await loadChatThreads();
         if (currentThreadId === threadId) {
           await startNewChat();
@@ -353,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     } catch (error) {}
   }
-  
+
   async function startNewChat() {
     if (chatBox) chatBox.innerHTML = '';
     currentThreadId = generateThreadId();
@@ -366,15 +355,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     await loadChatThreads();
   }
-  
+
   function setupMobileHandlers() {
-    // Tidak perlu diisi, biarkan ui-mobile.js yang mengatur sidebar
+    // Biarkan ui-mobile.js yang mengatur sidebar
   }
-  
+
   // Event listeners
-  if (sendBtn) {
-    sendBtn.addEventListener('click', sendMessage);
-  }
+  if (sendBtn) sendBtn.addEventListener('click', sendMessage);
   if (userInput) {
     userInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -383,10 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  if (newChatBtn) {
-    newChatBtn.addEventListener('click', startNewChat);
-  }
-  
-  init();
+  if (newChatBtn) newChatBtn.addEventListener('click', startNewChat);
 
+  init();
 });
