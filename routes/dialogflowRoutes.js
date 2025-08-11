@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const rateLimit = require('express-rate-limit');
 const router = express.Router();
+const URL_BASE = process.env.BASE_URL_3000
 
 // Rate limiter: max 20 request per menit per IP
 const dialogflowLimiter = rateLimit({
@@ -19,7 +20,7 @@ router.post('/', dialogflowLimiter, async (req, res) => {
   }
 
   try {
-    const response = await axios.post('http://localhost:3000/api/dialogflow/webhook', payload, {
+    const response = await axios.post(`${URL_BASE}/api/dialogflow/webhook`, payload, {
       headers: { 'Content-Type': 'application/json' }
     });
 

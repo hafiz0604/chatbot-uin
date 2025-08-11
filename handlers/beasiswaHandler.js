@@ -1,8 +1,8 @@
 const axios = require('axios');
 
-const API_BASE = "http://api.uin-suka.ac.id/akademik/v2";
-const NIP = "ACC.API.CHAT";
-const PASSWORD = "0274512474";
+const API_BASE = process.env.BASE_API;
+const NIP = process.env.SIA_NIP;
+const PASSWORD = process.env.SIA_PASSWORD;
 
 let cachedToken = null;
 let tokenExpire = 0;

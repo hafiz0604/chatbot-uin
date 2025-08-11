@@ -1,5 +1,5 @@
 const axios = require('axios');
-const API_URL = "http://api.uin-suka.ac.id/akademik/v2";
+const API_URL = process.env.BASE_API;
 
 // Fungsi bantu: Capitalize hari
 function capitalize(str) {

@@ -1,21 +1,14 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends, Request
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import numpy as np
 import json
 import re
 import logging
 import time
 import os
-import gc
-from typing import Dict, List, Tuple, Set, Optional, Union, Any
-import torch
-from sentence_transformers import SentenceTransformer, util
-from transformers import pipeline
-from fuzzywuzzy import fuzz, process
-import heapq
-from collections import Counter
 import traceback
+from typing import Dict, List, Tuple, Set, Optional, Union, Any
+from collections import Counter
 from functools import lru_cache
 
 # Configure logging
@@ -41,12 +34,9 @@ app.add_middleware(
 )
 
 # Global variables
-global qa_pipeline, model, faq_data, keyword_index, topic_map, embeddings_cache, question_embeddings
-global faq_by_topic, question_tokens, answer_tokens
-
-# Initialize cache structures
-embeddings_cache = {}
-question_embeddings = None
+faq_data = []
+keyword_index = {}
+topic_map = {}
 faq_by_topic = {}
 question_tokens = {}
 answer_tokens = {}
@@ -152,7 +142,7 @@ QUESTION_PATTERNS = {
 
 def load_models():
     """Load all necessary models and data"""
-    global qa_pipeline, model, faq_data, keyword_index, question_embeddings, faq_by_topic
+    global faq_data, keyword_index, faq_by_topic
     global question_tokens, answer_tokens
     
     logger.info("Loading models and data...")
@@ -176,42 +166,11 @@ def load_models():
             build_keyword_index()
             categorize_by_topics()
             
-            # Pre-compute embeddings
-            pre_compute_embeddings()
+            return True
         except Exception as e:
             logger.error(f"Failed to load FAQ data: {str(e)}")
             logger.error(traceback.format_exc())
             raise
-            
-        # Load embedding model
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        logger.info(f"Using device: {device}")
-        
-        try:
-            # Using a multilingual model for better Indonesian support
-            model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
-            if device == "cuda":
-                model = model.to(device)
-            logger.info("Embedding model loaded successfully")
-        except Exception as e:
-            logger.error(f"Failed to load embedding model: {str(e)}")
-            logger.error(traceback.format_exc())
-            model = None
-        
-        # Try to load QA pipeline
-        try:
-            qa_pipeline = pipeline(
-                "question-answering", 
-                model="deepset/xlm-roberta-base-squad2",
-                device=0 if device == "cuda" else -1
-            )
-            logger.info("QA pipeline loaded successfully")
-        except Exception as e:
-            logger.error(f"Failed to load QA pipeline: {str(e)}")
-            logger.error(traceback.format_exc())
-            qa_pipeline = None
-        
-        return True
     except Exception as e:
         logger.error(f"Error in load_models: {str(e)}")
         logger.error(traceback.format_exc())
@@ -335,64 +294,6 @@ def extract_phrases(text: str) -> List[str]:
     
     return phrases
 
-def pre_compute_embeddings():
-    """Pre-compute embeddings for all questions"""
-    global model, faq_data, question_embeddings
-    
-    if not model or not faq_data:
-        logger.warning("Cannot pre-compute embeddings: model or data not loaded")
-        return
-    
-    try:
-        logger.info("Pre-computing embeddings for all questions...")
-        
-        # Combine questions and first sentence of answers for better representation
-        texts = []
-        for item in faq_data:
-            question = item['question']
-            # Add first sentence of answer for better context
-            answer_first_sentence = re.split(r'[.!?]', item['answer'])[0]
-            combined_text = f"{question} {answer_first_sentence}"
-            texts.append(combined_text)
-        
-        # Encode in batches to avoid OOM errors
-        batch_size = 32
-        all_embeddings = []
-        
-        for i in range(0, len(texts), batch_size):
-            batch = texts[i:i+batch_size]
-            batch_embeddings = model.encode(batch, convert_to_tensor=True, show_progress_bar=False)
-            all_embeddings.append(batch_embeddings)
-            
-        # Concatenate all embeddings
-        if torch.cuda.is_available():
-            question_embeddings = torch.cat(all_embeddings)
-        else:
-            question_embeddings = torch.cat(all_embeddings)
-            
-        logger.info(f"Computed embeddings for {len(texts)} questions")
-    except Exception as e:
-        logger.error(f"Error pre-computing embeddings: {str(e)}")
-        logger.error(traceback.format_exc())
-        question_embeddings = None
-
-@lru_cache(maxsize=MAX_CACHE_SIZE)
-def get_embedding_for_query(query: str) -> Optional[torch.Tensor]:
-    """Get embedding for a query with caching"""
-    global model
-    
-    if not model:
-        return None
-    
-    try:
-        # Compute new embedding
-        embedding = model.encode(query, convert_to_tensor=True)
-        return embedding
-    except Exception as e:
-        logger.error(f"Error computing embedding: {str(e)}")
-        logger.error(traceback.format_exc())
-        return None
-
 def identify_question_type(question: str) -> str:
     """Identify the type of question being asked"""
     question = question.lower()
@@ -416,7 +317,7 @@ def identify_topics(query: str) -> List[str]:
                 identified_topics.append(topic)
                 break
     
-    # If no topics found, try fuzzy matching
+    # If no topics found, try fuzzy matching with basic string matching
     if not identified_topics:
         query_words = set(re.findall(r'\b\w+\b', query))
         query_words = {w for w in query_words if w not in STOPWORDS}
@@ -424,7 +325,8 @@ def identify_topics(query: str) -> List[str]:
         for topic, keywords in topic_map.items():
             for keyword in keywords:
                 for word in query_words:
-                    if fuzz.ratio(keyword, word) > FUZZY_MATCH_THRESHOLD:
+                    # Simple substring match
+                    if word in keyword or keyword in word:
                         identified_topics.append(topic)
                         break
                 if topic in identified_topics:
@@ -572,41 +474,46 @@ def calculate_keyword_match_score(
     score = match_ratio * 0.6 + exact_match_bonus
     return min(1.0, score)  # Cap at 1.0
 
-def calculate_semantic_match_score(
-    query_embedding: torch.Tensor,
-    idx: int
-) -> float:
-    """Calculate semantic match score for an FAQ item"""
-    global question_embeddings
-    
-    if question_embeddings is None:
-        return 0.0
-    
-    try:
-        # Calculate cosine similarity
-        similarity = util.pytorch_cos_sim(query_embedding, question_embeddings[idx])[0][0].item()
-        return similarity
-    except Exception as e:
-        logger.error(f"Error calculating semantic match: {str(e)}")
-        return 0.0
-
-def calculate_fuzzy_match_score(
+def calculate_simple_match_score(
     query: str,
     idx: int
 ) -> float:
-    """Calculate fuzzy match score for an FAQ item"""
+    """Calculate a simple match score for an FAQ item"""
     global faq_data
     
     item = faq_data[idx]
-    question = item['question']
+    question = item['question'].lower()
+    answer = item['answer'].lower()
     
-    # Calculate fuzzy match ratio
-    ratio = fuzz.token_set_ratio(query, question) / 100.0
-    return ratio
+    # Simple word overlap
+    query_words = set(re.findall(r'\b\w+\b', query.lower()))
+    query_words = {w for w in query_words if w not in STOPWORDS and len(w) > 2}
+    
+    question_words = set(re.findall(r'\b\w+\b', question))
+    answer_words = set(re.findall(r'\b\w+\b', answer))
+    
+    all_words = question_words.union(answer_words)
+    
+    # Count matches
+    matches = sum(1 for w in query_words if w in all_words)
+    
+    # Calculate score
+    if len(query_words) > 0:
+        score = matches / len(query_words)
+    else:
+        score = 0
+    
+    # Exact phrase bonus
+    if len(query) > 10:
+        if query in question or query in answer:
+            score += 0.3
+        elif query.split()[-1] in question or query.split()[-1] in answer:
+            score += 0.1
+    
+    return min(1.0, score)
 
 def calculate_match_scores(
     query: str, 
-    query_embedding: torch.Tensor,
     query_keywords: List[str],
     identified_topics: List[str], 
     candidates: Set[int],
@@ -623,12 +530,7 @@ def calculate_match_scores(
         
         # Calculate different types of match scores
         keyword_score = calculate_keyword_match_score(query, query_keywords, idx)
-        
-        semantic_score = 0.0
-        if query_embedding is not None:
-            semantic_score = calculate_semantic_match_score(query_embedding, idx)
-        
-        fuzzy_score = calculate_fuzzy_match_score(query, idx)
+        simple_score = calculate_simple_match_score(query, idx)
         
         # Topic match bonus
         topic_match_score = 0.0
@@ -652,9 +554,8 @@ def calculate_match_scores(
         
         # Calculate final weighted score
         final_score = (
-            keyword_score * 0.4 +       # 40% weight for keyword matching
-            semantic_score * 0.3 +      # 30% weight for semantic matching
-            fuzzy_score * 0.2 +         # 20% weight for fuzzy matching
+            keyword_score * 0.5 +       # 50% weight for keyword matching
+            simple_score * 0.3 +        # 30% weight for simple matching
             topic_match_score +         # Topic match bonus
             type_match_bonus +          # Question type match bonus
             length_score                # Length score
@@ -663,8 +564,7 @@ def calculate_match_scores(
         # Store detailed scoring for debugging
         scoring_details = {
             "keyword_score": keyword_score,
-            "semantic_score": semantic_score,
-            "fuzzy_score": fuzzy_score,
+            "simple_score": simple_score,
             "topic_match_score": topic_match_score,
             "type_match_bonus": type_match_bonus,
             "length_score": length_score
@@ -678,7 +578,7 @@ def calculate_match_scores(
 
 def get_best_matching_answer(query: str, threshold: float = 0.3) -> Tuple[Optional[Dict], float, Dict]:
     """Find the best matching answer from FAQ data"""
-    global faq_data, model
+    global faq_data
     
     if not faq_data:
         logger.error("FAQ data not loaded!")
@@ -704,22 +604,16 @@ def get_best_matching_answer(query: str, threshold: float = 0.3) -> Tuple[Option
         )
         logger.info(f"Found {len(candidates)} candidates by keywords and topics")
         
-        # Step 5: Get query embedding for semantic search (if model available)
-        query_embedding = None
-        if model:
-            query_embedding = get_embedding_for_query(query)
-        
-        # Step 6: Calculate match scores for candidates
+        # Step 5: Calculate match scores for candidates
         match_scores = calculate_match_scores(
             query, 
-            query_embedding, 
             query_keywords,
             identified_topics, 
             candidates,
             question_type
         )
         
-        # Step 7: Get the best match
+        # Step 6: Get the best match
         if match_scores:
             best_idx, best_score, details = match_scores[0]
             best_match = faq_data[best_idx]
@@ -731,7 +625,9 @@ def get_best_matching_answer(query: str, threshold: float = 0.3) -> Tuple[Option
                     "matched_idx": best_idx,
                     "score_details": details,
                     "question_type": question_type,
-                    "identified_topics": identified_topics
+                    "identified_topics": identified_topics,
+                    "top_matches": [{"idx": idx, "score": score, "question": faq_data[idx]["question"]} 
+                                   for idx, score, _ in match_scores[:3]]
                 }
             else:
                 logger.info(f"Best match score {best_score:.4f} below threshold {threshold}")
@@ -803,7 +699,6 @@ class Health(BaseModel):
     status: str
     models_loaded: Dict[str, bool]
     data_stats: Dict[str, int]
-    memory_usage: Dict[str, str]
 
 @app.get("/")
 def root():
@@ -815,18 +710,12 @@ def health_check():
     return Health(
         status="ok",
         models_loaded={
-            "faq_data": 'faq_data' in globals() and faq_data is not None,
-            "embedding_model": model is not None,
-            "qa_pipeline": qa_pipeline is not None
+            "faq_data": len(faq_data) > 0
         },
         data_stats={
-            "faq_count": len(faq_data) if 'faq_data' in globals() and faq_data else 0,
-            "keyword_index_size": len(keyword_index) if 'keyword_index' in globals() and keyword_index else 0,
-            "topic_categories": len(faq_by_topic) if 'faq_by_topic' in globals() and faq_by_topic else 0
-        },
-        memory_usage={
-            "gpu_memory": f"{torch.cuda.memory_allocated()/1024**2:.2f}MB" if torch.cuda.is_available() else "N/A",
-            "gpu_reserved": f"{torch.cuda.memory_reserved()/1024**2:.2f}MB" if torch.cuda.is_available() else "N/A"
+            "faq_count": len(faq_data),
+            "keyword_index_size": len(keyword_index),
+            "topic_categories": len(faq_by_topic) if faq_by_topic else 0
         }
     )
 
@@ -836,35 +725,18 @@ def reload_models(background_tasks: BackgroundTasks):
     background_tasks.add_task(load_models)
     return {"status": "success", "message": "Models reload started in background"}
 
-@app.post("/clear_cache")
-def clear_cache():
-    """Clear caches to free memory"""
-    global embeddings_cache
-    
-    # Clear LRU cache
-    get_embedding_for_query.cache_clear()
-    
-    # Clear other caches
-    embeddings_cache = {}
-    
-    # Run garbage collection
-    gc.collect()
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
-    
-    return {"status": "success", "message": "All caches cleared and memory freed"}
-
 @app.post("/answer")
 async def answer(req: QARequest, request: Request):
     start_time = time.time()
     client_ip = request.client.host
     question_id = f"{int(time.time())}-{hash(req.question) % 10000}"
     
+    # Log setiap permintaan dengan ID
     logger.info(f"[{question_id}] Received question from {client_ip}: {req.question}")
     
     try:
         # Check if data is loaded
-        if 'faq_data' not in globals() or not faq_data:
+        if len(faq_data) == 0:
             logger.error(f"[{question_id}] FAQ data not loaded!")
             raise HTTPException(status_code=503, detail="Data not loaded or initialized")
         
@@ -896,14 +768,16 @@ async def answer(req: QARequest, request: Request):
             result = {
                 "answer": answer,
                 "score": score,
-                "bab": best_match.get("bab", "")
+                "bab": best_match.get("bab", ""),
+                "jawaban": answer  # Tambahkan field 'jawaban' untuk kompatibilitas
             }
         else:
             logger.info(f"[{question_id}] No good match found")
             result = {
                 "answer": "Maaf, saya tidak menemukan informasi yang spesifik tentang pertanyaan Anda dalam pedoman akademik UIN Sunan Kalijaga. Mohon ajukan pertanyaan yang lebih spesifik atau hubungi bagian akademik untuk informasi lebih lanjut.",
                 "score": score,
-                "bab": ""
+                "bab": "",
+                "jawaban": "Maaf, saya tidak menemukan informasi yang spesifik tentang pertanyaan Anda dalam pedoman akademik UIN Sunan Kalijaga. Mohon ajukan pertanyaan yang lebih spesifik atau hubungi bagian akademik untuk informasi lebih lanjut."
             }
         
         # Add processing time
@@ -928,7 +802,7 @@ async def answer(req: QARequest, request: Request):
                 "processing_time": total_time
             }
         )
-
+    
 @app.post("/test_questions")
 async def test_questions(questions: List[str]):
     """Test a batch of questions and return metrics"""
@@ -981,6 +855,4 @@ def startup_event():
 
 if __name__ == "__main__":
     import uvicorn
-    # Use 1 worker if using GPU to avoid memory issues
-    workers = 1 if torch.cuda.is_available() else min(4, os.cpu_count() or 4)
-    uvicorn.run("bert_api:app", host="0.0.0.0", port=8000, workers=workers, log_level="info")
+    uvicorn.run("bert_api_fixed:app", host="0.0.0.0", port=8000, workers=1, log_level="info")

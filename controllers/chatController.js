@@ -1,5 +1,6 @@
 const Chat = require('../models/chat');
 const axios = require('axios');
+const URL_BASE = process.env.BASE_URL_3000
 
 exports.chatBotHandler = async (req, res) => {
   try {
@@ -16,7 +17,7 @@ exports.chatBotHandler = async (req, res) => {
     // sessionId/parameter bisa gunakan threadId atau username
     let botReply = "Maaf, terjadi kesalahan koneksi ke Dialogflow.";
     try {
-      const dialogflowRes = await axios.post('http://localhost:3000/api/dialogflow', {
+      const dialogflowRes = await axios.post(`${URL_BASE}/api/dialogflow`, {
         message: message,
         sessionId: threadId,
         nim: username // optional, jika perlu

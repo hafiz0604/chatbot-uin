@@ -17,10 +17,12 @@ const qaRoutes = require('./routes/qaRoutes');
 
 const app = express();
 
+const URL_BASE = process.env.BASE_URL_3000
+
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: ['http://localhost:3000'], // ganti dengan domain production kamu
+  origin: [{URL_BASE}], // ganti dengan domain production kamu
 }));
 app.use(express.json());
 app.use(morgan('dev'));

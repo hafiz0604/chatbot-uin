@@ -9,11 +9,12 @@ const { handleInformasiBeasiswa } = require('../handlers/beasiswaHandler');
 const { handleJadwalKuliah } = require('../handlers/jadwalKuliahHandler');
 const { handleJadwalUjian } = require('../handlers/jadwalUjianHandler');
 const { handlePengumumanKampus } = require('../handlers/pengumumanHandler');
+const URL_BASE = process.env.BASE_URL_3000
 
 // Konfigurasi API SIA
-const API_URL = "http://api.uin-suka.ac.id/akademik/v2";
-const NIP = process.env.SIA_NIP || "ACC.API.CHAT";
-const PASSWORD = process.env.SIA_PASSWORD || "0274512474";
+const API_URL = process.env.BASE_API;
+const NIP = process.env.SIA_NIP;
+const PASSWORD = process.env.SIA_PASSWORD;
 
 // Token cache
 let cachedToken = null;
@@ -152,7 +153,7 @@ router.post('/', async (req, res) => {
       }
       try {
         // PENTING: pastikan field-nya "question", bukan "message"
-        const qaResp = await axios.post('http://localhost:3000/api/qa', { question: message });
+        const qaResp = await axios.post(`${URL_BASE}/api/qa`, { question: message });
         if (process.env.NODE_ENV !== 'production') {
           console.log('Jawaban dari QA:', qaResp.data);
         }

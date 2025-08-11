@@ -1,5 +1,5 @@
 const axios = require('axios');
-const API_URL = "http://api.uin-suka.ac.id/akademik/v2";
+const API_URL = process.env.BASE_API;
 
 async function handleInformasiAkademik({ message, token, nim }) {
   console.log('==== HANDLER FULFILLMENT DIPANGGIL ====');

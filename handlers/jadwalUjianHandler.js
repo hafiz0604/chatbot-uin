@@ -1,5 +1,5 @@
 const axios = require('axios');
-const API_URL = "http://api.uin-suka.ac.id/akademik/v2";
+const API_URL = process.env.BASE_API;
 
 // Helper untuk ambil kode prodi dari NIM (5 digit awal, sesuaikan jika format berbeda)
 function getKdProdiFromNim(nim) {
