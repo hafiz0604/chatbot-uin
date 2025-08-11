@@ -17,7 +17,7 @@ const qaRoutes = require('./routes/qaRoutes');
 
 const app = express();
 
-const URL_BASE = process.env.BASE_URL_3000
+const URL_BASE = process.env.BASE_URL
 
 // Middleware
 app.use(helmet());

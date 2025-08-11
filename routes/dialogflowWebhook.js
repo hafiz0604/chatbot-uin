@@ -9,7 +9,7 @@ const { handleInformasiBeasiswa } = require('../handlers/beasiswaHandler');
 const { handleJadwalKuliah } = require('../handlers/jadwalKuliahHandler');
 const { handleJadwalUjian } = require('../handlers/jadwalUjianHandler');
 const { handlePengumumanKampus } = require('../handlers/pengumumanHandler');
-const URL_BASE = process.env.BASE_URL_3000
+const URL_BASE = process.env.BASE_URL
 
 // Konfigurasi API SIA
 const API_URL = process.env.BASE_API;

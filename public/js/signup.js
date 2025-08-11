@@ -96,10 +96,25 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Periksa status
           if (xhr.status >= 200 && xhr.status < 300) {
+            // Simpan token jika ada
+            if (data.token) {
+              localStorage.setItem('token', data.token);
+              
+              // Simpan data user jika tersedia
+              if (data.user) {
+                localStorage.setItem('currentUser', JSON.stringify({
+                  username: data.user.username || username,
+                  email: email,
+                  name: data.user.name || name
+                }));
+              }
+            }
+            
             alert('Pendaftaran berhasil! Silahkan login.');
             window.location.href = 'login.html';
           } else {
-            alert(data.error || 'Gagal membuat akun');
+            // Tampilkan pesan kesalahan dari server atau pesan default
+            alert(data.message || data.error || 'Gagal membuat akun. Silakan coba lagi.');
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalBtnText;
           }
@@ -109,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Error handler
       xhr.onerror = function(e) {
         console.error('❌ XHR error:', e);
-        alert('Terjadi kesalahan saat menghubungi server');
+        alert('Terjadi kesalahan saat menghubungi server. Periksa koneksi internet Anda.');
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
       };
@@ -117,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Timeout handler
       xhr.ontimeout = function() {
         console.error('❌ XHR timeout');
-        alert('Permintaan timeout, server tidak merespon');
+        alert('Permintaan timeout, server tidak merespon. Silakan coba lagi nanti.');
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
       };

@@ -34,3 +34,5 @@ coverage/
 
 # Static/Frontend build (if using React/Vue)
 public/build/
+# Local Netlify folder
+.netlify

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const URL_BASE = process.env.BASE_URL_8000
+const URL_BASE = process.env.BASE_URL_BERT
 
 async function askBert(question, context) {
   console.log("Making request to:", `${URL_BASE}/answer`);

@@ -1,6 +1,6 @@
 const Chat = require('../models/chat');
 const axios = require('axios');
-const URL_BASE = process.env.BASE_URL_3000
+const URL_BASE = process.env.BASE_URL
 
 exports.chatBotHandler = async (req, res) => {
   try {

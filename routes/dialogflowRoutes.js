@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const rateLimit = require('express-rate-limit');
 const router = express.Router();
-const URL_BASE = process.env.BASE_URL_3000
+const URL_BASE = process.env.BASE_URL
 
 // Rate limiter: max 20 request per menit per IP
 const dialogflowLimiter = rateLimit({
